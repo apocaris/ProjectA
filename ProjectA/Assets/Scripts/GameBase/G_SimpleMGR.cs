@@ -18,7 +18,7 @@ public class G_SimpleMGR<T> : G_Object where T : G_Object
 
     protected virtual void OnDestroy() { }
 
-    protected virtual void Initalize() { }
+    public virtual void Initalize() { }
 
     public static T ResetMGR()
     {
@@ -26,7 +26,7 @@ public class G_SimpleMGR<T> : G_Object where T : G_Object
 
         if (vInstance == null)
         {
-            GameObject vNewInstance = Instantiate(Resources.Load(G_Constant.m_strBaseInstance)) as GameObject;
+            GameObject vNewInstance = Instantiate(Resources.Load(G_Constant.m_strBaseObject)) as GameObject;
             vInstance = vNewInstance.AddComponent<T>();
         }
 

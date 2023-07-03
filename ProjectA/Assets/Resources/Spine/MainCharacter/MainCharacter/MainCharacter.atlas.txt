@@ -1,0 +1,467 @@
+MainCharacter.png
+size:172,172
+filter:Linear,Linear
+pma:true
+dummy/L_breast_1_B
+bounds:144,65,11,10
+offsets:1,1,13,12
+dummy/L_breast_1_F
+bounds:133,53,12,12
+dummy/L_breast_1_S
+bounds:162,18,10,10
+offsets:1,1,12,12
+dummy/L_calf_1_B
+bounds:118,98,14,23
+offsets:1,1,16,25
+dummy/L_calf_1_F
+bounds:63,18,11,24
+offsets:1,1,13,26
+rotate:90
+dummy/L_calf_1_S
+bounds:30,0,10,24
+offsets:1,1,12,26
+rotate:90
+dummy/L_foot_1_B
+bounds:137,6,13,13
+dummy/L_foot_1_F
+bounds:87,2,19,13
+rotate:90
+dummy/L_foot_1_S
+bounds:109,0,16,10
+dummy/L_foot_2_F
+bounds:151,136,11,14
+rotate:90
+dummy/L_fore arm_1_B
+bounds:165,134,7,13
+offsets:1,1,9,15
+dummy/L_fore arm_1_F
+bounds:164,95,7,13
+offsets:1,1,9,15
+dummy/R_fore arm_1_B
+bounds:164,95,7,13
+offsets:1,1,9,15
+dummy/L_fore arm_1_S
+bounds:151,90,9,13
+rotate:90
+dummy/L_fore arn_1_S
+bounds:144,75,9,13
+offsets:1,1,11,15
+dummy/L_hand_1_B
+bounds:144,88,7,13
+offsets:1,1,9,15
+dummy/L_hand_1_F
+bounds:144,88,7,13
+offsets:1,1,9,15
+dummy/L_hand_1_S
+bounds:153,77,11,13
+offsets:1,1,13,15
+dummy/L_hand_2_F
+bounds:152,99,12,12
+dummy/L_hand_3_F
+bounds:145,53,12,10
+rotate:90
+dummy/L_side hair_1_B
+bounds:75,0,12,18
+dummy/R_side hair_1_B
+bounds:75,0,12,18
+dummy/L_side hair_1_F
+bounds:166,156,6,16
+offsets:1,1,8,18
+dummy/L_side hair_1_S
+bounds:133,65,11,18
+offsets:1,1,13,20
+dummy/L_thigh_1_B
+bounds:138,120,12,24
+offsets:1,1,14,26
+dummy/L_thigh_1_S
+bounds:98,25,11,23
+offsets:1,1,13,25
+dummy/L_thigh_1_f
+bounds:86,45,12,25
+offsets:1,1,14,27
+dummy/L_upper arm_1_B
+bounds:147,40,9,13
+offsets:1,1,11,15
+dummy/L_upper arm_1_F
+bounds:155,64,9,13
+offsets:1,1,11,15
+dummy/L_upper arm_1_S
+bounds:164,121,8,13
+offsets:1,1,10,15
+dummy/R_breast_1_B
+bounds:152,111,13,12
+rotate:90
+dummy/R_breast_1_F
+bounds:155,53,11,10
+rotate:90
+dummy/R_breast_1_S
+bounds:150,124,14,12
+dummy/R_calf_1_B
+bounds:87,21,11,24
+offsets:1,1,13,26
+dummy/R_calf_1_F
+bounds:151,147,15,25
+offsets:1,1,17,27
+dummy/R_calf_1_S
+bounds:98,48,11,27
+offsets:1,1,13,29
+dummy/R_foot_1_B
+bounds:132,101,19,13
+rotate:90
+dummy/R_foot_1_F
+bounds:122,17,13,16
+dummy/R_foot_1_S
+bounds:100,8,17,9
+rotate:90
+dummy/R_fore arm_1_F
+bounds:164,82,7,13
+dummy/R_fore arm_1_S
+bounds:156,40,9,13
+offsets:1,1,11,15
+dummy/R_hand_1_B
+bounds:164,69,7,13
+offsets:1,1,9,15
+dummy/R_hand_1_F
+bounds:164,69,7,13
+offsets:1,1,9,15
+dummy/R_hand_1_S
+bounds:151,27,11,13
+offsets:1,1,13,15
+dummy/R_hand_2_F
+bounds:160,6,12,12
+dummy/R_hand_3_F
+bounds:162,28,12,10
+rotate:90
+dummy/R_side hair_1_F
+bounds:132,83,12,18
+offsets:1,1,14,20
+dummy/R_side hair_1_S
+bounds:135,35,12,18
+offsets:1,1,14,20
+dummy/R_thigh_1_B
+bounds:109,50,12,25
+offsets:1,1,14,27
+dummy/R_thigh_1_F
+bounds:121,53,12,25
+offsets:1,1,14,27
+dummy/R_thigh_1_S
+bounds:30,10,12,29
+offsets:1,1,14,31
+rotate:90
+dummy/R_upper arm_1_B
+bounds:151,14,9,13
+offsets:1,1,11,15
+dummy/R_upper arm_1_F
+bounds:150,1,9,13
+dummy/R_upper arm_1_S
+bounds:164,108,8,13
+offsets:1,1,10,15
+dummy/back hair_1_B
+bounds:0,96,63,76
+offsets:1,1,65,78
+dummy/back hair_1_F
+bounds:0,22,63,74
+offsets:1,3,65,78
+dummy/back hair_1_S
+bounds:63,98,55,74
+offsets:5,3,65,78
+dummy/back_short hair_1_B
+bounds:63,70,33,28
+offsets:1,1,35,30
+dummy/back_short hair_1_F
+bounds:118,144,33,28
+offsets:1,1,35,30
+dummy/back_short hair_1_S
+bounds:118,144,33,28
+offsets:1,1,35,30
+dummy/eye_1_B
+bounds:54,3,5,7
+offsets:1,1,7,9
+dummy/eye_1_F
+bounds:145,103,17,7
+rotate:90
+dummy/eye_1_S
+bounds:100,0,8,7
+rotate:90
+dummy/face_1_B
+bounds:109,27,12,23
+dummy/face_1_F
+bounds:96,75,20,23
+offsets:1,1,22,25
+dummy/face_1_S
+bounds:118,121,20,23
+offsets:1,1,22,25
+dummy/forehair_1_B
+bounds:0,0,22,15
+rotate:90
+dummy/forehair_1_F
+bounds:15,0,22,15
+offsets:1,1,24,17
+rotate:90
+dummy/forehair_1_S
+bounds:63,29,24,16
+offsets:1,1,26,18
+dummy/head_1_B
+bounds:63,45,23,25
+offsets:1,1,25,27
+dummy/head_1_F
+bounds:63,45,23,25
+offsets:1,1,25,27
+dummy/head_1_S
+bounds:63,45,23,25
+offsets:1,1,25,27
+dummy/mouth_1_B
+bounds:96,72,3,2
+rotate:90
+dummy/mouth_1_F
+bounds:98,22,3,2
+offsets:1,1,5,4
+rotate:90
+dummy/mouth_1_S
+bounds:87,0,3,2
+dummy/pelvis_1_B
+bounds:116,78,20,16
+offsets:1,1,22,18
+rotate:90
+dummy/pelvis_1_F
+bounds:59,0,18,16
+offsets:1,1,20,18
+rotate:90
+dummy/pelvis_1_S
+bounds:135,19,16,16
+dummy/torso_1_B
+bounds:109,10,13,17
+offsets:1,1,15,19
+dummy/torso_1_F
+bounds:125,0,12,17
+offsets:1,1,14,19
+dummy/torso_1_S
+bounds:121,33,14,20
+offsets:1,1,16,22
+
+MainCharacter_2.png
+size:156,156
+filter:Linear,Linear
+pma:true
+skin01/L_breast_1_B
+bounds:32,19,11,10
+skin01/L_breast_1_F
+bounds:89,108,10,9
+rotate:90
+skin01/L_breast_1_S
+bounds:110,66,10,10
+skin01/L_calf_1_B
+bounds:74,118,13,23
+rotate:90
+skin01/L_calf_1_F
+bounds:65,84,11,24
+skin01/L_calf_1_S
+bounds:67,60,10,24
+skin01/L_foot_1_B
+bounds:120,66,10,10
+skin01/L_foot_1_F
+bounds:25,2,17,11
+rotate:90
+skin01/R_foot_1_B
+bounds:25,2,17,11
+rotate:90
+skin01/L_foot_1_S
+bounds:73,108,16,10
+skin01/L_foot_2_F
+bounds:93,37,11,14
+skin01/L_fore arm_1_B
+bounds:69,19,9,17
+skin01/L_fore arm_1_F
+bounds:93,51,11,15
+skin01/L_fore arm_1_S
+bounds:98,108,11,16
+rotate:90
+skin01/L_fore hair_1_F
+bounds:105,76,10,16
+skin01/L_gauntlet hand_1_B
+bounds:127,76,7,9
+rotate:90
+skin01/L_gauntlet hand_1_F
+bounds:127,76,7,9
+rotate:90
+skin01/L_gauntlet hand_2_F
+bounds:130,66,10,6
+rotate:90
+skin01/L_gauntlet hand_3_F
+bounds:136,63,10,9
+skin01/L_gauntlet hand_S
+bounds:114,108,11,11
+skin01/L_gauntlet_B
+bounds:93,22,10,15
+skin01/L_gauntlet_F
+bounds:78,33,15,16
+skin01/L_gauntlet_S
+bounds:43,18,13,16
+skin01/L_hand_1_B
+bounds:149,105,7,13
+offsets:1,1,9,15
+skin01/L_hand_1_F
+bounds:149,105,7,13
+offsets:1,1,9,15
+skin01/L_hand_1_S
+bounds:114,38,11,13
+offsets:1,1,13,15
+skin01/L_hand_2_F
+bounds:125,108,12,12
+skin01/L_hand_3_F
+bounds:137,108,12,10
+skin01/L_outer skirt_1_F
+bounds:148,83,8,9
+skin01/L_thigh_1_B
+bounds:55,35,12,24
+skin01/L_thigh_1_F
+bounds:43,59,12,25
+skin01/L_thigh_1_S
+bounds:76,85,11,23
+skin01/L_upper arm_1_B
+bounds:135,99,9,13
+rotate:90
+skin01/L_upper arm_1_F
+bounds:104,37,10,14
+skin01/L_upper arm_1_S
+bounds:148,92,8,13
+skin01/R_breast_1_B
+bounds:123,55,11,10
+rotate:90
+skin01/R_breast_1_F
+bounds:147,72,11,9
+rotate:90
+skin01/R_breast_1_S
+bounds:115,86,12,10
+skin01/R_calf_1_B
+bounds:67,36,11,24
+skin01/R_calf_1_F
+bounds:0,4,15,25
+rotate:90
+skin01/R_calf_1_F 복사
+bounds:50,84,15,24
+skin01/R_calf_1_S
+bounds:32,29,11,27
+skin01/R_foot_1_F
+bounds:103,23,11,14
+skin01/R_foot_1_S
+bounds:94,66,16,10
+skin01/R_fore arm_1_B
+bounds:60,0,9,17
+skin01/R_fore arm_1_F
+bounds:69,4,9,15
+skin01/R_fore arm_1_S
+bounds:94,76,11,16
+skin01/R_fore hair_1_F
+bounds:33,85,17,21
+skin01/R_gauntlet hand_1_B
+bounds:133,56,7,9
+rotate:90
+skin01/R_gauntlet hand_1_F
+bounds:133,56,7,9
+rotate:90
+skin01/R_gauntlet hand_2_F
+bounds:142,57,10,6
+skin01/R_gauntlet hand_3_F
+bounds:146,63,10,9
+skin01/R_gauntlet hand_S
+bounds:136,72,11,11
+skin01/R_gauntlet_B
+bounds:104,51,10,15
+skin01/R_gauntlet_F
+bounds:78,17,15,16
+skin01/R_gauntlet_S
+bounds:78,4,13,16
+rotate:90
+skin01/R_hand_1_B
+bounds:135,92,7,13
+offsets:1,1,9,15
+rotate:90
+skin01/R_hand_1_F
+bounds:135,92,7,13
+offsets:1,1,9,15
+rotate:90
+skin01/R_hand_1_S
+bounds:114,25,11,13
+offsets:1,1,13,15
+skin01/R_hand_2_F
+bounds:123,96,12,12
+skin01/R_hand_3_F
+bounds:115,76,12,10
+skin01/R_outer skirt_1_F
+bounds:77,67,18,17
+rotate:90
+skin01/R_thigh_1_B
+bounds:43,34,12,25
+skin01/R_thigh_1_F
+bounds:55,59,12,25
+skin01/R_thigh_1_S
+bounds:32,56,11,29
+skin01/R_upper arm_1_B
+bounds:135,83,9,13
+rotate:90
+skin01/R_upper arm_1_F
+bounds:114,51,9,15
+skin01/R_upper arm_1_S
+bounds:127,83,8,13
+skin01/back belt
+bounds:33,106,17,50
+skin01/back hair_1_B
+bounds:0,88,33,68
+skin01/back hair_1_F
+bounds:0,19,32,69
+skin01/eye_1_B
+bounds:87,86,5,7
+offsets:1,1,7,9
+rotate:90
+skin01/eye_1_F
+bounds:87,91,17,7
+rotate:90
+skin01/eye_1_S
+bounds:125,48,8,7
+skin01/face_1_B
+bounds:97,119,12,23
+rotate:90
+skin01/face_1_F
+bounds:120,135,20,21
+skin01/face_1_S
+bounds:50,108,20,23
+rotate:90
+skin01/head_1_B
+bounds:74,131,23,25
+skin01/head_1_F
+bounds:50,128,24,28
+skin01/head_1_S
+bounds:97,131,23,25
+skin01/inner skirt_1_F
+bounds:51,0,18,9
+rotate:90
+skin01/mouth_1_B
+bounds:137,118,3,2
+skin01/mouth_1_F
+bounds:123,52,3,2
+offsets:1,1,5,4
+rotate:90
+skin01/mouth_1_S
+bounds:133,64,3,2
+skin01/pelvis_1_B
+bounds:140,136,20,16
+rotate:90
+skin01/pelvis_1_F
+bounds:140,118,18,16
+rotate:90
+skin01/pelvis_1_S
+bounds:94,92,16,16
+skin01/ribbon
+bounds:110,96,13,12
+skin01/toro_1_F 복사
+bounds:78,49,15,18
+skin01/toro_1_F
+bounds:78,49,15,18
+skin01/torso_1_B
+bounds:56,18,13,17
+skin01/torso_1_F
+bounds:36,0,15,18
+skin01/torso_1_S
+bounds:120,120,15,20
+rotate:90
