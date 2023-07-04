@@ -1,8 +1,10 @@
 using Spine;
 using Spine.Unity;
+using Spine.Unity.AttachmentTools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEngine;
 
 public class G_UnitMainCharacter : G_UnitObject
@@ -38,8 +40,16 @@ public class G_UnitMainCharacter : G_UnitObject
     {
         base.ResetObject();
 
+        //스킨 관련 정리
+        if (!IsNull(m_vSkinRuntimeMaterial))
+            Destroy(m_vSkinRuntimeMaterial);
+        if (!IsNull(m_vSkinRuntimeAtlas))
+            Destroy(m_vSkinRuntimeAtlas);
+        AtlasUtilities.ClearCache();
+
         // 외형
         InitializeSpineShape("MainCharacter");
+        SetCharacterSkin();
 
 #if ATTACK_BASE_TIMING
 
@@ -51,7 +61,7 @@ public class G_UnitMainCharacter : G_UnitObject
 
     private void SetCharacterSkin()
     {
-
+        UpdateSkin("skin_01", "gauntlet_01");
     }
 
     public void UpdateCamAnchor(Transform vTransform)
@@ -87,6 +97,66 @@ public class G_UnitMainCharacter : G_UnitObject
             }
         }
     }
+
+    #region Skin
+
+    private void UpdateSkin(string strCloth, string strGauntlet)
+    {
+        if (m_vSpineObject != null)
+        {
+            Skeleton vSkeleton = m_vSpineObject.Skeleton;
+            SkeletonData vSkeletonData = vSkeleton.Data;
+
+            // FindSkin return값은 start등에서 1회 호출 후 재활용 가능함
+            m_vCharacterSkin = new Skin("character-base");
+            m_vCharacterSkin.AddSkin(vSkeletonData.FindSkin(strCloth));
+            m_vCharacterSkin.AddSkin(vSkeletonData.FindSkin(strGauntlet));
+
+            vSkeleton.SetSkin(m_vCharacterSkin);
+            vSkeleton.SetSlotsToSetupPose();
+
+            OptimizeSkin();
+        }
+    }
+
+    private void OptimizeSkin()
+    {
+        if (m_vSpineObject != null)
+        {
+            if (m_vSpineObject.Skeleton != null)
+            {
+                // Create a repacked skin.
+                Skin vPreviousSkin = m_vSpineObject.Skeleton.Skin;
+                // Note: GetRepackedSkin()에 의해 반환된 재질 및 텍스처는 'new Texture2D()'처럼 동작하므로 제거해야 합니다.
+                if (!IsNull(m_vSkinRuntimeMaterial))
+                    Destroy(m_vSkinRuntimeMaterial);
+                if (!IsNull(m_vSkinRuntimeAtlas))
+                    Destroy(m_vSkinRuntimeAtlas);
+                if (m_vSpineObject.SkeletonDataAsset != null)
+                {
+                    if (m_vSpineObject.SkeletonDataAsset.atlasAssets != null && m_vSpineObject.SkeletonDataAsset.atlasAssets.Length > 0)
+                    {
+                        if (vPreviousSkin != null)
+                        {
+                            Skin vRepackedSkin = vPreviousSkin.GetRepackedSkin("Repacked skin", m_vSpineObject.SkeletonDataAsset.atlasAssets[0].PrimaryMaterial, out m_vSkinRuntimeMaterial, out m_vSkinRuntimeAtlas);
+                            vPreviousSkin.Clear();
+
+                            // Use the repacked skin.
+                            m_vSpineObject.Skeleton.Skin = vRepackedSkin;
+                            m_vSpineObject.Skeleton.SetSlotsToSetupPose();
+                            m_vSpineObject.AnimationState.Apply(m_vSpineObject.Skeleton);
+
+                            //리소스 정리
+                            AtlasUtilities.ClearCache();
+                            Resources.UnloadUnusedAssets();
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    #endregion
 
     #region State
 
@@ -208,6 +278,36 @@ public class G_UnitMainCharacter : G_UnitObject
 
     #endregion
 
+    #region Attack
+
+    protected override void Attack()
+    {
+        if (m_bProcessingAttack)
+            return;
+
+        StartCoroutine(StartAttack());
+    }
+
+    protected override IEnumerator StartAttack(float fApplyDelay = 0.6F, Action vReturnOnFX = null)
+    {
+        if (!m_bAlive)
+            yield break;
+
+        if (!m_vAttackTarget.a_bAlive)
+            yield break;
+
+        if (m_eState == GT_UnitState.Attack)
+            yield break;
+
+        if (IsTargetExist())
+            SetDirection(m_vAttackTarget.transform.position.x);
+        SetState(GT_UnitState.Attack);
+
+        m_bProcessingAttack = true;
+    }
+
+    #endregion
+
     #region Attack Event
 
     private TrackEntry m_vTrackEntry;
@@ -233,7 +333,7 @@ public class G_UnitMainCharacter : G_UnitObject
         if (m_eState != GT_UnitState.Attack && m_eState != GT_UnitState.Dash_Move && m_eState != GT_UnitState.Dash_Ready)
             return;
 
-        if (!vTrackEntry.Animation.Name.Contains("attack") && !vTrackEntry.Animation.Name.Contains("dash"))
+        if (!vTrackEntry.Animation.Name.Contains("atk") && !vTrackEntry.Animation.Name.Contains("dash"))
             return;
 
         if (m_bAttackProcess)
@@ -292,7 +392,7 @@ public class G_UnitMainCharacter : G_UnitObject
             {
                 if (m_vTrackEntry == null || m_vTrackEntry.IsComplete)
                     break;
-                if (m_vTrackEntry.Animation == null || (m_vTrackEntry.Animation != null && m_vTrackEntry.Animation.Name.Contains("attack") == false))
+                if (m_vTrackEntry.Animation == null || (m_vTrackEntry.Animation != null && m_vTrackEntry.Animation.Name.Contains("atk") == false))
                     break;
 
                 yield return null;
@@ -359,7 +459,7 @@ public class G_UnitMainCharacter : G_UnitObject
         base.ApplyDamage();
 
         m_bAttackProcess = true;
-        G_GameMGR.a_instance.a_vGameScene.CameraShake(0.07f, 0.2f);
+        G_GameMGR.a_instance.a_vGameScene.CameraShake(0.08f, 0.15f);
 
         List<G_UnitObject> vTargetList = null;
         G_FieldMGR.a_instance.GetNearbyMonsterList(ref vTargetList, transform.position, m_eUnitType, m_fAttackRange);
@@ -381,7 +481,7 @@ public class G_UnitMainCharacter : G_UnitObject
                             break;
                         case GT_UnitType.Monster:
                             {
-                                ((G_UnitMonster)vTargetList[i]).Hit();
+                                ((G_UnitMonster)vTargetList[i]).Hit(1, true);
                             }
                             break;
                     }
@@ -456,7 +556,9 @@ public class G_UnitMainCharacter : G_UnitObject
     #endregion
 
     #region Variable
-    private Skin m_vCharacterSkin = new Skin("Custom-Character");
+    private Skin m_vCharacterSkin = null;
+    private Material m_vSkinRuntimeMaterial = null;
+    private Texture2D m_vSkinRuntimeAtlas = null;
 
     private float m_fTargetTimer = 0.0f;
     private float m_fCheckAttackMotionTimer = 0.0f;

@@ -66,6 +66,11 @@ public class G_UnitMonster : G_UnitObject
             m_vSpineObject.transform.localPosition = Vector3.zero;
         }
 
+        if (m_vHitVFXAnchor != null)
+        {
+            m_vHitVFXAnchor.SetActive(false);
+        }
+
         m_bAggressive = false;
         m_fAgroTimer = 0.0f;
         m_fPatrolTimer = 1.0f;
@@ -197,6 +202,9 @@ public class G_UnitMonster : G_UnitObject
     #region Hit VFX
     private void PlayHitAnimation()
     {
+        if (m_vHitVFXAnchor != null)
+            m_vHitVFXAnchor.SetActive(true);
+
         if (m_vHitVFX != null)
         {
             if (m_vHitVFX.skeleton != null)

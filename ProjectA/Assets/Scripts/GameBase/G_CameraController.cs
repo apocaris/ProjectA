@@ -4,32 +4,68 @@ using UnityEngine;
 
 public class G_CameraController : MonoBehaviour
 {
-    private void Awake()
+    private void Start()
     {
-        if (target != null)
+        SetWidthHeight();
+    }
+
+    private void FixedUpdate()
+    {
+        ClampCamPos();
+    }
+
+    private void ClampCamPos()
+    {
+        transform.position = Vector3.Lerp(transform.position, playerTransform.position + cameraPosition, Time.deltaTime * cameraMoveSpeed);
+        float lx = mapSize.x - width;
+        float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
+
+        float ly = mapSize.y - height;
+        float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
+
+        transform.position = new Vector3(clampX, clampY, 0);
+
+        UpdateScreenInfo();
+    }
+
+    private void UpdateScreenInfo()
+    {
+        float fCurWid = Camera.main.orthographicSize * Screen.width / Screen.height;
+        if (m_fPreviousWidth != fCurWid)
         {
-            transform.position = new Vector3(target.position.x, target.position.y, transform.position.z);
+            //Debug.LogFormat("Previous : {0}, Current : {1}", m_fPreviousWidth, fCurWid);
+            SetWidthHeight();
         }
     }
 
-    public void LateUpdate()
+    private void SetWidthHeight()
     {
-        if (target == null)
-            return;
+        height = Camera.main.orthographicSize;
+        width = height * Screen.width / Screen.height;
 
-        if (transform.position != target.position)
-        {
-            Vector3 vTargetPosition = new Vector3(target.position.x, target.position.y, transform.position.z);
-
-            vTargetPosition.x = Mathf.Clamp(vTargetPosition.x, minposition.x, maxposition.x);
-            vTargetPosition.y = Mathf.Clamp(vTargetPosition.y, minposition.y, maxposition.y);
-
-            transform.position = Vector3.Lerp(transform.position, vTargetPosition, smoothing);
-        }
+        m_fPreviousWidth = width;
     }
 
-    public Transform target = null;
-    public float smoothing = 0.1f;
-    public Vector2 minposition;
-    public Vector2 maxposition;
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(center, mapSize * 2);
+    }
+
+    private float m_fPreviousWidth = 0.0f;
+
+    [SerializeField]
+    private Transform playerTransform;
+    [SerializeField]
+    private Vector3 cameraPosition;
+
+    [SerializeField]
+    private Vector2 center;
+    [SerializeField]
+    private Vector2 mapSize;
+
+    [SerializeField]
+    private float cameraMoveSpeed;
+    private float height;
+    private float width;
 }

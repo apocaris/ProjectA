@@ -42,10 +42,11 @@ public class G_IngameStageMode : G_IngameModeBase
             for (int i = 0; i < iSpawnOnceCount; ++i)
             {
                 Vector3 vSpawnPosition = Vector3.zero;
-                SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[UnityEngine.Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Length)];
+                SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Length)];
                 if (vPoint != null)
                 {
                     Vector3 vPos = Random.insideUnitSphere * vPoint.radius;
+                    Vector3 v2DPos = new Vector3(vPos.x, vPos.y, 0);
                     vSpawnPosition = vPoint.transform.position + vPos;
                 }
 
@@ -53,8 +54,6 @@ public class G_IngameStageMode : G_IngameModeBase
                 {
 
                 });
-
-                
             }
         }
     }

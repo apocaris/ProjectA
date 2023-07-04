@@ -111,7 +111,8 @@ public class G_UnitObject : G_Object
                 break;
             case GT_UnitState.Attack:
                 {
-                    SetAnimation(G_Constant.m_strMotion_Attack, false, m_fAttackSpeed);
+                    if (m_eUnitType != GT_UnitType.MainCharacter)
+                        SetAnimation(G_Constant.m_strMotion_Attack, false, m_fAttackSpeed);
                 }
                 break;
             case GT_UnitState.Die:

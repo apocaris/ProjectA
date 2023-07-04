@@ -35,7 +35,9 @@ public class G_GameScene : G_UIBase
     public void CameraShake(float fAmount, float fDuration, float fDelay = 0.0f)
     {
         if (m_vIngameCamShake != null)
-            m_vIngameCamShake.Shake(fAmount, fDuration, fDelay);
+        {
+            m_vIngameCamShake.Shake2D(fAmount, fDuration, fDelay);
+        }
     }
     public void UpdateCamState(bool bState)
     {

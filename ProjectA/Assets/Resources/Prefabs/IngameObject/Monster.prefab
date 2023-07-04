@@ -114,8 +114,8 @@ MonoBehaviour:
   m_eUnitType: 2
   m_fUnitSize: 1
   m_vHitTween: {fileID: 5657198722561961234}
-  m_vHitVFXAnchor: {fileID: 0}
-  m_vHitVFX: {fileID: 0}
+  m_vHitVFXAnchor: {fileID: 7151368067563141372}
+  m_vHitVFX: {fileID: 6417827822554132765}
 --- !u!1 &6565540862541495684
 GameObject:
   m_ObjectHideFlags: 0
@@ -504,8 +504,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7151368067563141372}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.237, y: 0.242, z: 0}
-  m_LocalScale: {x: 1.5, y: 1.5, z: 1}
+  m_LocalPosition: {x: -0.357, y: 0.135, z: 0}
+  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 2271236476092146339}
