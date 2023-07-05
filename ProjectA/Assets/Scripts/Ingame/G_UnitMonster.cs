@@ -43,10 +43,7 @@ public class G_UnitMonster : G_UnitObject
                 if (m_fPatrolTimer >= 1.5f)
                 {
                     m_fPatrolTimer = 0.0f;
-                    //m_vAgroTargetPos = m_vSpawnOriginPos + (new Vector3(0.1f, 0.1f, 0.0f) * UnityEngine.Random.Range(-0.02f, 0.02f));
-                    Vector3 vAdditionalPos = new Vector3(0.2f, 0.2f, 0.0f) * UnityEngine.Random.Range(-0.05f, 0.05f);
-                    m_vAgroTargetPos = m_vSpawnOriginPos + vAdditionalPos;
-                    //m_vAgroTargetPos.y = transform.position.y;
+                    SetPatrolDes();
                     m_bPatrolArrive = false;
                 }
             }
@@ -75,7 +72,7 @@ public class G_UnitMonster : G_UnitObject
         m_fAgroTimer = 0.0f;
         m_fPatrolTimer = 1.0f;
         m_vSpawnOriginPos = transform.position;
-        m_vAgroTargetPos = Vector3.zero;
+        m_vAgroTargetPos = transform.position;
         m_bDieTween = false;
 
         // ¿ÜÇü
@@ -93,6 +90,14 @@ public class G_UnitMonster : G_UnitObject
         {
             UpdatePatrolPos();
         }
+    }
+
+    private void SetPatrolDes()
+    {
+        float fAddValueX = UnityEngine.Random.Range(-m_fPatrolRange, m_fPatrolRange);
+        float fAddValueY = UnityEngine.Random.Range(-m_fPatrolRange, m_fPatrolRange);
+        Vector3 vAdditionalPos = new Vector3(fAddValueX, fAddValueY, 0.0f);
+        m_vAgroTargetPos = m_vSpawnOriginPos + vAdditionalPos;
     }
 
     private void UpdatePatrolPos()
@@ -182,7 +187,7 @@ public class G_UnitMonster : G_UnitObject
 
     private IEnumerator WaitForDie()
     {
-        yield return new WaitForSeconds(m_vSpineObject.state.GetCurrent((int)m_eUnitType).AnimationEnd);
+        yield return new WaitForSeconds(m_vSpineObject.state.GetCurrent((int)GetSpineTrackIndex()).AnimationEnd);
 
         m_vNotifyReturn?.Invoke();
     }
@@ -236,8 +241,11 @@ public class G_UnitMonster : G_UnitObject
     #endregion
 
     #region Constant
-    private const float m_fAgroRange = 4.5f;
+    private const float m_fPatrolRange = 1.0f;
     #endregion
+
+    [SerializeField, Rename("AgroRange")]
+    protected float m_fAgroRange = 1.0f;
 
     [SerializeField, Rename("Hit Tween")]
     protected UIPlayTween m_vHitTween = null;

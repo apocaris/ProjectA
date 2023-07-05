@@ -101,23 +101,23 @@ public class G_UnitObject : G_Object
         {
             case GT_UnitState.Idle:
                 {
-                    SetAnimation(G_Constant.m_strMotion_Idle);
+                    SetAnimation(G_Constant.m_strMotion_Idle, true, 1.0f, GetSpineTrackIndex());
                 }
                 break;
             case GT_UnitState.Move:
                 {
-                    SetAnimation(G_Constant.m_strMotion_Move, true, m_fMoveSpeed);
+                    SetAnimation(G_Constant.m_strMotion_Move, true, m_fMoveSpeed, GetSpineTrackIndex());
                 }
                 break;
             case GT_UnitState.Attack:
                 {
                     if (m_eUnitType != GT_UnitType.MainCharacter)
-                        SetAnimation(G_Constant.m_strMotion_Attack, false, m_fAttackSpeed);
+                        SetAnimation(G_Constant.m_strMotion_Attack, false, m_fAttackSpeed, GetSpineTrackIndex());
                 }
                 break;
             case GT_UnitState.Die:
                 {
-                    SetAnimation(G_Constant.m_strMotion_Die, false);
+                    SetAnimation(G_Constant.m_strMotion_Die, false, 1.0f, GetSpineTrackIndex());
                     Die();
                 }
                 break;
@@ -134,9 +134,9 @@ public class G_UnitObject : G_Object
         if (m_vSpineObject.state != null)
         {
             m_vSpineObject.state.ClearTracks();
-            m_vSpineObject.state.SetAnimation((int)m_eUnitType, strMotionName, bLoop);
+            m_vSpineObject.state.SetAnimation((int)eTrackIndex, strMotionName, bLoop);
 
-            float fAniTime = m_vSpineObject.state.GetCurrent((int)m_eUnitType).AnimationEnd;
+            float fAniTime = m_vSpineObject.state.GetCurrent((int)eTrackIndex).AnimationEnd;
             float fFIS = 1f / fAniTime;
             float fPlayTime = fAniTime * fFIS / fSpeed;
             m_vSpineObject.state.TimeScale = (fAniTime / fPlayTime);
@@ -338,6 +338,27 @@ public class G_UnitObject : G_Object
             }
         }
     }
+
+    protected GT_SpineTrackIndex GetSpineTrackIndex()
+    {
+        GT_SpineTrackIndex eTrackIndex = GT_SpineTrackIndex.None;
+        switch (m_eUnitType)
+        {
+            case GT_UnitType.MainCharacter:
+                {
+                    eTrackIndex = GT_SpineTrackIndex.Character;
+                }
+                break;
+            case GT_UnitType.Monster:
+                {
+                    eTrackIndex = GT_SpineTrackIndex.Monster;
+                }
+                break;
+        }
+
+        return eTrackIndex;
+    }
+
     #endregion
 
     #region Variables

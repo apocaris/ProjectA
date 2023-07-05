@@ -144,7 +144,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         }
     }
 
-    public void GetAttackTarget(ref G_UnitObject vRetTarget, Vector3 vOwnPos, GT_UnitType eOwnUnitType, bool bRandom = false)
+    public void GetAttackTarget(ref G_UnitObject vRetTarget, Vector3 vOwnPos, GT_UnitType eOwnUnitType, float fMinAttackRange = 0.0f, bool bRandom = false)
     {
         switch (eOwnUnitType)
         {
@@ -183,13 +183,15 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                 break;
             case GT_UnitType.Monster:
                 {
-                    float fMinDis = 0.0f;
-                    float fDis = Vector3.Distance(vOwnPos, m_vMainCharacter.transform.position);
-                    if (fMinDis == 0 || fDis < fMinDis)
-                    {
-                        fMinDis = fDis;
-                        vRetTarget = m_vMainCharacter;
-                    }
+                    //float fMinDis = fMinAttackRange;
+                    //float fDis = Vector3.Distance(vOwnPos, m_vMainCharacter.transform.position);
+                    //if (fMinDis == 0 || fDis < fMinDis)
+                    //{
+                    //    fMinDis = fDis;
+                    //    vRetTarget = m_vMainCharacter;
+                    //}
+
+                    vRetTarget = m_vMainCharacter;
                 }
                 break;
         }

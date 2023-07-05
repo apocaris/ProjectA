@@ -46,8 +46,8 @@ public class G_IngameStageMode : G_IngameModeBase
                 if (vPoint != null)
                 {
                     Vector3 vPos = Random.insideUnitSphere * vPoint.radius;
-                    Vector3 v2DPos = new Vector3(vPos.x, vPos.y, 0);
-                    vSpawnPosition = vPoint.transform.position + vPos;
+                    Vector3 v2DPos = new Vector3(vPoint.transform.position.x + vPos.x, vPoint.transform.position.y + vPos.y, 0);
+                    vSpawnPosition = v2DPos;
                 }
 
                 SpawnMonster(vSpawnPosition, (bool bForce) =>

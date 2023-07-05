@@ -259,7 +259,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5091131130220877621
 Transform:
   m_ObjectHideFlags: 0
@@ -455,6 +455,9 @@ MonoBehaviour:
   m_eUnitType: 1
   m_fUnitSize: 1
   m_fCheckAttackMotionTime: 0.8
+  m_fDashMoveSpeed: 45
+  m_fDashMotionSpeed: 1
+  m_fDashApplyDistance: 1.5
   m_vMainCamAnchor: {fileID: 9156437902975234975}
   m_vFrontVFXSpine: {fileID: 371502440257434155}
   m_vBackVFXSpine: {fileID: 2056051968929308003}

@@ -16,12 +16,12 @@ public class G_CameraController : MonoBehaviour
 
     private void ClampCamPos()
     {
-        transform.position = Vector3.Lerp(transform.position, playerTransform.position + cameraPosition, Time.deltaTime * cameraMoveSpeed);
-        float lx = mapSize.x - width;
-        float clampX = Mathf.Clamp(transform.position.x, -lx + center.x, lx + center.x);
+        transform.position = Vector3.Lerp(transform.position, m_vPlayerTransform.position + m_vCameraPosition, Time.deltaTime * m_fCameraMoveSpeed);
+        float lx = m_vMapSize.x - m_fWidth;
+        float clampX = Mathf.Clamp(transform.position.x, -lx + m_vCenter.x, lx + m_vCenter.x);
 
-        float ly = mapSize.y - height;
-        float clampY = Mathf.Clamp(transform.position.y, -ly + center.y, ly + center.y);
+        float ly = m_vMapSize.y - m_fHeight;
+        float clampY = Mathf.Clamp(transform.position.y, -ly + m_vCenter.y, ly + m_vCenter.y);
 
         transform.position = new Vector3(clampX, clampY, 0);
 
@@ -40,32 +40,32 @@ public class G_CameraController : MonoBehaviour
 
     private void SetWidthHeight()
     {
-        height = Camera.main.orthographicSize;
-        width = height * Screen.width / Screen.height;
+        m_fHeight = Camera.main.orthographicSize;
+        m_fWidth = m_fHeight * Screen.width / Screen.height;
 
-        m_fPreviousWidth = width;
+        m_fPreviousWidth = m_fWidth;
     }
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(center, mapSize * 2);
+        Gizmos.DrawWireCube(m_vCenter, m_vMapSize * 2);
     }
 
     private float m_fPreviousWidth = 0.0f;
 
     [SerializeField]
-    private Transform playerTransform;
+    private Transform m_vPlayerTransform;
     [SerializeField]
-    private Vector3 cameraPosition;
+    private Vector3 m_vCameraPosition;
 
     [SerializeField]
-    private Vector2 center;
+    private Vector2 m_vCenter;
     [SerializeField]
-    private Vector2 mapSize;
+    private Vector2 m_vMapSize;
 
     [SerializeField]
-    private float cameraMoveSpeed;
-    private float height;
-    private float width;
+    private float m_fCameraMoveSpeed;
+    private float m_fHeight;
+    private float m_fWidth;
 }

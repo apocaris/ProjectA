@@ -5,7 +5,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
+using UnityEngine.UIElements;
 
 public class G_UnitMainCharacter : G_UnitObject
 {
@@ -79,11 +81,27 @@ public class G_UnitMainCharacter : G_UnitObject
         if (!a_bAIUpdate)
             return;
 
-        m_fTargetTimer += Time.fixedDeltaTime;
-        if (m_fTargetTimer >= m_fIntervalTargeting)
+        m_bSetTargetEnemy = false;
+        if (m_eState != GT_UnitState.Die && m_eState != GT_UnitState.Attack)
         {
-            m_fTargetTimer = 0.0f;
-            G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
+            if (m_eState != GT_UnitState.Dash_Move && m_eState != GT_UnitState.Dash_Ready)
+            {
+                m_bSetTargetEnemy = true;
+            }
+        }
+
+        if (m_bSetTargetEnemy)
+        {
+            m_fTargetTimer += Time.fixedDeltaTime;
+            if (m_fTargetTimer >= m_fIntervalTargeting)
+            {
+                m_fTargetTimer = 0.0f;
+                G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
+                if (m_eState != GT_UnitState.Dash_Ready && m_eState != GT_UnitState.Dash_Move)
+                {
+                    CheckDashDistance();
+                }
+            }
         }
 
         if (m_bCheckInitAttackMotion)
@@ -96,6 +114,17 @@ public class G_UnitMainCharacter : G_UnitObject
                 m_iNextAttackMotion = 0;
             }
         }
+
+        #region Dash 처리
+        switch (m_eState)
+        {
+            case GT_UnitState.Dash_Move:
+                {
+                    UpdateDashPos();
+                }
+                break;
+        }
+        #endregion
     }
 
     #region Skin
@@ -209,7 +238,35 @@ public class G_UnitMainCharacter : G_UnitObject
         if (bForce)
             SetForceState(eState);
         else
-            base.SetState(eState);
+        {
+            switch (eState)
+            {
+                case GT_UnitState.Dash_Ready:
+                    {
+                        if (m_eState != GT_UnitState.Dash_Ready)
+                        {
+                            m_eState = GT_UnitState.Dash_Ready;
+                            StartCoroutine(PlayDash());
+                        }
+                    }
+                    break;
+                case GT_UnitState.Dash_Move:
+                    {
+                        if (m_eState != GT_UnitState.Dash_Move)
+                        {
+                            m_eState = GT_UnitState.Dash_Move;
+                            m_fOrgMoveSpeed = m_fMoveSpeed;
+                            m_fMoveSpeed = m_fDashMoveSpeed;
+                        }
+                    }
+                    break;
+                default:
+                    {
+                        base.SetState(eState);
+                    }
+                    break;
+            }
+        }
 
         if (eState == GT_UnitState.Attack)
         {
@@ -416,7 +473,7 @@ public class G_UnitMainCharacter : G_UnitObject
         }
         else
         {
-            G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, a_eUnitType);
+            G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
             if (m_vAttackTarget != null && m_vAttackTarget.a_bAlive && IsAttackable())
             {
                 SetDirection(m_vAttackTarget.transform.position.x);
@@ -555,6 +612,95 @@ public class G_UnitMainCharacter : G_UnitObject
 
     #endregion
 
+    #region Dash
+
+    // 목표 위치 설정
+    private void CheckDashDistance()
+    {
+        m_vDesDashPos = Vector3.zero;
+        if (m_eState == GT_UnitState.Idle || m_eState == GT_UnitState.Move)
+        {
+            // 타켓을 잡은 몬스터와 일정 거리 이상이면 대시 바로 발동
+            if (!IsTargetExist())
+                return;
+
+            float fDis = Vector3.Distance(transform.position, m_vAttackTarget.transform.position);
+            if (fDis <= m_fAttackRange + m_fDashApplyDistance)
+                return;
+
+            // 타켓의 위치를 기준으로 공격 범위를 뺀 위치가 대시 도착 위치
+            // 나보다 왼쪽이냐
+            if (transform.position.x > m_vAttackTarget.transform.position.x)
+            {
+                m_vDesDashPos = new Vector3(m_vAttackTarget.transform.position.x + m_fAttackRange, m_vAttackTarget.transform.position.y, 0);
+            }
+            // 나보다 오른쪽이냐
+            else
+            {
+                m_vDesDashPos = new Vector3(m_vAttackTarget.transform.position.x - m_fAttackRange, m_vAttackTarget.transform.position.y, 0);
+            }
+
+            SetState(GT_UnitState.Dash_Ready);
+        }
+    }
+
+    private IEnumerator PlayDash()
+    {
+        if (m_vSpineObject == null)
+        {
+            SetState(GT_UnitState.Idle);
+            yield break;
+        }
+
+        SetAnimation(G_Constant.m_strMotion_Idle);
+        yield return new WaitForSeconds(0.05f);
+
+        if (m_fOrgTimescale == 0.0f)
+            m_fOrgTimescale = m_vSpineObject.timeScale;
+
+        if (m_fDashMotionSpeed <= 1.0f)
+            m_fDashMotionSpeed = 1.0f;
+
+        SetAnimation(G_Constant.m_strMotion_Dash, false, m_fDashMotionSpeed, GT_SpineTrackIndex.Character);
+        yield return new WaitForSeconds((13f / 30f) / m_fDashMotionSpeed);
+
+        if (m_vAttackTarget != null)
+            SetDirection(m_vAttackTarget.transform.position.x);
+        SetState(GT_UnitState.Dash_Move);
+    }
+
+    private void UpdateDashPos()
+    {
+        if (!m_bAlive)
+            return;
+
+        if (!IsTargetExist())
+        {
+            SetState(GT_UnitState.Idle);
+            return;
+        }
+
+        float fStep = m_fMoveSpeed * Time.fixedDeltaTime; // calculate distance to move
+        transform.position = Vector3.MoveTowards(transform.position, m_vDesDashPos, fStep);
+        if (transform.position == m_vDesDashPos)
+            StopDash();
+    }
+
+    private void StopDash()
+    {
+        m_vDesDashPos = Vector3.zero;
+        if (m_fOrgMoveSpeed > 0.0f)
+            m_fMoveSpeed = m_fOrgMoveSpeed;
+        if (m_fOrgTimescale > 0.0f)
+        {
+            if (m_vSpineObject != null)
+                m_vSpineObject.timeScale = m_fOrgTimescale;
+        }
+        SetState(GT_UnitState.Move);
+    }
+
+    #endregion
+
     #region Variable
     private Skin m_vCharacterSkin = null;
     private Material m_vSkinRuntimeMaterial = null;
@@ -567,6 +713,10 @@ public class G_UnitMainCharacter : G_UnitObject
     private int m_iMaxAttackMotion = 3;
     private bool m_bAttackProcess = false;
     protected bool m_bSkillMotionProcess = false;
+    private float m_fOrgTimescale = 0.0f;
+    private float m_fOrgMoveSpeed = 0.0f;
+    private Vector3 m_vDesDashPos = Vector3.zero;
+    private bool m_bSetTargetEnemy = false;
 
     private Dictionary<string, List<GT_EffectSortType>> m_dicEffSortOption = new Dictionary<string, List<GT_EffectSortType>>();
     #endregion
@@ -578,6 +728,15 @@ public class G_UnitMainCharacter : G_UnitObject
     [Header("Base Parameter")]
     [SerializeField, Rename("Attack motion check time")]
     protected float m_fCheckAttackMotionTime = 2.0f;
+
+    [SerializeField, Rename("Dash move speed")]
+    protected float m_fDashMoveSpeed = 1.0f;
+
+    [SerializeField, Rename("Dash play time scale")]
+    protected float m_fDashMotionSpeed = 1.5f;
+
+    [SerializeField, Rename("Dash apply distance")]
+    protected float m_fDashApplyDistance = 1.5f;
 
     [Header("Objects")]
     [SerializeField, Rename("Main cam anchor")]
