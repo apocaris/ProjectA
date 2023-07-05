@@ -84,7 +84,7 @@ Transform:
   m_GameObject: {fileID: 6565540861804422846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.15, y: 1.15, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 6565540861792130885}
@@ -113,6 +113,7 @@ MonoBehaviour:
   m_fMoveSpeed: 1
   m_eUnitType: 2
   m_fUnitSize: 1
+  m_fAgroRange: 1
   m_vHitTween: {fileID: 5657198722561961234}
   m_vHitVFXAnchor: {fileID: 7151368067563141372}
   m_vHitVFX: {fileID: 6417827822554132765}
@@ -172,7 +173,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 915ce3822addc46059ca8b0d2b679bbe, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -412,7 +413,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 0}
+  - {fileID: 2100000, guid: aad0d218cd8aea14d915b37688bd3261, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

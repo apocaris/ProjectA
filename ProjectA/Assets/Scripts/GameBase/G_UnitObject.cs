@@ -106,7 +106,15 @@ public class G_UnitObject : G_Object
                 break;
             case GT_UnitState.Move:
                 {
-                    SetAnimation(G_Constant.m_strMotion_Move, true, m_fMoveSpeed, GetSpineTrackIndex());
+                    float fAniSpeed = m_fMoveSpeed;
+                    if (m_eUnitType == GT_UnitType.MainCharacter)
+                    {
+                        fAniSpeed = m_fMoveSpeed / 2f;
+                        if (fAniSpeed > 1.5f)
+                            fAniSpeed = 1.5f;
+                    }
+
+                    SetAnimation(G_Constant.m_strMotion_Move, true, fAniSpeed, GetSpineTrackIndex());
                 }
                 break;
             case GT_UnitState.Attack:
@@ -124,7 +132,7 @@ public class G_UnitObject : G_Object
         }
     }
 
-    protected virtual void SetAnimation(string strMotionName, bool bLoop = true, float fSpeed = 1.0f, GT_SpineTrackIndex eTrackIndex = GT_SpineTrackIndex.None)
+    protected virtual void SetAnimation(string strMotionName, bool bLoop = true, float fAniSpeed = 1.0f, GT_SpineTrackIndex eTrackIndex = GT_SpineTrackIndex.None)
     {
         if (m_vSpineObject == null)
             return;
@@ -138,7 +146,7 @@ public class G_UnitObject : G_Object
 
             float fAniTime = m_vSpineObject.state.GetCurrent((int)eTrackIndex).AnimationEnd;
             float fFIS = 1f / fAniTime;
-            float fPlayTime = fAniTime * fFIS / fSpeed;
+            float fPlayTime = fAniTime * fFIS / fAniSpeed;
             m_vSpineObject.state.TimeScale = (fAniTime / fPlayTime);
         }
     }

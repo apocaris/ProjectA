@@ -59,7 +59,7 @@ public class G_UnitMonster : G_UnitObject
 
         if (m_vSpineObject != null)
         {
-            m_vSpineObject.transform.localScale = Vector3.one;
+            //m_vSpineObject.transform.localScale = Vector3.one;
             m_vSpineObject.transform.localPosition = Vector3.zero;
         }
 
