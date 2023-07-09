@@ -47,7 +47,17 @@ public class G_IngameStageMode : G_IngameModeBase
                 {
                     Vector3 vPos = Random.insideUnitSphere * vPoint.radius;
                     Vector3 v2DPos = new Vector3(vPoint.transform.position.x + vPos.x, vPoint.transform.position.y + vPos.y, 0);
-                    vSpawnPosition = v2DPos;
+
+                    if (m_vFieldPoint.a_vSpawnLimitMin != null && m_vFieldPoint.a_vSpawnLimitMax != null)
+                    {
+                        float fClampX = Mathf.Clamp(v2DPos.x, m_vFieldPoint.a_vSpawnLimitMin.transform.position.x, m_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
+                        float fClampY = Mathf.Clamp(v2DPos.y, m_vFieldPoint.a_vSpawnLimitMin.transform.position.y, m_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
+                        vSpawnPosition = new Vector3(fClampX, fClampY, 0);
+                    }
+                    else
+                    {
+                        vSpawnPosition = v2DPos;
+                    }
                 }
 
                 SpawnMonster(vSpawnPosition, (bool bForce) =>

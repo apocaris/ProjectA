@@ -5,7 +5,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-
+using UnityEngine.UIElements;
 using Vector3 = UnityEngine.Vector3;
 
 public class G_UnitMonster : G_UnitObject
@@ -98,6 +98,17 @@ public class G_UnitMonster : G_UnitObject
         float fAddValueY = UnityEngine.Random.Range(-m_fPatrolRange, m_fPatrolRange);
         Vector3 vAdditionalPos = new Vector3(fAddValueX, fAddValueY, 0.0f);
         m_vAgroTargetPos = m_vSpawnOriginPos + vAdditionalPos;
+        if (G_FieldMGR.a_instance != null && G_FieldMGR.a_instance.a_vFieldPoint != null)
+        {
+            if (G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin != null && G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax != null)
+            {
+                // 최대, 최소 위치 적용
+                float fClampX = Mathf.Clamp(m_vAgroTargetPos.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
+                float fClampY = Mathf.Clamp(m_vAgroTargetPos.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
+
+                m_vAgroTargetPos = new Vector3(fClampX, fClampY, 0);
+            }
+        }
     }
 
     private void UpdatePatrolPos()
