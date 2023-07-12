@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Vector2 = UnityEngine.Vector2;
 
 public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
 {
@@ -171,7 +172,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                             if (!m_vMonsterList[i].a_bAlive)
                                 continue;
 
-                            float fDis = Vector3.Distance(vOwnPos, m_vMonsterList[i].transform.position);
+                            float fDis = Vector2.Distance(vOwnPos, m_vMonsterList[i].transform.position);
                             if (fMinDis == 0 || fDis < fMinDis)
                             {
                                 fMinDis = fDis;
@@ -216,7 +217,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                         if (m_vMonsterList[i] == null)
                             continue;
 
-                        float fDis = Vector3.Distance(vOwnPos, m_vMonsterList[i].transform.position);
+                        float fDis = Vector2.Distance(vOwnPos, m_vMonsterList[i].transform.position);
                         if (fDis <= fRange)
                         {
                             m_vNearbyMonsters.Add(m_vMonsterList[i]);

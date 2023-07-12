@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: VFX_Front_SkeletonData
   m_EditorClassIdentifier: 
   atlasAssets:
-  - {fileID: 11400000, guid: e39f1e28886b06f4ca4c5dac02b263a2, type: 2}
+  - {fileID: 11400000, guid: 99b8e4d436320504580fcccb9761032e, type: 2}
   scale: 0.01
-  skeletonJSON: {fileID: 4900000, guid: 95fe3af543b746447a4b6e9f368eb5d4, type: 3}
+  skeletonJSON: {fileID: 4900000, guid: 4aa7416930ca1ad43b835f851a85635e, type: 3}
   isUpgradingBlendModeMaterials: 0
   blendModeMaterials:
     requiresBlendModeMaterials: 0

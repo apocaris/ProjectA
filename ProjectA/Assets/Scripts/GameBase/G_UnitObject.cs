@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Vector2 = UnityEngine.Vector2;
 
 public class G_UnitObject : G_Object
 {
@@ -69,7 +70,7 @@ public class G_UnitObject : G_Object
             case GT_UnitType.MainCharacter:
                 {
                     m_vSpineObject.skeletonDataAsset = LoadSkeletonResource($"Spine/MainCharacter/{strName}/{strName}_SkeletonData");
-                    m_vSpineObject.initialSkinName = "default";
+                    //m_vSpineObject.initialSkinName = "default";
                 }
                 break;
             case GT_UnitType.Monster:
@@ -188,9 +189,9 @@ public class G_UnitObject : G_Object
         float fDes = m_fMoveSpeed * Time.fixedDeltaTime;
         SetDirection(m_vAttackTarget.transform.position.x);
 
-        transform.position = Vector3.MoveTowards(transform.position, m_vAttackTarget.transform.position, fDes);
+        transform.position = Vector2.MoveTowards(transform.position, m_vAttackTarget.transform.position, fDes);
 
-        if (Vector3.Distance(transform.position, m_vAttackTarget.transform.position) <= m_fAttackRange - m_fRangeRandomDistance)
+        if (Vector2.Distance(transform.position, m_vAttackTarget.transform.position) <= m_fAttackRange - m_fRangeRandomDistance)
             CheckAssailable();
     }
     #endregion
@@ -255,7 +256,7 @@ public class G_UnitObject : G_Object
         if (m_fAttackRange == 0.0f)
             return false;
 
-        return Vector3.Distance(transform.position, m_vAttackTarget.transform.position) <= m_fAttackRange;
+        return Vector2.Distance(transform.position, m_vAttackTarget.transform.position) <= m_fAttackRange;
     }
 
     protected virtual void Attack()
@@ -315,7 +316,7 @@ public class G_UnitObject : G_Object
         if (m_vAttackTarget != null && m_fAttackRange > 0.0f)
         {
             Vector3 vTargetPos = m_vAttackTarget.transform.position;
-            bAttack = Vector3.Distance(transform.position, vTargetPos) < m_fAttackRange;
+            bAttack = Vector2.Distance(transform.position, vTargetPos) < m_fAttackRange;
         }
 
         return bAttack;
@@ -325,8 +326,6 @@ public class G_UnitObject : G_Object
     {
         if (!m_bAlive)
             return;
-
-        SetState(GT_UnitState.Die);
     }
 
     public virtual void Die()

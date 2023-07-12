@@ -21,16 +21,16 @@ public class G_UnitMainCharacter : G_UnitObject
                 GT_EffectSortType.Front
             };
 
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_1))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_1, vList);
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_2))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_2, vList);
+            //if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_1))
+            //    m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_1, vList);
+            //if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_2))
+            //    m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_2, vList);
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_3))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_3, vList);
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_4))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_4, vList);
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Dash))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Dash, vList);
+            //if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Dash))
+            //    m_dicEffSortOption.Add(G_Constant.m_strMotion_Dash, vList);
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Skill_1))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Skill_1, vList);
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Skill_2))
@@ -63,7 +63,7 @@ public class G_UnitMainCharacter : G_UnitObject
 
     private void SetCharacterSkin()
     {
-        UpdateSkin("skin_01", "gauntlet_01");
+        UpdateSkin("costume_3", "weapon_2");
     }
 
     public void UpdateCamAnchor(Transform vTransform)
@@ -516,7 +516,7 @@ public class G_UnitMainCharacter : G_UnitObject
         base.ApplyDamage();
 
         m_bAttackProcess = true;
-        G_GameMGR.a_instance.a_vGameScene.CameraShake(0.08f, 0.15f);
+        G_GameMGR.a_instance.a_vGameScene.CameraShake(0.04f, 0.12f);
 
         List<G_UnitObject> vTargetList = null;
         G_FieldMGR.a_instance.GetNearbyMonsterList(ref vTargetList, transform.position, m_eUnitType, m_fAttackRange);
@@ -624,7 +624,7 @@ public class G_UnitMainCharacter : G_UnitObject
             if (!IsTargetExist())
                 return;
 
-            float fDis = Vector3.Distance(transform.position, m_vAttackTarget.transform.position);
+            float fDis = Vector2.Distance(transform.position, m_vAttackTarget.transform.position);
             if (fDis <= m_fAttackRange + m_fDashApplyDistance)
                 return;
 
@@ -662,7 +662,7 @@ public class G_UnitMainCharacter : G_UnitObject
             m_fDashMotionSpeed = 1.0f;
 
         SetAnimation(G_Constant.m_strMotion_Dash, false, m_fDashMotionSpeed, GT_SpineTrackIndex.Character);
-        yield return new WaitForSeconds((13f / 30f) / m_fDashMotionSpeed);
+        //yield return new WaitForSeconds((13f / 30f) / m_fDashMotionSpeed);
 
         if (m_vAttackTarget != null)
             SetDirection(m_vAttackTarget.transform.position.x);

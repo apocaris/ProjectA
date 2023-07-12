@@ -2,11 +2,10 @@ using Spine;
 using Spine.Unity;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-using UnityEngine.UIElements;
 using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
 
 public class G_UnitMonster : G_UnitObject
 {
@@ -25,7 +24,7 @@ public class G_UnitMonster : G_UnitObject
                 m_fAgroTimer = 0.0f;
                 if (IsTargetExist())
                 {
-                    float fDistance = Vector3.Distance(a_vAttackTarget.transform.position, transform.position);
+                    float fDistance = Vector2.Distance(a_vAttackTarget.transform.position, transform.position);
                     if (fDistance < m_fAgroRange)
                     {
                         m_bAggressive = true;
@@ -72,8 +71,11 @@ public class G_UnitMonster : G_UnitObject
         m_fAgroTimer = 0.0f;
         m_fPatrolTimer = 1.0f;
         m_vSpawnOriginPos = transform.position;
-        m_vAgroTargetPos = transform.position;
+        m_vPatrolTargetPos = transform.position;
         m_bDieTween = false;
+
+        // 임시
+        m_iHitCount = 0;
 
         // 외형
         InitializeSpineShape("MOB_MONKEY_01");
@@ -97,16 +99,16 @@ public class G_UnitMonster : G_UnitObject
         float fAddValueX = UnityEngine.Random.Range(-m_fPatrolRange, m_fPatrolRange);
         float fAddValueY = UnityEngine.Random.Range(-m_fPatrolRange, m_fPatrolRange);
         Vector3 vAdditionalPos = new Vector3(fAddValueX, fAddValueY, 0.0f);
-        m_vAgroTargetPos = m_vSpawnOriginPos + vAdditionalPos;
+        m_vPatrolTargetPos = m_vSpawnOriginPos + vAdditionalPos;
         if (G_FieldMGR.a_instance != null && G_FieldMGR.a_instance.a_vFieldPoint != null)
         {
             if (G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin != null && G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax != null)
             {
                 // 최대, 최소 위치 적용
-                float fClampX = Mathf.Clamp(m_vAgroTargetPos.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
-                float fClampY = Mathf.Clamp(m_vAgroTargetPos.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
+                float fClampX = Mathf.Clamp(m_vPatrolTargetPos.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
+                float fClampY = Mathf.Clamp(m_vPatrolTargetPos.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
 
-                m_vAgroTargetPos = new Vector3(fClampX, fClampY, 0);
+                m_vPatrolTargetPos = new Vector3(fClampX, fClampY, 0);
             }
         }
     }
@@ -124,10 +126,10 @@ public class G_UnitMonster : G_UnitObject
 
         //패트롤 처리
         float step = m_fMoveSpeed * Time.fixedDeltaTime; // calculate distance to move
-        SetDirection(m_vAgroTargetPos.x);
+        SetDirection(m_vPatrolTargetPos.x);
 
-        transform.position = Vector3.MoveTowards(transform.position, m_vAgroTargetPos, step);
-        if (Vector3.Distance(transform.position, m_vAgroTargetPos) <= 0.01f)
+        transform.position = Vector2.MoveTowards(transform.position, m_vPatrolTargetPos, step);
+        if (Vector2.Distance(transform.position, m_vPatrolTargetPos) <= 0.01f)
         {
             //목적지 도착했으면 Idle
             if (!m_bPatrolArrive)
@@ -176,6 +178,12 @@ public class G_UnitMonster : G_UnitObject
 
         base.Hit();
 
+        ++m_iHitCount;
+        if (m_iHitCount >= 3)
+        {
+            SetState(GT_UnitState.Die);
+        }
+
         if (m_vHitTween != null)
         {
             if (!m_bDieTween)
@@ -221,16 +229,21 @@ public class G_UnitMonster : G_UnitObject
         if (m_vHitVFXAnchor != null)
             m_vHitVFXAnchor.SetActive(true);
 
+        //if (m_vHitVFX_Spine != null)
+        //{
+        //    if (m_vHitVFX_Spine.skeleton != null)
+        //        m_vHitVFX_Spine.skeleton.SetToSetupPose();
+        //    if (m_vHitVFX_Spine.state != null)
+        //    {
+        //        m_vHitVFX_Spine.state.ClearTracks();
+        //        m_vHitVFX_Spine.state.SetAnimation(0, G_Constant.m_strMotion_Hit, false);
+        //        m_vHitVFX_Spine.state.TimeScale = 1;
+        //    }
+        //}
+
         if (m_vHitVFX != null)
         {
-            if (m_vHitVFX.skeleton != null)
-                m_vHitVFX.skeleton.SetToSetupPose();
-            if (m_vHitVFX.state != null)
-            {
-                m_vHitVFX.state.ClearTracks();
-                m_vHitVFX.state.SetAnimation(0, G_Constant.m_strMotion_Hit, false);
-                m_vHitVFX.state.TimeScale = 1;
-            }
+            m_vHitVFX.PlayParticle();
         }
     }
 
@@ -243,12 +256,15 @@ public class G_UnitMonster : G_UnitObject
     private float m_fAgroTimer = 0.0f;
     private float m_fPatrolTimer = 0.0f;
     private Vector3 m_vSpawnOriginPos;
-    private Vector3 m_vAgroTargetPos;
+    private Vector3 m_vPatrolTargetPos;
     private bool m_bPatrolArrive = false;
     private bool m_bDieTween = false;
 
     public bool a_bAggressive { get { return m_bAggressive; } }
     private bool m_bAggressive = false;
+
+    // 임시
+    private int m_iHitCount = 0;
     #endregion
 
     #region Constant
@@ -266,5 +282,8 @@ public class G_UnitMonster : G_UnitObject
     protected GameObject m_vHitVFXAnchor = null;
 
     [SerializeField, Rename("Hit VFX Spine")]
-    protected SkeletonAnimation m_vHitVFX = null;
+    protected SkeletonAnimation m_vHitVFX_Spine = null;
+
+    [SerializeField, Rename("Hit VFX")]
+    protected G_PlayParticle m_vHitVFX = null;
 }
