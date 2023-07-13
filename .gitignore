@@ -79,3 +79,10 @@ crashlytics-build.properties
 /ProjectA/[Bb]uilds/
 /ProjectA/[Ll]ogs/
 /ProjectA/[Uu]ser[Ss]ettings/
+
+
+[Aa]ssets/Firebase/
+[Aa]ssets/GeneratedLocalRepo/
+[Aa]ssets/Editor Default Resources/
+[Aa]ssets/ExternalDependencyManager/
+.DS_Store
