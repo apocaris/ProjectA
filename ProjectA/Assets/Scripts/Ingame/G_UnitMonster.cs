@@ -78,7 +78,22 @@ public class G_UnitMonster : G_UnitObject
         m_iHitCount = 0;
 
         // ¿ÜÇü
-        InitializeSpineShape("MOB_MONKEY_01");
+        string strMonster;
+        int iMonsterResource = UnityEngine.Random.Range(0, 6);
+        switch (iMonsterResource)
+        {
+            case 1: strMonster = "demon_baphomet_1"; break;
+            case 2: strMonster = "demon_wolf_4"; break;
+            case 3: strMonster = "baphomet"; break;
+            case 4: strMonster = "chicken"; break;
+            default:
+                {
+                    strMonster = "slime";
+                }
+                break;
+        }
+
+        InitializeSpineShape(strMonster);
     }
 
     protected override void CheckMoveState()
