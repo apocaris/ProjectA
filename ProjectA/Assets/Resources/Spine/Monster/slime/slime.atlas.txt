@@ -1,0 +1,14 @@
+slime.png
+size:64,64
+filter:Linear,Linear
+pma:true
+body
+bounds:0,24,52,38
+eye
+bounds:52,26,16,6
+offsets:1,1,18,8
+rotate:90
+eye2
+bounds:52,42,20,10
+offsets:1,1,22,12
+rotate:90
