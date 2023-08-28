@@ -126,4 +126,9 @@ public class G_GameMGR : G_SimpleMGR<G_GameMGR>
     //Pool -------------------------------------------
     public Dictionary<GT_PoolType, Queue<GameObject>> a_vObjectPools { get { return m_vObjectPools; } }
     private Dictionary<GT_PoolType, Queue<GameObject>> m_vObjectPools = new Dictionary<GT_PoolType, Queue<GameObject>>();
+
+    public Transform a_vIngameArea { get { return m_vIngameArea; } }
+
+    [SerializeField, Rename("IngameArea")]
+    private Transform m_vIngameArea = null;
 }

@@ -63,8 +63,10 @@ public static class G_Constant
 
     public const string m_strMonsterPool = "MonsterPool";
 
-    // 인게임 오브젝트 (이름)
+    #region Ingame object names
+    public const string m_strCharacterObject = "Prefabs/IngameObject/MainCharacter";
     public const string m_strMonsterObject = "Prefabs/IngameObject/Monster";
+    #endregion
 
     // 기본 모션 이름
     public const string m_strMotion_Idle = "idle";
@@ -72,14 +74,6 @@ public static class G_Constant
     public const string m_strMotion_Attack = "atk";
     public const string m_strMotion_Die = "die";
     public const string m_strMotion_Hit = "hit";
-
-    // 캐릭터 모션 이름 (임시)
-    public const string m_strMotion_Character_Idle = "Idle-upper grip";
-    public const string m_strMotion_Character_Run = "Run";
-    public const string m_strMotion_Character_Die = "death";
-    public const string m_strMotion_Character_Atk_1 = "atk-down to up";
-    public const string m_strMotion_Character_Atk_2 = "atk-up to down";
-    public const string m_strMotion_Character_Atk_3 = "atk-left to right";
 
     // 캐릭터 모션 이름
     public const string m_strMotion_Atk_1 = "atk_1";

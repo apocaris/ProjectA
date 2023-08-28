@@ -56,12 +56,18 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
 
     public void ResetMode()
     {
+        // Create Character
         {
             bool bInitialize = true;
-            if (m_vMainCharacter == null)
+            if (m_vMainCharacter == null && G_GameMGR.a_instance.a_vIngameArea != null)
             {
-                m_vMainCharacter = FindObjectOfType<G_UnitMainCharacter>();
-                bInitialize = false;
+                GameObject vObj = Instantiate(LoadResource<GameObject>(G_Constant.m_strCharacterObject), G_GameMGR.a_instance.a_vIngameArea);
+                if (vObj != null)
+                {
+                    m_vMainCharacter = vObj.GetComponent<G_UnitMainCharacter>();
+                    if (m_vMainCharacter != null)
+                        bInitialize = false;
+                }
             }
 
             if (m_vMainCharacter == null)
@@ -71,7 +77,9 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
             }
 
             if (!bInitialize)
+            {
                 m_vMainCharacter.InitializeObject();
+            }
 
             m_vMainCharacter.ResetObject();
         }
