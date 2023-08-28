@@ -1,0 +1,28 @@
+CHA_axe_1.png
+size:71,71
+filter:Linear,Linear
+pma:true
+hammer
+bounds:0,17,71,24
+offsets:1,1,73,26
+helmet
+bounds:38,41,33,30
+offsets:2,0,36,30
+left foot
+bounds:0,66,5,7
+offsets:1,1,7,9
+rotate:90
+right foot
+bounds:0,66,5,7
+offsets:1,1,7,9
+rotate:90
+left hand
+bounds:7,65,7,6
+offsets:1,1,9,8
+right hand
+bounds:14,65,7,6
+offsets:1,1,9,8
+torso
+bounds:21,57,14,17
+offsets:1,1,16,19
+rotate:90
