@@ -1,0 +1,32 @@
+CHA_spear_1.png
+size:113,113
+filter:Linear,Linear
+pma:true
+back hair
+bounds:26,84,22,20
+offsets:1,1,24,22
+head
+bounds:0,82,26,22
+offsets:1,1,28,24
+left foot
+bounds:62,93,5,5
+offsets:1,1,7,7
+right foot
+bounds:62,93,5,5
+offsets:1,1,7,7
+left hand
+bounds:62,98,7,6
+offsets:1,1,9,8
+ponytail
+bounds:75,92,21,38
+rotate:90
+right hand
+bounds:69,97,7,6
+offsets:1,1,9,8
+rotate:90
+spear
+bounds:0,104,75,9
+offsets:1,1,77,11
+torso
+bounds:48,91,14,13
+offsets:1,1,16,15
