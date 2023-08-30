@@ -13,6 +13,9 @@ public class G_UnitMonster : G_UnitObject
     {
         base.FixedUpdate();
 
+        if (!m_bInitSpineObject)
+            return;
+
         if (!m_bAlive)
             return;
 

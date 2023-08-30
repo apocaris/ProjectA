@@ -31,6 +31,7 @@
 #define NEW_PREFAB_SYSTEM
 #endif
 
+using System;
 using UnityEngine;
 
 namespace Spine.Unity {
@@ -224,27 +225,36 @@ namespace Spine.Unity {
 		}
 
 		protected void ApplyAnimation () {
-			if (_BeforeApply != null)
-				_BeforeApply(this);
+			try
+			{
+                if (_BeforeApply != null)
+                    _BeforeApply(this);
 
-			if (updateMode != UpdateMode.OnlyEventTimelines)
-				state.Apply(skeleton);
-			else
-				state.ApplyEventTimelinesOnly(skeleton, issueEvents: true);
+                if (updateMode != UpdateMode.OnlyEventTimelines)
+                    state.Apply(skeleton);
+                else
+                    state.ApplyEventTimelinesOnly(skeleton, issueEvents: true);
 
-			if (_UpdateLocal != null)
-				_UpdateLocal(this);
+                if (_UpdateLocal != null)
+                    _UpdateLocal(this);
 
-			skeleton.UpdateWorldTransform();
+                skeleton.UpdateWorldTransform();
 
-			if (_UpdateWorld != null) {
-				_UpdateWorld(this);
-				skeleton.UpdateWorldTransform();
-			}
+                if (_UpdateWorld != null)
+                {
+                    _UpdateWorld(this);
+                    skeleton.UpdateWorldTransform();
+                }
 
-			if (_UpdateComplete != null) {
-				_UpdateComplete(this);
-			}
+                if (_UpdateComplete != null)
+                {
+                    _UpdateComplete(this);
+                }
+            }
+			catch (Exception e)
+			{
+                Debug.LogError("Spine Exception ! : " + e.ToString());
+            }
 		}
 
 		public override void LateUpdate () {

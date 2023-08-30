@@ -14,8 +14,16 @@ public class G_CameraController : MonoBehaviour
         ClampCamPos();
     }
 
+    public void SetPlayerTransform(Transform vTransform)
+    {
+        m_vPlayerTransform = vTransform;
+    }
+
     private void ClampCamPos()
     {
+        if (m_vPlayerTransform == null)
+            return;
+
         transform.position = Vector3.Lerp(transform.position, m_vPlayerTransform.position + m_vCameraPosition, Time.deltaTime * m_fCameraMoveSpeed);
         float lx = m_vMapSize.x - m_fWidth;
         float clampX = Mathf.Clamp(transform.position.x, -lx + m_vCenter.x, lx + m_vCenter.x);

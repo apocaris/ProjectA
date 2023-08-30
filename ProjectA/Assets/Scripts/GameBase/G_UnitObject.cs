@@ -49,6 +49,7 @@ public class G_UnitObject : G_Object
 
     public virtual void ResetObject()
     {
+        m_bInitSpineObject = false;
         SetState(GT_UnitState.Create);
         ApplyDirection(GT_Direction.Right);
         m_vAttackTarget = null;
@@ -84,11 +85,15 @@ public class G_UnitObject : G_Object
         try
         {
             if (Time.timeScale != 0)
+            {
+                m_vSpineObject.timeScale = 1;
                 m_vSpineObject.Initialize(true);
+                m_bInitSpineObject = true;
+            }
         }
         catch
         {
-
+            
         }
     }
 
@@ -377,6 +382,8 @@ public class G_UnitObject : G_Object
     protected float m_fAttackDelayTimer = 0.0f;
     private float m_fRangeRandomDistance = 0.0f;
 
+    protected bool m_bInitSpineObject = false;
+
     public bool a_bAlive { get { return m_bAlive; } }
     protected bool m_bAlive = false;
 
@@ -390,7 +397,7 @@ public class G_UnitObject : G_Object
         }
     }
     protected bool m_bAIUpdate = false;
-
+    
     public G_UnitObject a_vAttackTarget { get { return m_vAttackTarget; } }
     protected G_UnitObject m_vAttackTarget = null;
 

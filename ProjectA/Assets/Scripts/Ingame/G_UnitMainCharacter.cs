@@ -78,6 +78,9 @@ public class G_UnitMainCharacter : G_UnitObject
     {
         base.FixedUpdate();
 
+        if (!m_bInitSpineObject)
+            return;
+
         if (!a_bAIUpdate)
             return;
 

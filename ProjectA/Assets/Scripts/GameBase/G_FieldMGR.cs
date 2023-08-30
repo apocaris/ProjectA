@@ -79,6 +79,12 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
             if (!bInitialize)
             {
                 m_vMainCharacter.InitializeObject();
+                if (G_GameMGR.a_instance.a_vGameScene != null && G_GameMGR.a_instance.a_vGameScene.a_vMainCamera != null)
+                {
+                    G_CameraController vCtrl = G_GameMGR.a_instance.a_vGameScene.a_vMainCamera.GetComponent<G_CameraController>();
+                    if (vCtrl != null)
+                        vCtrl.SetPlayerTransform(m_vMainCharacter.transform);
+                }
             }
 
             m_vMainCharacter.ResetObject();
