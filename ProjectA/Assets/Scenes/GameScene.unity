@@ -732,5 +732,5 @@ MonoBehaviour:
   m_vPlayerTransform: {fileID: 0}
   m_vCameraPosition: {x: 0, y: 0, z: 0}
   m_vCenter: {x: 0, y: 0}
-  m_vMapSize: {x: 6.67, y: 7}
+  m_vMapSize: {x: 6.67, y: 6}
   m_fCameraMoveSpeed: 3

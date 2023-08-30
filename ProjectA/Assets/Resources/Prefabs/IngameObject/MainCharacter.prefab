@@ -568,7 +568,7 @@ MonoBehaviour:
   m_eUnitType: 1
   m_fUnitSize: 1.5
   m_fCheckAttackMotionTime: 0.7
-  m_fDashMoveSpeed: 45
+  m_fDashMoveSpeed: 30
   m_fDashMotionSpeed: 1
   m_fDashApplyDistance: 1.5
   m_vMainCamAnchor: {fileID: 9156437902975234975}

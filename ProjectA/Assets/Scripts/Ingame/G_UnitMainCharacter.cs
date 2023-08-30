@@ -53,18 +53,24 @@ public class G_UnitMainCharacter : G_UnitObject
                 {
                     strClass = G_Constant.m_strClassAxe;
                     strResource = "axe_1";
+                    m_fAttackRange = 1.7f;
+                    m_fMoveSpeed = 1.3f;
                 }
                 break;
             case GT_UnitClass.Spear:
                 {
                     strClass = G_Constant.m_strClassSpear;
                     strResource = "spear_1";
+                    m_fAttackRange = 2.0f;
+                    m_fMoveSpeed = 1.6f;
                 }
                 break;
             case GT_UnitClass.TwoSword:
                 {
                     strClass = G_Constant.m_strClassTwoSword;
                     strResource = "two_sword_1";
+                    m_fAttackRange = 1.3f;
+                    m_fMoveSpeed = 1.9f;
                 }
                 break;
         }
@@ -120,10 +126,10 @@ public class G_UnitMainCharacter : G_UnitObject
                     G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
                     // Once the target is set, notify other characters of the target as well.
                     G_FieldMGR.a_instance.NotifyAttackTarget(this);
-                    if (m_eState != GT_UnitState.Dash_Ready && m_eState != GT_UnitState.Dash_Move)
-                    {
-                        CheckDashDistance();
-                    }
+                    //if (m_eState != GT_UnitState.Dash_Ready && m_eState != GT_UnitState.Dash_Move)
+                    //{
+                    //    CheckDashDistance();
+                    //}
                 }
             }
         }
@@ -669,12 +675,12 @@ public class G_UnitMainCharacter : G_UnitObject
             // 나보다 왼쪽이냐
             if (transform.position.x > m_vAttackTarget.transform.position.x)
             {
-                m_vDesDashPos = new Vector3(m_vAttackTarget.transform.position.x + m_fAttackRange, m_vAttackTarget.transform.position.y, 0);
+                m_vDesDashPos = new Vector3(m_vAttackTarget.transform.position.x + (m_fAttackRange + 1.0f), m_vAttackTarget.transform.position.y, 0);
             }
             // 나보다 오른쪽이냐
             else
             {
-                m_vDesDashPos = new Vector3(m_vAttackTarget.transform.position.x - m_fAttackRange, m_vAttackTarget.transform.position.y, 0);
+                m_vDesDashPos = new Vector3(m_vAttackTarget.transform.position.x - (m_fAttackRange + 1.0f), m_vAttackTarget.transform.position.y, 0);
             }
 
             SetState(GT_UnitState.Dash_Ready);

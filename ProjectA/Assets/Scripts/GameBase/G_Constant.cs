@@ -111,7 +111,8 @@ public static class G_Constant
     public const int m_iFoldScreenResoultion = 1080; //1080 : FHD
 
     // юс╫ц
-    public const float m_fMonsterSpawnDelay = 1.4f;
+    //public const float m_fMonsterSpawnDelay = 1.4f;
+    public const float m_fMonsterSpawnDelay = 3.0f;
     public const int m_iSpawnMonsterMaxCount = 20;
     public const int m_iSpawnOnceCount = 4;
 }

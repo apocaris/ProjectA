@@ -2,7 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using Vector2 = UnityEngine.Vector2;
 
@@ -45,7 +44,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
             if (m_vIngameStageMode != null)
             {
                 m_vIngameStageMode.name = typeof(G_IngameStageMode).ToString();
-                m_vIngameStageMode.ResetIngameMode();
+                m_vIngameStageMode.ResetIngameMode(); 
             }
         }
     }
@@ -202,6 +201,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         if (vSource == null)
             return;
 
+
         Vector3 vTargetPos = vSource.a_vDesDashPos;
         foreach (G_UnitMainCharacter vCharacter in m_vCharacters.Values)
         {
@@ -210,6 +210,9 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
             if (vCharacter == vSource)
                 continue;
 
+            float fRand = UnityEngine.Random.Range(0.05f, 1.0f);
+            vTargetPos += new Vector3(0.0f, fRand, 0.0f);
+            ClampingLimitPosition(ref vTargetPos);
             vCharacter.SetDashDesPos(ref vTargetPos);
         }
     }
@@ -392,6 +395,19 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
 
                 }
                 break;
+        }
+    }
+
+    private void ClampingLimitPosition(ref Vector3 vTargetPos)
+    {
+        if (m_vFieldPoint == null)
+            return;
+
+        if (m_vFieldPoint.a_vSpawnLimitMin != null && m_vFieldPoint.a_vSpawnLimitMax != null)
+        {
+            float fClampX = Mathf.Clamp(vTargetPos.x, m_vFieldPoint.a_vSpawnLimitMin.transform.position.x, m_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
+            float fClampY = Mathf.Clamp(vTargetPos.y, m_vFieldPoint.a_vSpawnLimitMin.transform.position.y, m_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
+            vTargetPos = new Vector3(fClampX, fClampY, 0);
         }
     }
 

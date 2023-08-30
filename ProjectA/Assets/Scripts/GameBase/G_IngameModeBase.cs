@@ -1,7 +1,6 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class G_IngameModeBase : G_Object
@@ -12,6 +11,7 @@ public class G_IngameModeBase : G_Object
     public virtual void ResetIngameMode()
     {
         m_vFieldPoint = null;
+        m_vSpawnSide = GT_Direction.Right;
         m_iCurrentSpawnCount = 0;
         m_fSpawnMonsterTimer = 0.0f;
     }
@@ -27,13 +27,6 @@ public class G_IngameModeBase : G_Object
             return;
 
         m_vFieldPoint = vFieldPoint;
-
-        //if (G_FieldMGR.a_instance.a_vMainCharacter != null)
-        //{
-        //    G_FieldMGR.a_instance.a_vMainCharacter.transform.position = m_vFieldPoint.a_vCharacterPoint.position;
-        //    G_FieldMGR.a_instance.a_vMainCharacter.UpdateCamAnchor(m_vFieldPoint.a_vCameraTransform.transform);
-        //}
-
         if (m_vFieldPoint != null && G_FieldMGR.a_instance.a_vCharacters != null)
         {
             if (m_vFieldPoint.a_vCharacterPoints.Count == G_FieldMGR.a_instance.a_vCharacters.Count)
@@ -43,8 +36,8 @@ public class G_IngameModeBase : G_Object
                     if (vData.Value == null)
                         continue;
 
-                    int iTargetPosIdx = (int)vData.Key;
-                    if (iTargetPosIdx < m_vFieldPoint.a_vCharacterPoints.Count)
+                    int iTargetPosIdx = (int)vData.Key - 1;
+                    if (iTargetPosIdx >= 0 && iTargetPosIdx < m_vFieldPoint.a_vCharacterPoints.Count)
                     {
                         Transform vTarget = m_vFieldPoint.a_vCharacterPoints[iTargetPosIdx];
                         if (vTarget != null)
@@ -100,6 +93,7 @@ public class G_IngameModeBase : G_Object
     }
 
     protected G_FieldPoint m_vFieldPoint = null;
+    protected GT_Direction m_vSpawnSide = GT_Direction.Left;
 
     protected float m_fSpawnMonsterTimer = 0.0f;
     protected int m_iCurrentSpawnCount = 0;

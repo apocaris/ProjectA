@@ -2,7 +2,6 @@ using Spine;
 using Spine.Unity;
 using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Vector2 = UnityEngine.Vector2;
 
@@ -98,6 +97,9 @@ public class G_UnitObject : G_Object
         }
     }
 
+    private TrackEntry m_vTrackEntry;
+    private IEnumerator m_enumeratorCheckAnimationEnd = null;
+
     protected virtual void SetState(GT_UnitState eState)
     {
         if (eState != GT_UnitState.Attack && m_eState == eState)
@@ -133,11 +135,12 @@ public class G_UnitObject : G_Object
             case GT_UnitState.Hit:
                 {
                     if (m_eUnitType != GT_Unit.MainCharacter)
-                        SetAnimation(G_Constant.m_strMotion_Hit, false, 2.0f, GetSpineTrackIndex());
+                        SetAnimation(G_Constant.m_strMotion_Hit, false, 3.0f, GetSpineTrackIndex());
                 }
                 break;
             case GT_UnitState.Die:
                 {
+                    FinishAnimation();
                     SetAnimation(G_Constant.m_strMotion_Die, false, 1.0f, GetSpineTrackIndex());
                     Die();
                 }
@@ -155,13 +158,51 @@ public class G_UnitObject : G_Object
         if (m_vSpineObject.state != null)
         {
             m_vSpineObject.state.ClearTracks();
-            m_vSpineObject.state.SetAnimation((int)eTrackIndex, strMotionName, bLoop);
+            m_vTrackEntry = m_vSpineObject.state.SetAnimation((int)eTrackIndex, strMotionName, bLoop);
+            if (strMotionName == G_Constant.m_strMotion_Hit)
+            {
+                if (m_enumeratorCheckAnimationEnd == null)
+                {
+                    m_enumeratorCheckAnimationEnd = CheckAnimationFinish(FinishAnimation);
+                    StartCoroutine(m_enumeratorCheckAnimationEnd);
+                }
+            }
 
             float fAniTime = m_vSpineObject.state.GetCurrent((int)eTrackIndex).AnimationEnd;
             float fFIS = 1f / fAniTime;
             float fPlayTime = fAniTime * fFIS / fAniSpeed;
             m_vSpineObject.state.TimeScale = (fAniTime / fPlayTime);
         }
+    }
+
+    private IEnumerator CheckAnimationFinish(Action vOnFinished = null)
+    {
+        if (m_vTrackEntry != null)
+        {
+            while (true)
+            {
+                if (m_vTrackEntry == null || m_vTrackEntry.IsComplete)
+                    break;
+                if (m_vTrackEntry.Animation == null || (m_vTrackEntry.Animation != null && m_vTrackEntry.Animation.Name.Contains("hit") == false))
+                    break;
+
+                yield return null;
+            }
+
+            if (vOnFinished != null)
+                vOnFinished.Invoke();
+        }
+    }
+
+    protected void FinishAnimation()
+    {
+        if (m_enumeratorCheckAnimationEnd != null)
+        {
+            StopCoroutine(m_enumeratorCheckAnimationEnd);
+            m_enumeratorCheckAnimationEnd = null;
+        }
+
+        SetState(GT_UnitState.Idle);
     }
 
     protected virtual void CheckAssailable()

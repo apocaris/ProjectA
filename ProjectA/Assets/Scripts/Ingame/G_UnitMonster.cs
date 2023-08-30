@@ -1,4 +1,3 @@
-using Spine;
 using Spine.Unity;
 using System;
 using System.Collections;
@@ -6,7 +5,6 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
-using UnityEditor;
 
 public class G_UnitMonster : G_UnitObject
 {
@@ -68,7 +66,7 @@ public class G_UnitMonster : G_UnitObject
             m_vHitVFXAnchor.SetActive(false);
         }
 
-        m_bAggressive = false;
+        m_bAggressive = true;
         m_fAgroTimer = 0.0f;
         m_fPatrolTimer = 1.0f;
         m_vSpawnOriginPos = transform.position;

@@ -35,14 +35,37 @@ public class G_IngameStageMode : G_IngameModeBase
         if (m_fSpawnMonsterTimer >= G_Constant.m_fMonsterSpawnDelay)
         {
             m_fSpawnMonsterTimer = 0.0f;
-            if (m_iCurrentSpawnCount >= G_Constant.m_iSpawnMonsterMaxCount)
+            //if (m_iCurrentSpawnCount >= G_Constant.m_iSpawnMonsterMaxCount)
+            //    return;
+            if (m_iCurrentSpawnCount > 0)
                 return;
 
-            int iSpawnOnceCount = G_Constant.m_iSpawnOnceCount;
+            if (m_vSpawnSide == GT_Direction.Right)
+                m_vSpawnSide = GT_Direction.Left;
+            else
+                m_vSpawnSide = GT_Direction.Right;
+
+            //int iSpawnOnceCount = G_Constant.m_iSpawnOnceCount;
+            int iSpawnOnceCount = G_Constant.m_iSpawnMonsterMaxCount;
             for (int i = 0; i < iSpawnOnceCount; ++i)
             {
                 Vector3 vSpawnPosition = Vector3.zero;
-                SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Count)];
+                //SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Count)];
+                SphereCollider vPoint = null;
+                switch (m_vSpawnSide)
+                {
+                    case GT_Direction.Left:
+                        {
+                            vPoint = m_vFieldPoint.a_arrayLeftSpawnPoints[Random.Range(0, m_vFieldPoint.a_arrayLeftSpawnPoints.Count)];
+                        }
+                        break;
+                    case GT_Direction.Right:
+                        {
+                            vPoint = m_vFieldPoint.a_arrayRightSpawnPoints[Random.Range(0, m_vFieldPoint.a_arrayRightSpawnPoints.Count)];
+                        }
+                        break;
+                }
+
                 if (vPoint != null)
                 {
                     Vector3 vPos = Random.insideUnitSphere * vPoint.radius;

@@ -8,7 +8,8 @@ public class G_FieldPoint : G_Object
     //public Transform a_vCharacterPoint { get { return m_vCharacterPoint; } }
     public List<Transform> a_vCharacterPoints { get { return m_vCharacterPoints; } }
     public Transform a_vBossPoint { get { return m_vBossPoint; } }
-    public List<SphereCollider> a_arraySpawnPoints { get { return m_arraySpawnPoints; } }
+    public List<SphereCollider> a_arrayLeftSpawnPoints { get { return m_arrayLeftSpawnPoints; } }
+    public List<SphereCollider> a_arrayRightSpawnPoints { get { return m_arrayRightSpawnPoints; } }
     public Transform a_vSpawnLimitMin { get { return m_vSpawnLimitMin; } }
     public Transform a_vSpawnLimitMax { get { return m_vSpawnLimitMax; } }
 
@@ -46,8 +47,11 @@ public class G_FieldPoint : G_Object
     [SerializeField, Rename("Boss Point")]
     protected Transform m_vBossPoint = null;
 
-    [SerializeField, Rename("Spawn Point")]
-    protected List<SphereCollider> m_arraySpawnPoints = null;
+    [SerializeField, Rename("Spawn Point (Left)")]
+    protected List<SphereCollider> m_arrayLeftSpawnPoints = null;
+
+    [SerializeField, Rename("Spawn Point (Right)")]
+    protected List<SphereCollider> m_arrayRightSpawnPoints = null;
 
     [SerializeField, Rename("Spawn Limit Min")]
     protected Transform m_vSpawnLimitMin = null;
