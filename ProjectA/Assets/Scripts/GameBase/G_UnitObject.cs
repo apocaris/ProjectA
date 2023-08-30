@@ -49,7 +49,6 @@ public class G_UnitObject : G_Object
 
     public virtual void ResetObject()
     {
-        m_bInitSpineObject = false;
         SetState(GT_UnitState.Create);
         ApplyDirection(GT_Direction.Right);
         m_vAttackTarget = null;
@@ -59,22 +58,25 @@ public class G_UnitObject : G_Object
         m_bAIUpdate = true;
 
         m_fRangeRandomDistance = UnityEngine.Random.Range(0.0f, 0.15f);
+
+        if (m_vAnchor != null)
+            m_vAnchor.transform.localScale = Vector3.one * m_fUnitSize;
     }
 
-    protected virtual void InitializeSpineShape(string strName)
+    protected virtual void InitializeSpineShape(string strClass, string strName)
     {
         if (m_vSpineObject == null)
             return;
 
         switch (m_eUnitType)
         {
-            case GT_UnitType.MainCharacter:
+            case GT_Unit.MainCharacter:
                 {
-                    m_vSpineObject.skeletonDataAsset = LoadSkeletonResource($"Spine/MainCharacter/{strName}/{strName}_SkeletonData");
-                    //m_vSpineObject.initialSkinName = "default";
+                    m_vSpineObject.skeletonDataAsset = LoadSkeletonResource($"Spine/MainCharacter/{strClass}/{strName}/{strName}_SkeletonData");
+                    m_vSpineObject.initialSkinName = "default";
                 }
                 break;
-            case GT_UnitType.Monster:
+            case GT_Unit.Monster:
                 {
                     m_vSpineObject.skeletonDataAsset = LoadSkeletonResource($"Spine/Monster/{strName}/{strName}_SkeletonData");
                     m_vSpineObject.initialSkinName = "default";
@@ -88,7 +90,6 @@ public class G_UnitObject : G_Object
             {
                 m_vSpineObject.timeScale = 1;
                 m_vSpineObject.Initialize(true);
-                m_bInitSpineObject = true;
             }
         }
         catch
@@ -113,7 +114,7 @@ public class G_UnitObject : G_Object
             case GT_UnitState.Move:
                 {
                     float fAniSpeed = m_fMoveSpeed;
-                    if (m_eUnitType == GT_UnitType.MainCharacter)
+                    if (m_eUnitType == GT_Unit.MainCharacter)
                     {
                         fAniSpeed = m_fMoveSpeed / 2f;
                         if (fAniSpeed > 1.5f)
@@ -125,7 +126,7 @@ public class G_UnitObject : G_Object
                 break;
             case GT_UnitState.Attack:
                 {
-                    if (m_eUnitType != GT_UnitType.MainCharacter)
+                    if (m_eUnitType != GT_Unit.MainCharacter)
                         SetAnimation(G_Constant.m_strMotion_Attack, false, m_fAttackSpeed, GetSpineTrackIndex());
                 }
                 break;
@@ -212,7 +213,7 @@ public class G_UnitObject : G_Object
             {
                 case GT_Direction.Left:
                     {
-                        if (m_eUnitType == GT_UnitType.MainCharacter)
+                        if (m_eUnitType == GT_Unit.MainCharacter)
                             m_vAnchor.transform.localEulerAngles = m_vLeftRot;
                         else
                             m_vAnchor.transform.localEulerAngles = m_vRightRot;
@@ -220,7 +221,7 @@ public class G_UnitObject : G_Object
                     break;
                 case GT_Direction.Right:
                     {
-                        if (m_eUnitType == GT_UnitType.MainCharacter)
+                        if (m_eUnitType == GT_Unit.MainCharacter)
                             m_vAnchor.transform.localEulerAngles = m_vRightRot;
                         else
                             m_vAnchor.transform.localEulerAngles = m_vLeftRot;
@@ -356,12 +357,12 @@ public class G_UnitObject : G_Object
         GT_SpineTrackIndex eTrackIndex = GT_SpineTrackIndex.None;
         switch (m_eUnitType)
         {
-            case GT_UnitType.MainCharacter:
+            case GT_Unit.MainCharacter:
                 {
                     eTrackIndex = GT_SpineTrackIndex.Character;
                 }
                 break;
-            case GT_UnitType.Monster:
+            case GT_Unit.Monster:
                 {
                     eTrackIndex = GT_SpineTrackIndex.Monster;
                 }
@@ -382,8 +383,6 @@ public class G_UnitObject : G_Object
     protected float m_fAttackDelayTimer = 0.0f;
     private float m_fRangeRandomDistance = 0.0f;
 
-    protected bool m_bInitSpineObject = false;
-
     public bool a_bAlive { get { return m_bAlive; } }
     protected bool m_bAlive = false;
 
@@ -401,7 +400,7 @@ public class G_UnitObject : G_Object
     public G_UnitObject a_vAttackTarget { get { return m_vAttackTarget; } }
     protected G_UnitObject m_vAttackTarget = null;
 
-    public GT_UnitType a_eUnitType { get { return m_eUnitType; } }
+    public GT_Unit a_eUnitType { get { return m_eUnitType; } }
     #endregion
 
     [Header("Objects")]
@@ -432,7 +431,7 @@ public class G_UnitObject : G_Object
 
     [Header("Unit Data")]
     [SerializeField, Rename("Unit Type")]
-    protected GT_UnitType m_eUnitType = GT_UnitType.None;
+    protected GT_Unit m_eUnitType = GT_Unit.None;
 
     [SerializeField, Rename("Unit Size")]
     protected float m_fUnitSize = 1.0f;

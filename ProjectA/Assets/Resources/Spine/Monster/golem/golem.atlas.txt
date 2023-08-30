@@ -1,0 +1,66 @@
+golem.png
+size:128,128
+filter:Linear,Linear
+pma:true
+head_hit
+bounds:48,47,22,22
+offsets:1,1,24,24
+head_hit_white
+bounds:64,7,22,22
+offsets:1,1,24,24
+head_idle
+bounds:48,29,22,18
+offsets:1,1,24,20
+head_idle_white
+bounds:70,47,22,18
+offsets:1,1,24,20
+rotate:90
+left foot
+bounds:86,0,17,13
+offsets:1,1,19,15
+left foot_white
+bounds:75,70,17,13
+offsets:1,1,19,15
+left hand
+bounds:48,100,27,31
+offsets:1,1,29,33
+rotate:90
+left hand_white
+bounds:48,69,27,31
+offsets:1,1,29,33
+left shoulder
+bounds:70,32,15,19
+offsets:1,1,17,21
+rotate:90
+right shoulder
+bounds:70,32,15,19
+offsets:1,1,17,21
+rotate:90
+left shoulder_white
+bounds:86,13,15,19
+offsets:1,1,17,21
+right shoulder_white
+bounds:86,13,15,19
+offsets:1,1,17,21
+right foot
+bounds:75,83,17,15
+offsets:1,1,19,17
+rotate:90
+right foot_white
+bounds:88,53,17,15
+offsets:1,1,19,17
+rotate:90
+right hand
+bounds:0,2,27,32
+offsets:1,1,29,34
+rotate:90
+right hand_white
+bounds:32,2,27,32
+offsets:1,1,29,34
+rotate:90
+torso
+bounds:0,78,48,49
+offsets:1,1,50,51
+torso_white
+bounds:0,29,48,49
+offsets:1,1,50,51

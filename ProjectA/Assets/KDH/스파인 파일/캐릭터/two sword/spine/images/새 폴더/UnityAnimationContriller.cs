@@ -23,7 +23,7 @@ public class UnityAnimationContriller : MonoBehaviour
 
     }
 
-    public void Event(Spine.AnimationState state, int trackIndex, Event e)
+    public void Event(Spine.AnimationState state, int trackIndex, Spine.Event e)
     {
         Debug.Log(trackIndex + "" + state.GetCurrent(trackIndex) + ":evemt" + e + e.Int);
         

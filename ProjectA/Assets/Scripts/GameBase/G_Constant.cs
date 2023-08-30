@@ -1,7 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 public enum GT_PoolType
 {
     Monster,
@@ -39,15 +35,23 @@ public enum GT_SpineTrackIndex
     Monster,
 }
 
-public enum GT_UnitType
+public enum GT_Unit
 {
     None,
     MainCharacter,
     Monster,
 }
 
+public enum GT_UnitClass
+{
+    None,
+    Axe,
+    Spear,
+    TwoSword,
+}
+
 // 캐릭터 이펙트 소팅 타입
-public enum GT_EffectSortType
+public enum GT_EffectSort
 {
     None,
     Front,
@@ -68,6 +72,13 @@ public static class G_Constant
     public const string m_strMonsterObject = "Prefabs/IngameObject/Monster";
     #endregion
 
+    #region Character spine class folder
+    public const string m_strClassAxe = "axe";
+    public const string m_strClassSpear = "spear";
+    public const string m_strClassTwoSword = "two_sword";
+    #endregion
+
+    #region Motion names
     // 기본 모션 이름
     public const string m_strMotion_Idle = "idle";
     public const string m_strMotion_Move = "run";
@@ -76,34 +87,20 @@ public static class G_Constant
     public const string m_strMotion_Hit = "hit";
 
     // 캐릭터 모션 이름
-    public const string m_strMotion_Atk_1 = "atk_1";
-    public const string m_strMotion_Atk_2 = "atk_2";
-    public const string m_strMotion_Atk_3 = "atk_3";
-    public const string m_strMotion_Atk_4 = "atk_4";
+    public const string m_strMotion_Atk_1 = "atk1";
+    public const string m_strMotion_Atk_2 = "atk2";
+    public const string m_strMotion_Atk_3 = "atk3";
+    public const string m_strMotion_Atk_4 = "atk4";
     public const string m_strMotion_Dash = "dash";
     public const string m_strMotion_Skill_1 = "skill_1";
     public const string m_strMotion_Skill_2 = "skill_2";
 
     // 평타 이벤트 이름
-    public const string m_strSpine_Event_Attack_1 = "attack_1";
-    public const string m_strSpine_Event_Attack_2 = "attack_2";
-    public const string m_strSpine_Event_Attack_3 = "attack_3";
-    public const string m_strSpine_Event_Attack_4 = "attack_4";
-
-    // 연타 스킬 이벤트 이름
-    public const string m_strSpine_Event_ComoSkill_1 = "skill_combo_1";
-    public const string m_strSpine_Event_ComoSkill_2 = "skill_combo_2";
-    public const string m_strSpine_Event_ComoSkill_3 = "skill_combo_3";
-    public const string m_strSpine_Event_ComoSkill_4 = "skill_combo_4";
-    public const string m_strSpine_Event_ComoSkill_5 = "skill_combo_5";
-    public const string m_strSpine_Event_ComoSkill_6 = "skill_combo_6";
-    public const string m_strSpine_Event_ComoSkill_7 = "skill_combo_7";
-    public const string m_strSpine_Event_ComoSkill_8 = "skill_combo_8";
-    public const string m_strSpine_Event_ComoSkill_9 = "skill_combo_9";
-    public const string m_strSpine_Event_ComoSkill_10 = "skill_combo_10";
-    public const string m_strSpine_Event_ComoSkill_11 = "skill_combo_11";
-    public const string m_strSpine_Event_ComoSkill_12 = "skill_combo_12";
-    public const string m_strSpine_Event_ComoSkill_13 = "skill_combo_13";
+    public const string m_strSpine_Event_Attack_1 = "atk1";
+    public const string m_strSpine_Event_Attack_2 = "atk2";
+    public const string m_strSpine_Event_Attack_3 = "atk3";
+    public const string m_strSpine_Event_Attack_4 = "atk4";
+    #endregion
 
     // 메모리 풀
     public const int m_iMonsterPoolSize = 20;

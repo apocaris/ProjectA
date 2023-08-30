@@ -87,7 +87,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                 }
             }
 
-            m_vMainCharacter.ResetObject();
+            m_vMainCharacter.ResetObject(GT_UnitClass.Axe);
         }
 
         {
@@ -99,7 +99,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
 
                 switch (m_vMonsterList[i].a_eUnitType)
                 {
-                    case GT_UnitType.Monster:
+                    case GT_Unit.Monster:
                         {
                             G_GameMGR.a_instance.ReturnPoolObject(GT_PoolType.Monster, m_vMonsterList[i].gameObject);
                         }
@@ -159,11 +159,11 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         }
     }
 
-    public void GetAttackTarget(ref G_UnitObject vRetTarget, Vector3 vOwnPos, GT_UnitType eOwnUnitType, float fMinAttackRange = 0.0f, bool bRandom = false)
+    public void GetAttackTarget(ref G_UnitObject vRetTarget, Vector3 vOwnPos, GT_Unit eOwnUnitType, float fMinAttackRange = 0.0f, bool bRandom = false)
     {
         switch (eOwnUnitType)
         {
-            case GT_UnitType.MainCharacter:
+            case GT_Unit.MainCharacter:
                 {
                     if (m_vMonsterList == null)
                         return;
@@ -196,7 +196,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                     }
                 }
                 break;
-            case GT_UnitType.Monster:
+            case GT_Unit.Monster:
                 {
                     //float fMinDis = fMinAttackRange;
                     //float fDis = Vector3.Distance(vOwnPos, m_vMainCharacter.transform.position);
@@ -213,11 +213,11 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
     }
 
     private List<G_UnitObject> m_vNearbyMonsters = new List<G_UnitObject>();
-    public void GetNearbyMonsterList(ref List<G_UnitObject> vRetTargets, Vector3 vOwnPos, GT_UnitType eOwnUnitType, float fRange, int iMaxCount = 0)
+    public void GetNearbyMonsterList(ref List<G_UnitObject> vRetTargets, Vector3 vOwnPos, GT_Unit eOwnUnitType, float fRange, int iMaxCount = 0)
     {
         switch (eOwnUnitType)
         {
-            case GT_UnitType.MainCharacter:
+            case GT_Unit.MainCharacter:
                 {
                     if (m_vNearbyMonsters == null)
                         return;
@@ -244,7 +244,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                     }
                 }
                 break;
-            case GT_UnitType.Monster:
+            case GT_Unit.Monster:
                 {
 
                 }

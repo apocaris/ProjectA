@@ -4,54 +4,71 @@ using Spine.Unity.AttachmentTools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using System.Security.Cryptography;
-using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
-using UnityEngine.UIElements;
 
 public class G_UnitMainCharacter : G_UnitObject
 {
     public override void InitializeObject()
     {
         // 앞, 뒤 이펙트 모션 필요한 데이터 세팅
+        /*
         if (m_dicEffSortOption != null)
         {
             List<GT_EffectSortType> vList = new List<GT_EffectSortType>
             {
                 GT_EffectSortType.Front
             };
-
-            //if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_1))
-            //    m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_1, vList);
-            //if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_2))
-            //    m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_2, vList);
+            
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_3))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_3, vList);
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_4))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_4, vList);
-            //if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Dash))
-            //    m_dicEffSortOption.Add(G_Constant.m_strMotion_Dash, vList);
+            
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Skill_1))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Skill_1, vList);
             if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Skill_2))
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Skill_2, vList);
         }
+        */
     }
 
-    public override void ResetObject()
+    public void ResetObject(GT_UnitClass eClass)
     {
         base.ResetObject();
 
         //스킨 관련 정리
-        if (!IsNull(m_vSkinRuntimeMaterial))
-            Destroy(m_vSkinRuntimeMaterial);
-        if (!IsNull(m_vSkinRuntimeAtlas))
-            Destroy(m_vSkinRuntimeAtlas);
-        AtlasUtilities.ClearCache();
+        //if (!IsNull(m_vSkinRuntimeMaterial))
+        //    Destroy(m_vSkinRuntimeMaterial);
+        //if (!IsNull(m_vSkinRuntimeAtlas))
+        //    Destroy(m_vSkinRuntimeAtlas);
+        //AtlasUtilities.ClearCache();
+
+        string strClass = string.Empty;
+        string strResource = string.Empty;
+        switch (eClass)
+        {
+            case GT_UnitClass.Axe:
+                {
+                    strClass = G_Constant.m_strClassAxe;
+                    strResource = "axe_1";
+                }
+                break;
+            case GT_UnitClass.Spear:
+                {
+                    strClass = G_Constant.m_strClassSpear;
+                    strResource = "spear_1";
+                }
+                break;
+            case GT_UnitClass.TwoSword:
+                {
+                    strClass = G_Constant.m_strClassTwoSword;
+                    strResource = "two_sword_1";
+                }
+                break;
+        }
 
         // 외형
-        InitializeSpineShape("MainCharacter");
-        SetCharacterSkin();
+        InitializeSpineShape(strClass, strResource);
 
 #if ATTACK_BASE_TIMING
 
@@ -77,9 +94,6 @@ public class G_UnitMainCharacter : G_UnitObject
     protected override void FixedUpdate()
     {
         base.FixedUpdate();
-
-        if (!m_bInitSpineObject)
-            return;
 
         if (!a_bAIUpdate)
             return;
@@ -282,10 +296,10 @@ public class G_UnitMainCharacter : G_UnitObject
             string strMotionName = string.Empty;
             switch (m_iNextAttackMotion)
             {
-                case 0: strMotionName = "atk_1"; break;
-                case 1: strMotionName = "atk_2"; break;
-                case 2: strMotionName = "atk_3"; break;
-                case 3: strMotionName = "atk_4"; break;
+                case 0: strMotionName = G_Constant.m_strMotion_Atk_1; break;
+                case 1: strMotionName = G_Constant.m_strMotion_Atk_2; break;
+                case 2: strMotionName = G_Constant.m_strMotion_Atk_3; break;
+                case 3: strMotionName = G_Constant.m_strMotion_Atk_4; break;
             }
 
             if (!string.IsNullOrEmpty(strMotionName))
@@ -534,12 +548,12 @@ public class G_UnitMainCharacter : G_UnitObject
 
                     switch (vTargetList[i].a_eUnitType)
                     {
-                        case GT_UnitType.MainCharacter:
+                        case GT_Unit.MainCharacter:
                             {
 
                             }
                             break;
-                        case GT_UnitType.Monster:
+                        case GT_Unit.Monster:
                             {
                                 ((G_UnitMonster)vTargetList[i]).Hit(1, true);
                             }
@@ -569,6 +583,7 @@ public class G_UnitMainCharacter : G_UnitObject
         }
 
         // 관련 이펙트 재생
+        /*
         if (m_dicEffSortOption.ContainsKey(strMotionName))
         {
             if (m_dicEffSortOption[strMotionName] != null)
@@ -577,7 +592,7 @@ public class G_UnitMainCharacter : G_UnitObject
                 {
                     switch (m_dicEffSortOption[strMotionName][i])
                     {
-                        case GT_EffectSortType.Front:
+                        case GT_EffectSort.Front:
                             {
                                 if (m_vFrontVFXSpine != null)
                                 {
@@ -592,7 +607,7 @@ public class G_UnitMainCharacter : G_UnitObject
                                 }
                             }
                             break;
-                        case GT_EffectSortType.Back:
+                        case GT_EffectSort.Back:
                             {
                                 if (m_vBackVFXSpine != null)
                                 {
@@ -611,6 +626,7 @@ public class G_UnitMainCharacter : G_UnitObject
                 }
             }
         }
+        */
     }
 
     #endregion
@@ -664,7 +680,7 @@ public class G_UnitMainCharacter : G_UnitObject
         if (m_fDashMotionSpeed <= 1.0f)
             m_fDashMotionSpeed = 1.0f;
 
-        SetAnimation(G_Constant.m_strMotion_Dash, false, m_fDashMotionSpeed, GT_SpineTrackIndex.Character);
+        SetAnimation(G_Constant.m_strMotion_Move, false, m_fDashMotionSpeed, GT_SpineTrackIndex.Character);
         //yield return new WaitForSeconds((13f / 30f) / m_fDashMotionSpeed);
 
         if (m_vAttackTarget != null)
@@ -713,7 +729,7 @@ public class G_UnitMainCharacter : G_UnitObject
     private float m_fCheckAttackMotionTimer = 0.0f;
     private bool m_bCheckInitAttackMotion = false;
     private int m_iNextAttackMotion = 0;
-    private int m_iMaxAttackMotion = 3;
+    private int m_iMaxAttackMotion = 2;
     private bool m_bAttackProcess = false;
     protected bool m_bSkillMotionProcess = false;
     private float m_fOrgTimescale = 0.0f;
@@ -721,7 +737,7 @@ public class G_UnitMainCharacter : G_UnitObject
     private Vector3 m_vDesDashPos = Vector3.zero;
     private bool m_bSetTargetEnemy = false;
 
-    private Dictionary<string, List<GT_EffectSortType>> m_dicEffSortOption = new Dictionary<string, List<GT_EffectSortType>>();
+    //private Dictionary<string, List<GT_EffectSortType>> m_dicEffSortOption = new Dictionary<string, List<GT_EffectSortType>>();
     #endregion
 
     #region Constant

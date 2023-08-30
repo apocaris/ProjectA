@@ -14906,7 +14906,7 @@ MonoBehaviour:
   m_fAttackSpeed: 1
   m_fMoveSpeed: 1
   m_eUnitType: 2
-  m_fUnitSize: 1
+  m_fUnitSize: 2
   m_fAgroRange: 1
   m_vHitTween: {fileID: 5657198722561961234}
   m_vHitVFXAnchor: {fileID: 7151368067563141372}
@@ -15002,7 +15002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: b074d4f3562c843b8a2f9dac048baf14, type: 2}
+  skeletonDataAsset: {fileID: 0}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0

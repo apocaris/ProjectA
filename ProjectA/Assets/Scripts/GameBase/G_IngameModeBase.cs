@@ -65,7 +65,7 @@ public class G_IngameModeBase : G_Object
                 G_FieldMGR.a_instance.GetAttackTarget(ref vTargetUnit, vMonster.transform.position, vMonster.a_eUnitType);
                 if (vTargetUnit != null)
                 {
-                    if (vTargetUnit.a_eUnitType == GT_UnitType.MainCharacter)
+                    if (vTargetUnit.a_eUnitType == GT_Unit.MainCharacter)
                         vMonster.UpdateTarget((G_UnitMainCharacter)vTargetUnit);
                 }
 

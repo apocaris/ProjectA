@@ -1,0 +1,28 @@
+two_sword_1.png
+size:128,128
+filter:Linear,Linear
+pma:true
+back hair
+bounds:87,87,22,22
+head
+bounds:67,89,20,20
+left foot
+bounds:0,104,5,5
+offsets:1,1,7,7
+left hand
+bounds:10,103,7,6
+offsets:1,1,9,8
+right back hair
+bounds:37,91,18,30
+rotate:90
+right foot
+bounds:5,104,5,5
+offsets:1,1,7,7
+right hand
+bounds:17,103,7,6
+offsets:1,1,9,8
+sword1
+bounds:0,70,72,19
+torso
+bounds:24,97,12,13
+rotate:90

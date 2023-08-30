@@ -88,7 +88,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 90bd7145009cb3344b6c44447c8d21d4, type: 2}
+  skeletonDataAsset: {fileID: 0}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -566,7 +566,7 @@ MonoBehaviour:
   m_fAttackSpeed: 1.5
   m_fMoveSpeed: 1.7
   m_eUnitType: 1
-  m_fUnitSize: 1
+  m_fUnitSize: 2
   m_fCheckAttackMotionTime: 0.7
   m_fDashMoveSpeed: 45
   m_fDashMotionSpeed: 1

@@ -13,9 +13,6 @@ public class G_UnitMonster : G_UnitObject
     {
         base.FixedUpdate();
 
-        if (!m_bInitSpineObject)
-            return;
-
         if (!m_bAlive)
             return;
 
@@ -82,21 +79,19 @@ public class G_UnitMonster : G_UnitObject
 
         // ¿ÜÇü
         string strMonster;
-        int iMonsterResource = UnityEngine.Random.Range(0, 6);
+        int iMonsterResource = UnityEngine.Random.Range(0, 3);
         switch (iMonsterResource)
         {
-            case 1: strMonster = "demon_baphomet_1"; break;
-            case 2: strMonster = "demon_wolf_4"; break;
-            case 3: strMonster = "baphomet"; break;
-            case 4: strMonster = "chicken"; break;
+            case 1: strMonster = "goblin"; break;
+            case 2: strMonster = "golem"; break;
             default:
                 {
-                    strMonster = "slime";
+                    strMonster = "goblin";
                 }
                 break;
         }
 
-        InitializeSpineShape(strMonster);
+        InitializeSpineShape(string.Empty, strMonster);
     }
 
     protected override void CheckMoveState()
