@@ -42,7 +42,7 @@ public class G_IngameStageMode : G_IngameModeBase
             for (int i = 0; i < iSpawnOnceCount; ++i)
             {
                 Vector3 vSpawnPosition = Vector3.zero;
-                SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Length)];
+                SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Count)];
                 if (vPoint != null)
                 {
                     Vector3 vPos = Random.insideUnitSphere * vPoint.radius;

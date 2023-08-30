@@ -62,6 +62,8 @@ public class G_CameraController : MonoBehaviour
 
     private float m_fPreviousWidth = 0.0f;
 
+    public Transform a_vPlayerTransform { get { return m_vPlayerTransform; } }
+
     [SerializeField]
     private Transform m_vPlayerTransform;
     [SerializeField]

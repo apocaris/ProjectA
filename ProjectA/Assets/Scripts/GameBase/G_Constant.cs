@@ -23,6 +23,7 @@ public enum GT_UnitState
     Idle,
     Move,
     Attack,
+    Hit,
     Die,
     Dash_Ready,
     Dash_Move,

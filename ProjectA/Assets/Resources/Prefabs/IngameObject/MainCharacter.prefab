@@ -210,7 +210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d247ba06193faa74d9335f5481b2b56c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  skeletonDataAsset: {fileID: 11400000, guid: 90bd7145009cb3344b6c44447c8d21d4, type: 2}
+  skeletonDataAsset: {fileID: 0}
   initialSkinName: 
   fixPrefabOverrideViaMeshFilter: 2
   initialFlipX: 0
@@ -560,13 +560,13 @@ MonoBehaviour:
   m_vAnchor: {fileID: 9156437903315532368}
   m_vSpineObject: {fileID: 8462977158234635870}
   m_vDustAnchor: {fileID: 5645083734104708058}
-  m_fAttackRange: 1.2
+  m_fAttackRange: 0.9
   m_fAttackTiming: 0.6
   m_fAttackCoolTime: 0.3
   m_fAttackSpeed: 1.5
   m_fMoveSpeed: 1.7
   m_eUnitType: 1
-  m_fUnitSize: 2
+  m_fUnitSize: 1.5
   m_fCheckAttackMotionTime: 0.7
   m_fDashMoveSpeed: 45
   m_fDashMotionSpeed: 1

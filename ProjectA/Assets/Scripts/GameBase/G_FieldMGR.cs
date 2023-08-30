@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering.Universal;
 using UnityEngine.SceneManagement;
 using Vector2 = UnityEngine.Vector2;
 
@@ -58,36 +59,53 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
     {
         // Create Character
         {
-            bool bInitialize = true;
-            if (m_vMainCharacter == null && G_GameMGR.a_instance.a_vIngameArea != null)
+            // Summon characters by class
+            if (m_vCharacters != null && G_GameMGR.a_instance.a_vIngameArea != null)
             {
-                GameObject vObj = Instantiate(LoadResource<GameObject>(G_Constant.m_strCharacterObject), G_GameMGR.a_instance.a_vIngameArea);
-                if (vObj != null)
+                for (GT_UnitClass eClass = GT_UnitClass.Axe; eClass <= GT_UnitClass.TwoSword; ++eClass)
                 {
-                    m_vMainCharacter = vObj.GetComponent<G_UnitMainCharacter>();
-                    if (m_vMainCharacter != null)
-                        bInitialize = false;
+                    bool bInitialize = true;
+                    G_UnitMainCharacter vCharacter = null;
+
+                    if (!m_vCharacters.ContainsKey(eClass))
+                    {
+                        GameObject vObj = Instantiate(LoadResource<GameObject>(G_Constant.m_strCharacterObject), G_GameMGR.a_instance.a_vIngameArea);
+                        if (vObj != null)
+                        {
+                            vCharacter = vObj.GetComponent<G_UnitMainCharacter>();
+                            if (vCharacter != null)
+                                m_vCharacters.Add(eClass, vCharacter);
+                            bInitialize = false;
+                        }
+                    }
+                    else
+                    {
+                        vCharacter = m_vCharacters[eClass];
+                    }
+
+                    if (vCharacter != null)
+                    {
+                        if (!bInitialize)
+                        {
+                            vCharacter.InitializeObject();
+                            if (G_GameMGR.a_instance.a_vGameScene != null && G_GameMGR.a_instance.a_vGameScene.a_vMainCamera != null)
+                            {
+                                G_CameraController vCtrl = G_GameMGR.a_instance.a_vGameScene.a_vMainCamera.GetComponent<G_CameraController>();
+                                if (vCtrl != null && vCtrl.a_vPlayerTransform == null)
+                                    vCtrl.SetPlayerTransform(vCharacter.transform);
+                            }
+                        }
+
+                        vCharacter.ResetObject(eClass);
+
+                        if (m_vRepCharacter == null)
+                        {
+                            vCharacter.SetRepresentative();
+                            m_vRepCharacter = vCharacter;
+                        }
+                    }
                 }
             }
-
-            if (m_vMainCharacter == null)
-            {
-                Debug.LogError("Not found main character unit");
-                return;
-            }
-
-            if (!bInitialize)
-            {
-                m_vMainCharacter.InitializeObject();
-                if (G_GameMGR.a_instance.a_vGameScene != null && G_GameMGR.a_instance.a_vGameScene.a_vMainCamera != null)
-                {
-                    G_CameraController vCtrl = G_GameMGR.a_instance.a_vGameScene.a_vMainCamera.GetComponent<G_CameraController>();
-                    if (vCtrl != null)
-                        vCtrl.SetPlayerTransform(m_vMainCharacter.transform);
-                }
-            }
-
-            m_vMainCharacter.ResetObject(GT_UnitClass.Axe);
         }
 
         {
@@ -159,6 +177,43 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         }
     }
 
+    public void NotifyAttackTarget(G_UnitMainCharacter vSource)
+    {
+        if (vSource == null)
+            return;
+
+        G_UnitObject vTarget = vSource.a_vAttackTarget;
+        if (vTarget == null)
+            return;
+
+        foreach (G_UnitMainCharacter vCharacter in m_vCharacters.Values)
+        {
+            if (vCharacter == null)
+                continue;
+            if (vCharacter == vSource)
+                continue;
+
+            vCharacter.SetAttackTarget(ref vTarget);
+        }
+    }
+
+    public void NotifyDashCharacter(G_UnitMainCharacter vSource)
+    {
+        if (vSource == null)
+            return;
+
+        Vector3 vTargetPos = vSource.a_vDesDashPos;
+        foreach (G_UnitMainCharacter vCharacter in m_vCharacters.Values)
+        {
+            if (vCharacter == null)
+                continue;
+            if (vCharacter == vSource)
+                continue;
+
+            vCharacter.SetDashDesPos(ref vTargetPos);
+        }
+    }
+
     public void GetAttackTarget(ref G_UnitObject vRetTarget, Vector3 vOwnPos, GT_Unit eOwnUnitType, float fMinAttackRange = 0.0f, bool bRandom = false)
     {
         switch (eOwnUnitType)
@@ -198,15 +253,25 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                 break;
             case GT_Unit.Monster:
                 {
-                    //float fMinDis = fMinAttackRange;
-                    //float fDis = Vector3.Distance(vOwnPos, m_vMainCharacter.transform.position);
-                    //if (fMinDis == 0 || fDis < fMinDis)
-                    //{
-                    //    fMinDis = fDis;
-                    //    vRetTarget = m_vMainCharacter;
-                    //}
+                    if (m_vCharacters != null)
+                    {
+                        float fMinDis = fMinAttackRange;
+                        foreach (G_UnitMainCharacter vTarget in m_vCharacters.Values)
+                        {
+                            if (vTarget == null)
+                                continue;
 
-                    vRetTarget = m_vMainCharacter;
+                            float fDis = Vector3.Distance(vOwnPos, vTarget.transform.position);
+                            if (fMinDis == 0 || fDis < fMinDis)
+                            {
+                                fMinDis = fDis;
+                                vRetTarget = vTarget;
+                                break;
+                            }
+                        }
+                    }
+
+                    //vRetTarget = m_vMainCharacter;
                 }
                 break;
         }
@@ -349,8 +414,14 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
     public G_IngameStageMode a_vIngameStageMode { get { return m_vIngameStageMode; } }
     private G_IngameStageMode m_vIngameStageMode = null;
 
-    public G_UnitMainCharacter a_vMainCharacter { get { return m_vMainCharacter; } }
-    private G_UnitMainCharacter m_vMainCharacter = null;
+    //public G_UnitMainCharacter a_vMainCharacter { get { return m_vMainCharacter; } }
+    //private G_UnitMainCharacter m_vMainCharacter = null;
+
+    public G_UnitMainCharacter a_vRepCharacter { get { return m_vRepCharacter; } }
+    private G_UnitMainCharacter m_vRepCharacter = null;
+
+    public Dictionary<GT_UnitClass, G_UnitMainCharacter> a_vCharacters { get { return m_vCharacters; } }
+    private Dictionary<GT_UnitClass, G_UnitMainCharacter> m_vCharacters = new Dictionary<GT_UnitClass, G_UnitMainCharacter>(); 
 
     public List<G_UnitObject> a_vMonsterList { get { return m_vMonsterList; } }
     private List<G_UnitObject> m_vMonsterList = new List<G_UnitObject>();

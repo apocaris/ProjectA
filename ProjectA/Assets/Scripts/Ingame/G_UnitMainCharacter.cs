@@ -30,6 +30,8 @@ public class G_UnitMainCharacter : G_UnitObject
                 m_dicEffSortOption.Add(G_Constant.m_strMotion_Skill_2, vList);
         }
         */
+
+        m_bRep = false;
     }
 
     public void ResetObject(GT_UnitClass eClass)
@@ -98,25 +100,30 @@ public class G_UnitMainCharacter : G_UnitObject
         if (!a_bAIUpdate)
             return;
 
-        m_bSetTargetEnemy = false;
-        if (m_eState != GT_UnitState.Die && m_eState != GT_UnitState.Attack)
+        if (m_bRep)
         {
-            if (m_eState != GT_UnitState.Dash_Move && m_eState != GT_UnitState.Dash_Ready)
+            m_bSetTargetEnemy = false;
+            if (m_eState != GT_UnitState.Die && m_eState != GT_UnitState.Attack)
             {
-                m_bSetTargetEnemy = true;
-            }
-        }
-
-        if (m_bSetTargetEnemy)
-        {
-            m_fTargetTimer += Time.fixedDeltaTime;
-            if (m_fTargetTimer >= m_fIntervalTargeting)
-            {
-                m_fTargetTimer = 0.0f;
-                G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
-                if (m_eState != GT_UnitState.Dash_Ready && m_eState != GT_UnitState.Dash_Move)
+                if (m_eState != GT_UnitState.Dash_Move && m_eState != GT_UnitState.Dash_Ready)
                 {
-                    CheckDashDistance();
+                    m_bSetTargetEnemy = true;
+                }
+            }
+
+            if (m_bSetTargetEnemy)
+            {
+                m_fTargetTimer += Time.fixedDeltaTime;
+                if (m_fTargetTimer >= m_fIntervalTargeting)
+                {
+                    m_fTargetTimer = 0.0f;
+                    G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
+                    // Once the target is set, notify other characters of the target as well.
+                    G_FieldMGR.a_instance.NotifyAttackTarget(this);
+                    if (m_eState != GT_UnitState.Dash_Ready && m_eState != GT_UnitState.Dash_Move)
+                    {
+                        CheckDashDistance();
+                    }
                 }
             }
         }
@@ -205,6 +212,17 @@ public class G_UnitMainCharacter : G_UnitObject
     #endregion
 
     #region State
+
+    public void SetRepresentative()
+    {
+        m_bRep = true;
+    }
+
+    public void SetDashDesPos(ref Vector3 vTargetPos)
+    {
+        m_vDesDashPos = vTargetPos;
+        SetState(GT_UnitState.Dash_Ready);
+    }
 
 #if ATTACK_BASE_TIMING
     protected override void SetState(GT_UnitState eState)
@@ -660,6 +678,8 @@ public class G_UnitMainCharacter : G_UnitObject
             }
 
             SetState(GT_UnitState.Dash_Ready);
+            // Notifies dash usage information to other characters
+            G_FieldMGR.a_instance.NotifyDashCharacter(this);
         }
     }
 
@@ -734,8 +754,13 @@ public class G_UnitMainCharacter : G_UnitObject
     protected bool m_bSkillMotionProcess = false;
     private float m_fOrgTimescale = 0.0f;
     private float m_fOrgMoveSpeed = 0.0f;
-    private Vector3 m_vDesDashPos = Vector3.zero;
     private bool m_bSetTargetEnemy = false;
+
+    public Vector3 a_vDesDashPos { get { return m_vDesDashPos; } }
+    private Vector3 m_vDesDashPos = Vector3.zero;
+
+    public bool a_bRep { get { return m_bRep; } }
+    private bool m_bRep = false;
 
     //private Dictionary<string, List<GT_EffectSortType>> m_dicEffSortOption = new Dictionary<string, List<GT_EffectSortType>>();
     #endregion

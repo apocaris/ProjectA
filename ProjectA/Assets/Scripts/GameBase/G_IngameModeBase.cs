@@ -28,10 +28,32 @@ public class G_IngameModeBase : G_Object
 
         m_vFieldPoint = vFieldPoint;
 
-        if (G_FieldMGR.a_instance.a_vMainCharacter != null)
+        //if (G_FieldMGR.a_instance.a_vMainCharacter != null)
+        //{
+        //    G_FieldMGR.a_instance.a_vMainCharacter.transform.position = m_vFieldPoint.a_vCharacterPoint.position;
+        //    G_FieldMGR.a_instance.a_vMainCharacter.UpdateCamAnchor(m_vFieldPoint.a_vCameraTransform.transform);
+        //}
+
+        if (m_vFieldPoint != null && G_FieldMGR.a_instance.a_vCharacters != null)
         {
-            G_FieldMGR.a_instance.a_vMainCharacter.transform.position = m_vFieldPoint.a_vCharacterPoint.position;
-            G_FieldMGR.a_instance.a_vMainCharacter.UpdateCamAnchor(m_vFieldPoint.a_vCameraTransform.transform);
+            if (m_vFieldPoint.a_vCharacterPoints.Count == G_FieldMGR.a_instance.a_vCharacters.Count)
+            {
+                foreach (KeyValuePair<GT_UnitClass, G_UnitMainCharacter> vData in G_FieldMGR.a_instance.a_vCharacters)
+                {
+                    if (vData.Value == null)
+                        continue;
+
+                    int iTargetPosIdx = (int)vData.Key;
+                    if (iTargetPosIdx < m_vFieldPoint.a_vCharacterPoints.Count)
+                    {
+                        Transform vTarget = m_vFieldPoint.a_vCharacterPoints[iTargetPosIdx];
+                        if (vTarget != null)
+                        {
+                            vData.Value.transform.position = vTarget.position;
+                        }
+                    }
+                }
+            }
         }
     }
 

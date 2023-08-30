@@ -130,6 +130,12 @@ public class G_UnitObject : G_Object
                         SetAnimation(G_Constant.m_strMotion_Attack, false, m_fAttackSpeed, GetSpineTrackIndex());
                 }
                 break;
+            case GT_UnitState.Hit:
+                {
+                    if (m_eUnitType != GT_Unit.MainCharacter)
+                        SetAnimation(G_Constant.m_strMotion_Hit, false, 2.0f, GetSpineTrackIndex());
+                }
+                break;
             case GT_UnitState.Die:
                 {
                     SetAnimation(G_Constant.m_strMotion_Die, false, 1.0f, GetSpineTrackIndex());
@@ -213,18 +219,22 @@ public class G_UnitObject : G_Object
             {
                 case GT_Direction.Left:
                     {
-                        if (m_eUnitType == GT_Unit.MainCharacter)
-                            m_vAnchor.transform.localEulerAngles = m_vLeftRot;
-                        else
-                            m_vAnchor.transform.localEulerAngles = m_vRightRot;
+                        //if (m_eUnitType == GT_Unit.MainCharacter)
+                        //    m_vAnchor.transform.localEulerAngles = m_vLeftRot;
+                        //else
+                        //    m_vAnchor.transform.localEulerAngles = m_vRightRot;
+
+                        m_vAnchor.transform.localEulerAngles = m_vLeftRot;
                     }
                     break;
                 case GT_Direction.Right:
                     {
-                        if (m_eUnitType == GT_Unit.MainCharacter)
-                            m_vAnchor.transform.localEulerAngles = m_vRightRot;
-                        else
-                            m_vAnchor.transform.localEulerAngles = m_vLeftRot;
+                        //if (m_eUnitType == GT_Unit.MainCharacter)
+                        //    m_vAnchor.transform.localEulerAngles = m_vRightRot;
+                        //else
+                        //    m_vAnchor.transform.localEulerAngles = m_vLeftRot;
+
+                        m_vAnchor.transform.localEulerAngles = m_vRightRot;
                     }
                     break;
             }
@@ -246,6 +256,11 @@ public class G_UnitObject : G_Object
     #endregion
 
     #region Attack
+    public void SetAttackTarget(ref G_UnitObject vTarget)
+    {
+        m_vAttackTarget = vTarget;
+    }
+
     protected bool IsTargetExist()
     {
         if (m_vAttackTarget == null)

@@ -6,6 +6,7 @@ using System.Numerics;
 using UnityEngine;
 using Vector3 = UnityEngine.Vector3;
 using Vector2 = UnityEngine.Vector2;
+using UnityEditor;
 
 public class G_UnitMonster : G_UnitObject
 {
@@ -76,6 +77,7 @@ public class G_UnitMonster : G_UnitObject
 
         // 임시
         m_iHitCount = 0;
+        m_iMaxHitCount = UnityEngine.Random.Range(1, 10);
 
         // 외형
         string strMonster;
@@ -192,9 +194,13 @@ public class G_UnitMonster : G_UnitObject
         base.Hit();
 
         ++m_iHitCount;
-        if (m_iHitCount >= 3)
+        if (m_iHitCount >= m_iMaxHitCount)
         {
             SetState(GT_UnitState.Die);
+        }
+        else
+        {
+            SetState(GT_UnitState.Hit);
         }
 
         if (m_vHitTween != null)
@@ -278,6 +284,7 @@ public class G_UnitMonster : G_UnitObject
 
     // 임시
     private int m_iHitCount = 0;
+    private int m_iMaxHitCount = 0;
     #endregion
 
     #region Constant
