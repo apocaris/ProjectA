@@ -27,11 +27,11 @@ public class G_IngameModeBase : G_Object
             return;
 
         m_vFieldPoint = vFieldPoint;
-        if (m_vFieldPoint != null && G_FieldMGR.a_instance.a_vCharacters != null)
+        if (m_vFieldPoint != null && G_FieldMGR.a_instance.a_dicCharacters != null)
         {
-            if (m_vFieldPoint.a_vCharacterPoints.Count == G_FieldMGR.a_instance.a_vCharacters.Count)
+            if (m_vFieldPoint.a_vCharacterPoints.Count == G_FieldMGR.a_instance.a_dicCharacters.Count)
             {
-                foreach (KeyValuePair<GT_UnitClass, G_UnitMainCharacter> vData in G_FieldMGR.a_instance.a_vCharacters)
+                foreach (KeyValuePair<GT_UnitClass, G_UnitMainCharacter> vData in G_FieldMGR.a_instance.a_dicCharacters)
                 {
                     if (vData.Value == null)
                         continue;

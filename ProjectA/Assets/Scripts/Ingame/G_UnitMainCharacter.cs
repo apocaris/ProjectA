@@ -4,6 +4,7 @@ using Spine.Unity.AttachmentTools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class G_UnitMainCharacter : G_UnitObject
@@ -53,6 +54,7 @@ public class G_UnitMainCharacter : G_UnitObject
                 {
                     strClass = G_Constant.m_strClassAxe;
                     strResource = "axe_1";
+                    m_fAttackSpeed = 1.3f;
                     m_fAttackRange = 1.7f;
                     m_fMoveSpeed = 1.3f;
                 }
@@ -61,16 +63,18 @@ public class G_UnitMainCharacter : G_UnitObject
                 {
                     strClass = G_Constant.m_strClassSpear;
                     strResource = "spear_1";
-                    m_fAttackRange = 2.0f;
-                    m_fMoveSpeed = 1.6f;
+                    m_fAttackSpeed = 1.5f;
+                    m_fAttackRange = 1.8f;
+                    m_fMoveSpeed = 2f;
                 }
                 break;
             case GT_UnitClass.TwoSword:
                 {
                     strClass = G_Constant.m_strClassTwoSword;
                     strResource = "two_sword_1";
+                    m_fAttackSpeed = 2.0f;
                     m_fAttackRange = 1.3f;
-                    m_fMoveSpeed = 1.9f;
+                    m_fMoveSpeed = 3f;
                 }
                 break;
         }
@@ -106,6 +110,8 @@ public class G_UnitMainCharacter : G_UnitObject
         if (!a_bAIUpdate)
             return;
 
+
+        /*
         if (m_bRep)
         {
             m_bSetTargetEnemy = false;
@@ -131,6 +137,30 @@ public class G_UnitMainCharacter : G_UnitObject
                     //    CheckDashDistance();
                     //}
                 }
+            }
+        }
+        */
+
+        m_bSetTargetEnemy = false;
+        if (m_eState != GT_UnitState.Die && m_eState != GT_UnitState.Attack)
+        {
+            if (m_eState != GT_UnitState.Dash_Move && m_eState != GT_UnitState.Dash_Ready)
+            {
+                m_bSetTargetEnemy = true;
+            }
+        }
+
+        if (m_bSetTargetEnemy)
+        {
+            m_fTargetTimer += Time.fixedDeltaTime;
+            if (m_fTargetTimer >= m_fIntervalTargeting)
+            {
+                m_fTargetTimer = 0.0f;
+                G_FieldMGR.a_instance.GetAttackTarget(ref m_vAttackTarget, transform.position, m_eUnitType);
+                //if (m_eState != GT_UnitState.Dash_Ready && m_eState != GT_UnitState.Dash_Move)
+                //{
+                //    CheckDashDistance();
+                //}
             }
         }
 
@@ -332,10 +362,10 @@ public class G_UnitMainCharacter : G_UnitObject
             }
         }
 
-        if (m_vDustAnchor != null)
-        {
-            m_vDustAnchor.SetActive(eState == GT_UnitState.Move);
-        }
+        //if (m_vDustAnchor != null)
+        //{
+        //    m_vDustAnchor.SetActive(eState == GT_UnitState.Move);
+        //}
     }
 #endif
 

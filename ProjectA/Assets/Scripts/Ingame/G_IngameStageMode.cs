@@ -16,7 +16,7 @@ public class G_IngameStageMode : G_IngameModeBase
         base.StartMode();
 
         ResetIngameMode();
-        StartCoroutine(ChangeInagmeMode("Map_Stage_01"));
+        G_GameMGR.a_instance.StartCoroutine(ChangeInagmeMode("Map_Stage_01"));
     }
 
     public override void UpdateMode()
@@ -46,48 +46,56 @@ public class G_IngameStageMode : G_IngameModeBase
                 m_vSpawnSide = GT_Direction.Right;
 
             //int iSpawnOnceCount = G_Constant.m_iSpawnOnceCount;
-            int iSpawnOnceCount = G_Constant.m_iSpawnMonsterMaxCount;
-            for (int i = 0; i < iSpawnOnceCount; ++i)
+            G_GameMGR.a_instance.StartCoroutine(Spawn());
+        }
+    }
+
+    private IEnumerator Spawn()
+    {
+        //int iSpawnOnceCount = G_Constant.m_iSpawnMonsterMaxCount;
+        for (int i = 0; i < G_Constant.m_iSpawnMonsterMaxCount; ++i)
+        {
+            Vector3 vSpawnPosition = Vector3.zero;
+            //SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Count)];
+            SphereCollider vPoint = null;
+            switch (m_vSpawnSide)
             {
-                Vector3 vSpawnPosition = Vector3.zero;
-                //SphereCollider vPoint = m_vFieldPoint.a_arraySpawnPoints[Random.Range(0, m_vFieldPoint.a_arraySpawnPoints.Count)];
-                SphereCollider vPoint = null;
-                switch (m_vSpawnSide)
-                {
-                    case GT_Direction.Left:
-                        {
-                            vPoint = m_vFieldPoint.a_arrayLeftSpawnPoints[Random.Range(0, m_vFieldPoint.a_arrayLeftSpawnPoints.Count)];
-                        }
-                        break;
-                    case GT_Direction.Right:
-                        {
-                            vPoint = m_vFieldPoint.a_arrayRightSpawnPoints[Random.Range(0, m_vFieldPoint.a_arrayRightSpawnPoints.Count)];
-                        }
-                        break;
-                }
-
-                if (vPoint != null)
-                {
-                    Vector3 vPos = Random.insideUnitSphere * vPoint.radius;
-                    Vector3 v2DPos = new Vector3(vPoint.transform.position.x + vPos.x, vPoint.transform.position.y + vPos.y, 0);
-
-                    if (m_vFieldPoint.a_vSpawnLimitMin != null && m_vFieldPoint.a_vSpawnLimitMax != null)
+                case GT_Direction.Left:
                     {
-                        float fClampX = Mathf.Clamp(v2DPos.x, m_vFieldPoint.a_vSpawnLimitMin.transform.position.x, m_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
-                        float fClampY = Mathf.Clamp(v2DPos.y, m_vFieldPoint.a_vSpawnLimitMin.transform.position.y, m_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
-                        vSpawnPosition = new Vector3(fClampX, fClampY, 0);
+                        vPoint = m_vFieldPoint.a_arrayLeftSpawnPoints[Random.Range(0, m_vFieldPoint.a_arrayLeftSpawnPoints.Count)];
                     }
-                    else
+                    break;
+                case GT_Direction.Right:
                     {
-                        vSpawnPosition = v2DPos;
+                        vPoint = m_vFieldPoint.a_arrayRightSpawnPoints[Random.Range(0, m_vFieldPoint.a_arrayRightSpawnPoints.Count)];
                     }
-                }
-
-                SpawnMonster(vSpawnPosition, (bool bForce) =>
-                {
-
-                });
+                    break;
             }
+
+            if (vPoint != null)
+            {
+                Vector3 vPos = Random.insideUnitSphere * vPoint.radius;
+                Vector3 v2DPos = new Vector3(vPoint.transform.position.x + vPos.x, vPoint.transform.position.y + vPos.y, 0);
+
+                if (m_vFieldPoint.a_vSpawnLimitMin != null && m_vFieldPoint.a_vSpawnLimitMax != null)
+                {
+                    float fClampX = Mathf.Clamp(v2DPos.x, m_vFieldPoint.a_vSpawnLimitMin.transform.position.x, m_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
+                    float fClampY = Mathf.Clamp(v2DPos.y, m_vFieldPoint.a_vSpawnLimitMin.transform.position.y, m_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
+                    vSpawnPosition = new Vector3(fClampX, fClampY, 0);
+                }
+                else
+                {
+                    vSpawnPosition = v2DPos;
+                }
+            }
+
+            SpawnMonster(vSpawnPosition, (bool bForce) =>
+            {
+
+            });
+
+            float fDelay = UnityEngine.Random.Range(0.1f, 0.5f);
+            yield return new WaitForSeconds(fDelay);
         }
     }
 }

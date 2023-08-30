@@ -95,6 +95,35 @@ public class G_UnitObject : G_Object
         {
             
         }
+
+        SetSpineEvent();
+    }
+
+    private void SetSpineEvent()
+    {
+        if (m_vSpineObject != null && m_vSpineObject.state != null)
+            m_vSpineObject.state.Event += HandleSpineEvent;
+    }
+
+    protected void HandleSpineEvent(TrackEntry vTrackEntry, Spine.Event vEvent)
+    {
+        if (!a_bAIUpdate)
+            return;
+        if (!a_bAlive)
+            return;
+
+        switch (vTrackEntry.Animation.Name)
+        {
+            case G_Constant.m_strMotion_Move:
+                {
+                    if (vEvent.Data.Name == "run")
+                    {
+                        if (m_vDustVFX != null)
+                            m_vDustVFX.PlayParticle();
+                    }
+                }
+                break;
+        }
     }
 
     private TrackEntry m_vTrackEntry;
@@ -468,6 +497,9 @@ public class G_UnitObject : G_Object
 
     [SerializeField, Rename("Dust Anchor")]
     protected GameObject m_vDustAnchor = null;
+
+    [SerializeField, Rename("Dust VFX")]
+    protected G_PlayParticle m_vDustVFX = null;
 
     [Header("Base Parameter")]
     [SerializeField, Rename("Attack Range")]
