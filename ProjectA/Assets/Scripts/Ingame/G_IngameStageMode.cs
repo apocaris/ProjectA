@@ -16,7 +16,7 @@ public class G_IngameStageMode : G_IngameModeBase
         base.StartMode();
 
         ResetIngameMode();
-        G_GameMGR.a_instance.StartCoroutine(ChangeInagmeMode("Map_Stage_01"));
+        G_GameMGR.a_instance.StartCoroutine(ChangeInagmeMode("Map_Stage_02"));
     }
 
     public override void UpdateMode()
