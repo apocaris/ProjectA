@@ -1,0 +1,44 @@
+{ "skeleton": { "images": "D:/Kim Do hyeun/작업물/샘플 프로젝트_0817/캐릭터 샘플/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "레이어 9", "bone": "root", "attachment": "레이어 9" },
+	{ "name": "right hand", "bone": "root", "attachment": "right hand" },
+	{ "name": "left hand", "bone": "root", "attachment": "left hand" },
+	{ "name": "left foot", "bone": "root", "attachment": "left foot" },
+	{ "name": "right foot", "bone": "root", "attachment": "right foot" },
+	{ "name": "torso", "bone": "root", "attachment": "torso" },
+	{ "name": "head", "bone": "root", "attachment": "head" },
+	{ "name": "hammer", "bone": "root", "attachment": "hammer" }
+],
+"skins": {
+	"default": {
+		"레이어 9": {
+			"레이어 9": { "x": 91, "y": -50, "width": 184, "height": 102 }
+		},
+		"right hand": {
+			"right hand": { "x": 123.5, "y": -64, "width": 9, "height": 8 }
+		},
+		"left hand": {
+			"left hand": { "x": 142.5, "y": -63, "width": 9, "height": 8 }
+		},
+		"left foot": {
+			"left foot": { "x": 137.5, "y": -70.5, "width": 7, "height": 9 }
+		},
+		"right foot": {
+			"right foot": { "x": 130.5, "y": -70.5, "width": 7, "height": 9 }
+		},
+		"torso": {
+			"torso": { "x": 133, "y": -61.5, "width": 16, "height": 19 }
+		},
+		"head": {
+			"head": { "x": 132.5, "y": -50.5, "width": 21, "height": 23 }
+		},
+		"hammer": {
+			"hammer": { "x": 130.5, "y": -25, "width": 73, "height": 26 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
