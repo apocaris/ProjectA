@@ -3,29 +3,34 @@ size:128,128
 filter:Linear,Linear
 pma:true
 back hair
-bounds:26,98,22,20
+bounds:21,56,22,20
 offsets:1,1,24,22
+rotate:90
 head
-bounds:0,96,26,22
+bounds:0,78,26,22
 offsets:1,1,28,24
+rotate:90
 left foot
-bounds:113,103,5,5
+bounds:36,87,5,5
 offsets:1,1,7,7
 right foot
-bounds:113,103,5,5
+bounds:36,87,5,5
 offsets:1,1,7,7
 left hand
-bounds:113,108,7,6
+bounds:36,98,7,6
 offsets:1,1,9,8
 ponytail
-bounds:75,106,21,38
-rotate:90
+bounds:0,40,21,38
 right hand
-bounds:120,108,7,6
+bounds:36,92,7,6
 offsets:1,1,9,8
+shadow
+bounds:75,45,68,38
+offsets:1,1,70,40
+rotate:90
 spear
-bounds:0,118,75,9
+bounds:0,104,75,9
 offsets:1,1,77,11
 torso
-bounds:113,114,14,13
+bounds:22,91,14,13
 offsets:1,1,16,15

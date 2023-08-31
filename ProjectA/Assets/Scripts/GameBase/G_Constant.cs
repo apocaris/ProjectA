@@ -17,6 +17,12 @@ public enum GT_Direction
     Right,
 }
 
+public enum GT_VerticalPos
+{
+    Top,
+    Bottom,
+}
+
 public enum GT_UnitState
 {
     Create = 0,
@@ -104,15 +110,17 @@ public static class G_Constant
     #endregion
 
     // 메모리 풀
-    public const int m_iMonsterPoolSize = 20;
+    public const int m_iMonsterPoolSize = 40;
 
     // 해상도
     public const int m_iScreenResoultion = 1080; //540 : qHD , 720 : HD
     public const int m_iFoldScreenResoultion = 1080; //1080 : FHD
 
     // 임시
-    //public const float m_fMonsterSpawnDelay = 1.4f;
+    //public const float m_fMonsterSpawnDelay = 0.3f;
     public const float m_fMonsterSpawnDelay = 3.0f;
-    public const int m_iSpawnMonsterMaxCount = 20;
+    public const int m_iSpawnMonsterMaxCount = 40;
     public const int m_iSpawnOnceCount = 4;
+
+    public const string m_strRegexPattern = @"\d+";
 }

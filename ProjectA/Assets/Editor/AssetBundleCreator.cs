@@ -107,7 +107,7 @@ private static List<string> AddBasicBuildDefineForAndroid()
         arrayAllDefines.Add("PRODUCTION_AD");
         arrayAllDefines.Add("DEV_SERVER");
         //arrayAllDefines.Add("ATTACK_BASE_TIMING"); // 기본 캐릭터의 공격 인식 방식 (타이밍), 추가가 안될 경우 기본이 이벤트 발생 방식으로
-        //arrayAllDefines.Add("DEV_TOOLS");
+        arrayAllDefines.Add("MONSTER_SPAWN_WAVE");  // 몬스터 스폰 방식 : 웨이브 (데몬스쿼드 방식)
 
         return arrayAllDefines;
     }

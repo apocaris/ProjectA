@@ -5,11 +5,9 @@ using UnityEngine;
 public class G_FieldPoint : G_Object
 {
     public Transform a_vCameraTransform { get { return m_vCameraTransform; } }
-    //public Transform a_vCharacterPoint { get { return m_vCharacterPoint; } }
     public List<Transform> a_vCharacterPoints { get { return m_vCharacterPoints; } }
     public Transform a_vBossPoint { get { return m_vBossPoint; } }
-    public List<SphereCollider> a_arrayLeftSpawnPoints { get { return m_arrayLeftSpawnPoints; } }
-    public List<SphereCollider> a_arrayRightSpawnPoints { get { return m_arrayRightSpawnPoints; } }
+    public List<SphereCollider> a_arraySpawnPoints { get { return m_arraySpawnPoints; } }
     public Transform a_vSpawnLimitMin { get { return m_vSpawnLimitMin; } }
     public Transform a_vSpawnLimitMax { get { return m_vSpawnLimitMax; } }
 
@@ -36,6 +34,29 @@ public class G_FieldPoint : G_Object
     private Vector3 m_vLimitAreaCenter;
     private Vector3 m_vLimitArea;
 
+    public void GetSpawnPoints(GT_Direction eHorizontalSide, GT_VerticalPos eVeritcalSide, ref List<SphereCollider> vRetData)
+    {
+        switch (eHorizontalSide)
+        {
+            case GT_Direction.Left:
+                {
+                    if (eVeritcalSide == GT_VerticalPos.Top)
+                        vRetData = m_arraySpawnPoints_TopLeft;
+                    else
+                        vRetData = m_arraySpawnPoints_BottomLeft;
+                }
+                break;
+            case GT_Direction.Right:
+                {
+                    if (eVeritcalSide == GT_VerticalPos.Top)
+                        vRetData = m_arraySpawnPoints_TopRight;
+                    else
+                        vRetData = m_arraySpawnPoints_BottomRight;
+                }
+                break;
+        }
+    }
+
     [SerializeField, Rename("Camera Transform")]
     protected Transform m_vCameraTransform = null;
 
@@ -47,11 +68,20 @@ public class G_FieldPoint : G_Object
     [SerializeField, Rename("Boss Point")]
     protected Transform m_vBossPoint = null;
 
-    [SerializeField, Rename("Spawn Point (Left)")]
-    protected List<SphereCollider> m_arrayLeftSpawnPoints = null;
+    [SerializeField, Rename("Spawn Point")]
+    protected List<SphereCollider> m_arraySpawnPoints = null;
 
-    [SerializeField, Rename("Spawn Point (Right)")]
-    protected List<SphereCollider> m_arrayRightSpawnPoints = null;
+    [SerializeField, Rename("Spawn Point (TopLeft)")]
+    protected List<SphereCollider> m_arraySpawnPoints_TopLeft = null;
+
+    [SerializeField, Rename("Spawn Point (BottomLeft)")]
+    protected List<SphereCollider> m_arraySpawnPoints_BottomLeft = null;
+
+    [SerializeField, Rename("Spawn Point (TopRight")]
+    protected List<SphereCollider> m_arraySpawnPoints_TopRight = null;
+
+    [SerializeField, Rename("Spawn Point (BottomRight")]
+    protected List<SphereCollider> m_arraySpawnPoints_BottomRight = null;
 
     [SerializeField, Rename("Spawn Limit Min")]
     protected Transform m_vSpawnLimitMin = null;

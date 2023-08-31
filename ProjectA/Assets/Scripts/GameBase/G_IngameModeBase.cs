@@ -11,9 +11,11 @@ public class G_IngameModeBase : G_Object
     public virtual void ResetIngameMode()
     {
         m_vFieldPoint = null;
-        m_vSpawnSide = GT_Direction.Right;
         m_iCurrentSpawnCount = 0;
         m_fSpawnMonsterTimer = 0.0f;
+
+        int iRand = UnityEngine.Random.Range(0, 2);
+        m_eSpawnHorizontalSide = (GT_Direction)iRand;
     }
 
     public virtual IEnumerator ChangeInagmeMode(string strName)
@@ -66,7 +68,7 @@ public class G_IngameModeBase : G_Object
                     if (vMonster != null)
                     {
                         G_FieldMGR.a_instance.a_vMonsterList.Remove(vMonster);
-                        m_iCurrentSpawnCount--;
+                        --m_iCurrentSpawnCount;
                     }
 
                     vOnDie?.Invoke(bForce);
@@ -84,7 +86,7 @@ public class G_IngameModeBase : G_Object
                         vMonster.UpdateTarget((G_UnitMainCharacter)vTargetUnit);
                 }
 
-                m_iCurrentSpawnCount++;
+                ++m_iCurrentSpawnCount;
                 G_FieldMGR.a_instance.a_vMonsterList.Add(vMonster);
             }
         }
@@ -93,7 +95,8 @@ public class G_IngameModeBase : G_Object
     }
 
     protected G_FieldPoint m_vFieldPoint = null;
-    protected GT_Direction m_vSpawnSide = GT_Direction.Left;
+    protected GT_Direction m_eSpawnHorizontalSide = GT_Direction.Left;
+    protected GT_VerticalPos m_eSpawnVerticalSide = GT_VerticalPos.Top;
 
     protected float m_fSpawnMonsterTimer = 0.0f;
     protected int m_iCurrentSpawnCount = 0;

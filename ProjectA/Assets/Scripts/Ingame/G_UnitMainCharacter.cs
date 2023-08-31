@@ -4,34 +4,12 @@ using Spine.Unity.AttachmentTools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class G_UnitMainCharacter : G_UnitObject
 {
     public override void InitializeObject()
     {
-        // 앞, 뒤 이펙트 모션 필요한 데이터 세팅
-        /*
-        if (m_dicEffSortOption != null)
-        {
-            List<GT_EffectSortType> vList = new List<GT_EffectSortType>
-            {
-                GT_EffectSortType.Front
-            };
-            
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_3))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_3, vList);
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Atk_4))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Atk_4, vList);
-            
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Skill_1))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Skill_1, vList);
-            if (!m_dicEffSortOption.ContainsKey(G_Constant.m_strMotion_Skill_2))
-                m_dicEffSortOption.Add(G_Constant.m_strMotion_Skill_2, vList);
-        }
-        */
-
         m_bRep = false;
     }
 
@@ -46,16 +24,18 @@ public class G_UnitMainCharacter : G_UnitObject
         //    Destroy(m_vSkinRuntimeAtlas);
         //AtlasUtilities.ClearCache();
 
+        m_eClass = eClass;
+
         string strClass = string.Empty;
         string strResource = string.Empty;
-        switch (eClass)
+        switch (m_eClass)
         {
             case GT_UnitClass.Axe:
                 {
                     strClass = G_Constant.m_strClassAxe;
                     strResource = "axe_1";
-                    m_fAttackSpeed = 1.3f;
-                    m_fAttackRange = 1.7f;
+                    m_fAttackSpeed = 1.1f;
+                    m_fAttackRange = 1.6f;
                     m_fMoveSpeed = 1.3f;
                 }
                 break;
@@ -63,8 +43,8 @@ public class G_UnitMainCharacter : G_UnitObject
                 {
                     strClass = G_Constant.m_strClassSpear;
                     strResource = "spear_1";
-                    m_fAttackSpeed = 1.5f;
-                    m_fAttackRange = 1.8f;
+                    m_fAttackSpeed = 1.3f;
+                    m_fAttackRange = 2.1f;
                     m_fMoveSpeed = 2f;
                 }
                 break;
@@ -73,7 +53,7 @@ public class G_UnitMainCharacter : G_UnitObject
                     strClass = G_Constant.m_strClassTwoSword;
                     strResource = "two_sword_1";
                     m_fAttackSpeed = 2.0f;
-                    m_fAttackRange = 1.3f;
+                    m_fAttackRange = 1.0f;
                     m_fMoveSpeed = 3f;
                 }
                 break;
@@ -260,6 +240,28 @@ public class G_UnitMainCharacter : G_UnitObject
         SetState(GT_UnitState.Dash_Ready);
     }
 
+    protected override void ApplyDirection(GT_Direction eDirection)
+    {
+        base.ApplyDirection(eDirection);
+
+        //if (m_vVFXAnchor != null)
+        //{
+        //    switch (eDirection)
+        //    {
+        //        case GT_Direction.Left:
+        //            {
+        //                m_vVFXAnchor.transform.localEulerAngles = m_vLeftRot;
+        //            }
+        //            break;
+        //        case GT_Direction.Right:
+        //            {
+        //                m_vVFXAnchor.transform.localEulerAngles = m_vRightRot;
+        //            }
+        //            break;
+        //    }
+        //}
+    }
+
 #if ATTACK_BASE_TIMING
     protected override void SetState(GT_UnitState eState)
     {
@@ -361,11 +363,6 @@ public class G_UnitMainCharacter : G_UnitObject
                 SetAnimation(strMotionName, false, m_fAttackSpeed, GT_SpineTrackIndex.Character);
             }
         }
-
-        //if (m_vDustAnchor != null)
-        //{
-        //    m_vDustAnchor.SetActive(eState == GT_UnitState.Move);
-        //}
     }
 #endif
 
@@ -500,6 +497,8 @@ public class G_UnitMainCharacter : G_UnitObject
                     if (m_vTrackEntry == null)
                         m_vTrackEntry = vTrackEntry;
 
+                    ApplyAttackVFX(vEvent.Data.Name);
+
                     ApplyDamage();
 
                     if (m_enumeratorCheckAnimationEnd == null)
@@ -616,6 +615,49 @@ public class G_UnitMainCharacter : G_UnitObject
                 }
             }
         }
+    }
+
+    private void ApplyAttackVFX(string strEventName)
+    {
+        int iVFXIndex = G_Utils.GetNumbersInString(strEventName);
+        if (iVFXIndex < 0)
+            return;
+
+        iVFXIndex -= 1;
+        G_PlayParticle vVFX = null;
+        switch (m_eClass)
+        {
+            case GT_UnitClass.Axe:
+                {
+                    if (m_vAxeVFXs != null && m_vAxeVFXs.Count > 0)
+                    {
+                        if (iVFXIndex < m_vAxeVFXs.Count)
+                            vVFX = m_vAxeVFXs[iVFXIndex];
+                    }
+                }
+                break;
+            case GT_UnitClass.Spear:
+                {
+                    if (m_vSpearVFXs != null && m_vSpearVFXs.Count > 0)
+                    {
+                        if (iVFXIndex < m_vSpearVFXs.Count)
+                            vVFX = m_vSpearVFXs[iVFXIndex];
+                    }
+                }
+                break;
+            case GT_UnitClass.TwoSword:
+                {
+                    if (m_vTwoswordVFXs != null && m_vTwoswordVFXs.Count > 0)
+                    {
+                        if (iVFXIndex < m_vTwoswordVFXs.Count)
+                            vVFX = m_vTwoswordVFXs[iVFXIndex];
+                    }
+                }
+                break;
+        }
+
+        if (vVFX != null)
+            vVFX.PlayParticle();
     }
 
     #endregion
@@ -780,6 +822,7 @@ public class G_UnitMainCharacter : G_UnitObject
     private Skin m_vCharacterSkin = null;
     private Material m_vSkinRuntimeMaterial = null;
     private Texture2D m_vSkinRuntimeAtlas = null;
+    private GT_UnitClass m_eClass = GT_UnitClass.None;
 
     private float m_fTargetTimer = 0.0f;
     private float m_fCheckAttackMotionTimer = 0.0f;
@@ -798,7 +841,6 @@ public class G_UnitMainCharacter : G_UnitObject
     public bool a_bRep { get { return m_bRep; } }
     private bool m_bRep = false;
 
-    //private Dictionary<string, List<GT_EffectSortType>> m_dicEffSortOption = new Dictionary<string, List<GT_EffectSortType>>();
     #endregion
 
     #region Constant
@@ -822,11 +864,17 @@ public class G_UnitMainCharacter : G_UnitObject
     [SerializeField, Rename("Main cam anchor")]
     protected GameObject m_vMainCamAnchor = null;
 
-    [Header("VFX Spines")]
-    [SerializeField, Rename("Front VFX spine")]
-    protected SkeletonAnimation m_vFrontVFXSpine = null;
+    [Header("Attack VFXs")]
+    [SerializeField, Rename("VFX anchor")]
+    protected GameObject m_vVFXAnchor = null;
 
-    [SerializeField, Rename("Back VFX spine")]
-    protected SkeletonAnimation m_vBackVFXSpine = null;
+    [SerializeField]
+    protected List<G_PlayParticle> m_vAxeVFXs = null;
+
+    [SerializeField]
+    protected List<G_PlayParticle> m_vSpearVFXs = null;
+
+    [SerializeField]
+    protected List<G_PlayParticle> m_vTwoswordVFXs = null;
 }
 

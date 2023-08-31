@@ -279,31 +279,21 @@ public class G_UnitObject : G_Object
     #endregion
 
     #region Direction
-    protected void ApplyDirection(GT_Direction eDirection)
+    protected virtual void ApplyDirection(GT_Direction eDirection)
     {
         m_eDirection = eDirection;
 
-        if (m_vSpineObject != null && m_vSpineObject.skeleton != null)
+        if (m_vAnchor != null)
         {
             switch (m_eDirection)
             {
                 case GT_Direction.Left:
                     {
-                        //if (m_eUnitType == GT_Unit.MainCharacter)
-                        //    m_vAnchor.transform.localEulerAngles = m_vLeftRot;
-                        //else
-                        //    m_vAnchor.transform.localEulerAngles = m_vRightRot;
-
                         m_vAnchor.transform.localEulerAngles = m_vLeftRot;
                     }
                     break;
                 case GT_Direction.Right:
                     {
-                        //if (m_eUnitType == GT_Unit.MainCharacter)
-                        //    m_vAnchor.transform.localEulerAngles = m_vRightRot;
-                        //else
-                        //    m_vAnchor.transform.localEulerAngles = m_vLeftRot;
-
                         m_vAnchor.transform.localEulerAngles = m_vRightRot;
                     }
                     break;
