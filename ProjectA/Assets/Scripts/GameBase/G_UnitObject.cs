@@ -279,7 +279,7 @@ public class G_UnitObject : G_Object
         float fDes = m_fMoveSpeed * Time.fixedDeltaTime;
         SetDirection(m_vAttackTarget.transform.position.x);
 
-        transform.position = Vector2.MoveTowards(transform.position, m_vAttackTarget.transform.position, fDes);
+        transform.position = Vector3.MoveTowards(transform.position, m_vAttackTarget.transform.position, fDes);
 
         if (Vector2.Distance(transform.position, m_vAttackTarget.transform.position) <= m_fAttackRange - m_fRangeRandomDistance)
             CheckAssailable();

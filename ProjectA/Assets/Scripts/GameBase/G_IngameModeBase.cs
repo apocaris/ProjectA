@@ -100,6 +100,7 @@ public class G_IngameModeBase : G_Object
 
     protected float m_fSpawnMonsterTimer = 0.0f;
     protected int m_iCurrentSpawnCount = 0;
+    protected float m_fDefaultZPos = 10.0f;
 
     public bool a_bStageEnd { get { return m_bStageEnd; } }
     protected bool m_bStageEnd = false;

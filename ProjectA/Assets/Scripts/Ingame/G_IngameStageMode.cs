@@ -18,7 +18,7 @@ public class G_IngameStageMode : G_IngameModeBase
         ResetIngameMode();
 
 #if MONSTER_SPAWN_WAVE
-        G_GameMGR.a_instance.StartCoroutine(ChangeInagmeMode("Map_Stage_02"));
+        G_GameMGR.a_instance.StartCoroutine(ChangeInagmeMode("Map_Stage_04"));
 #else
         G_GameMGR.a_instance.StartCoroutine(ChangeInagmeMode("Map_Stage_03"));
 #endif
@@ -58,6 +58,10 @@ public class G_IngameStageMode : G_IngameModeBase
         if (m_vFieldPoint == null)
             yield break;
 
+        float fZPos = m_fDefaultZPos;
+        if (m_vFieldPoint.a_vMapTransform != null)
+            fZPos = m_vFieldPoint.a_vMapTransform.position.z - 1.0f;
+
         List<SphereCollider> vSpawnPoints = null;
         m_vFieldPoint.GetSpawnPoints(m_eSpawnHorizontalSide, m_eSpawnVerticalSide, ref vSpawnPoints);
 
@@ -77,7 +81,7 @@ public class G_IngameStageMode : G_IngameModeBase
                     {
                         float fClampX = Mathf.Clamp(v2DPos.x, m_vFieldPoint.a_vSpawnLimitMin.transform.position.x, m_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
                         float fClampY = Mathf.Clamp(v2DPos.y, m_vFieldPoint.a_vSpawnLimitMin.transform.position.y, m_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
-                        vSpawnPosition = new Vector3(fClampX, fClampY, 0);
+                        vSpawnPosition = new Vector3(fClampX, fClampY, fZPos);
                     }
                     else
                     {

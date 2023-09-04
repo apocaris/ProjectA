@@ -121,7 +121,7 @@ public class G_UnitMonster : G_UnitObject
                 float fClampX = Mathf.Clamp(m_vPatrolTargetPos.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.x, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
                 float fClampY = Mathf.Clamp(m_vPatrolTargetPos.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMin.transform.position.y, G_FieldMGR.a_instance.a_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
 
-                m_vPatrolTargetPos = new Vector3(fClampX, fClampY, 0);
+                m_vPatrolTargetPos = new Vector3(fClampX, fClampY, m_vSpawnOriginPos.z);
             }
         }
     }
@@ -141,7 +141,7 @@ public class G_UnitMonster : G_UnitObject
         float step = m_fMoveSpeed * Time.fixedDeltaTime; // calculate distance to move
         SetDirection(m_vPatrolTargetPos.x);
 
-        transform.position = Vector2.MoveTowards(transform.position, m_vPatrolTargetPos, step);
+        transform.position = Vector3.MoveTowards(transform.position, m_vPatrolTargetPos, step);
         if (Vector2.Distance(transform.position, m_vPatrolTargetPos) <= 0.01f)
         {
             //목적지 도착했으면 Idle
@@ -276,6 +276,7 @@ public class G_UnitMonster : G_UnitObject
     private Vector3 m_vPatrolTargetPos;
     private bool m_bPatrolArrive = false;
     private bool m_bDieTween = false;
+    private float m_fDefaultZPos = 0.0f;
 
     public bool a_bAggressive { get { return m_bAggressive; } }
     private bool m_bAggressive = false;

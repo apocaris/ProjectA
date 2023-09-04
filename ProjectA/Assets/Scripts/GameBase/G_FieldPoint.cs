@@ -5,6 +5,7 @@ using UnityEngine;
 public class G_FieldPoint : G_Object
 {
     public Transform a_vCameraTransform { get { return m_vCameraTransform; } }
+    public Transform a_vMapTransform { get { return m_vMapTransform; } }
     public List<Transform> a_vCharacterPoints { get { return m_vCharacterPoints; } }
     public Transform a_vBossPoint { get { return m_vBossPoint; } }
     public List<SphereCollider> a_arraySpawnPoints { get { return m_arraySpawnPoints; } }
@@ -24,7 +25,7 @@ public class G_FieldPoint : G_Object
 
                 float fCenterX = m_vSpawnLimitMin.transform.position.x + (fWidth / 2);
                 float fCenterY = m_vSpawnLimitMin.transform.position.y + (fHeight / 2);
-                m_vLimitAreaCenter = new Vector3(fCenterX, fCenterY, 0);
+                m_vLimitAreaCenter = new Vector3(fCenterX, fCenterY, transform.position.z);
             }
 
             Gizmos.DrawWireCube(m_vLimitAreaCenter, m_vLimitArea);
@@ -59,6 +60,9 @@ public class G_FieldPoint : G_Object
 
     [SerializeField, Rename("Camera Transform")]
     protected Transform m_vCameraTransform = null;
+
+    [SerializeField, Rename("Map Transform")]
+    protected Transform m_vMapTransform = null;
 
     //[SerializeField, Rename("Character Point")]
     //protected Transform m_vCharacterPoint = null;

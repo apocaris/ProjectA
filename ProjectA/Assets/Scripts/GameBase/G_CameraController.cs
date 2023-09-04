@@ -70,7 +70,7 @@ public class G_CameraController : MonoBehaviour
     private Vector3 m_vCameraPosition;
 
     [SerializeField]
-    private Vector2 m_vCenter;
+    private Vector3 m_vCenter;
     [SerializeField]
     private Vector2 m_vMapSize;
 

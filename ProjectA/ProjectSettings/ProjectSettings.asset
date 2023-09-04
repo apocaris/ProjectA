@@ -645,7 +645,7 @@ PlayerSettings:
   webGLMemoryGeometricGrowthCap: 96
   webGLPowerPreference: 2
   scriptingDefineSymbols:
-    Android: UNITY_POST_PROCESSING_STACK_V2;PRODUCTION_AD;DEV_SERVER;MONSTER_SPAWN_WAVE;Build_Type_AND_GooglePlay
+    Android: UNITY_POST_PROCESSING_STACK_V2;PRODUCTION_AD;DEV_SERVER;MONSTER_SPAWN_WAVE;CAM_PERSPECTIVE;Build_Type_AND_GooglePlay
   additionalCompilerArguments: {}
   platformArchitecture: {}
   scriptingBackend:

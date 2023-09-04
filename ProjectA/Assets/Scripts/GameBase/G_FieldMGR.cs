@@ -91,9 +91,16 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                             {
                                 if (eClass == GT_UnitClass.TwoSword)
                                 {
+#if CAM_PERSPECTIVE
+                                    G_CameraController_perspective vCtrl = G_GameMGR.a_instance.a_vGameScene.a_vMainCamera.GetComponent<G_CameraController_perspective>();
+                                    if (vCtrl != null && vCtrl.a_vPlayerTransform == null)
+                                        vCtrl.SetPlayerTransform(vCharacter.transform);
+
+#else
                                     G_CameraController vCtrl = G_GameMGR.a_instance.a_vGameScene.a_vMainCamera.GetComponent<G_CameraController>();
                                     if (vCtrl != null && vCtrl.a_vPlayerTransform == null)
                                         vCtrl.SetPlayerTransform(vCharacter.transform);
+#endif
                                 }
                             }
                         }
@@ -247,7 +254,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                             if (!m_vMonsterList[i].a_bAlive)
                                 continue;
 
-                            float fDis = Vector2.Distance(vOwnPos, m_vMonsterList[i].transform.position);
+                            float fDis = Vector3.Distance(vOwnPos, m_vMonsterList[i].transform.position);
                             if (fMinDis == 0 || fDis < fMinDis)
                             {
                                 fMinDis = fDis;
@@ -408,7 +415,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         {
             float fClampX = Mathf.Clamp(vTargetPos.x, m_vFieldPoint.a_vSpawnLimitMin.transform.position.x, m_vFieldPoint.a_vSpawnLimitMax.transform.position.x);
             float fClampY = Mathf.Clamp(vTargetPos.y, m_vFieldPoint.a_vSpawnLimitMin.transform.position.y, m_vFieldPoint.a_vSpawnLimitMax.transform.position.y);
-            vTargetPos = new Vector3(fClampX, fClampY, 0);
+            vTargetPos = new Vector3(fClampX, fClampY, vTargetPos.z);
         }
     }
 

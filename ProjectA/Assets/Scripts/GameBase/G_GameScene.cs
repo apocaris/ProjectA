@@ -11,8 +11,8 @@ public class G_GameScene : G_UIBase
     {
         base.Awake();
 
-        if (m_vMainCamera != null)
-            m_vIngameCamShake = m_vMainCamera.GetComponent<G_CameraShake>();
+        if (a_vMainCamera != null)
+            m_vIngameCamShake = a_vMainCamera.GetComponent<G_CameraShake>();
         if (m_vUICamera != null)
             m_vUICamShake = m_vUICamera.GetComponent<G_CameraShake>();
     }
@@ -57,15 +57,15 @@ public class G_GameScene : G_UIBase
     {
         if (m_vUICamera == null)
             return;
-        if (m_vMainCamera == null)
+        if (a_vMainCamera == null)
             return;
         if (vAnchor == null)
             return;
 
         float fHeight = vAnchor.GetHeight();
 
-        Vector3 vAnchorCenter = new Vector3(vAnchor.transform.position.x, vAnchor.transform.position.y + (fHeight / 2), 0);
-        Vector3 vDamagePos = m_vUICamera.ViewportToWorldPoint(m_vMainCamera.WorldToViewportPoint(vAnchorCenter));
+        Vector3 vAnchorCenter = new Vector3(vAnchor.transform.position.x, vAnchor.transform.position.y + (fHeight / 2), vAnchor.transform.position.z);
+        Vector3 vDamagePos = m_vUICamera.ViewportToWorldPoint(a_vMainCamera.WorldToViewportPoint(vAnchorCenter));
         vDamagePos.z = 0.0f;
 
         for (int i = 0; i < vValues.Count; ++i)
@@ -112,21 +112,21 @@ public class G_GameScene : G_UIBase
     {
         if (!bState)
         {
-            if (m_vMainCamera != null)
-                m_vMainCamera.cullingMask = 0;
+            if (a_vMainCamera != null)
+                a_vMainCamera.cullingMask = 0;
             if (m_vFieldCamera != null)
                 m_vFieldCamera.cullingMask = 0;
         }
         else
         {
-            if (m_vMainCamera != null)
+            if (a_vMainCamera != null)
             {
-                m_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("Default");
-                m_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("TransparentFX");
-                m_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("Ignore Raycast");
-                m_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("Water");
-                m_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("UI");
-                m_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("MainObject");
+                a_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("Default");
+                a_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("TransparentFX");
+                a_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("Ignore Raycast");
+                a_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("Water");
+                a_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("UI");
+                a_vMainCamera.cullingMask |= 1 << LayerMask.NameToLayer("MainObject");
             }
 
             if (m_vFieldCamera != null)
@@ -156,9 +156,21 @@ public class G_GameScene : G_UIBase
     [SerializeField, Rename("UI cam")]
     protected Camera m_vUICamera = null;
 
-    public Camera a_vMainCamera { get { return m_vMainCamera; } }
-    [SerializeField, Rename("Main cam")]
-    protected Camera m_vMainCamera = null;
+    public Camera a_vMainCamera { 
+        get
+        {
+#if CAM_PERSPECTIVE
+            return m_vMainCamera_pers;
+#else
+            return m_vMainCamera_ortho;
+#endif
+        }
+    }
+    [SerializeField, Rename("Main cam : ortho")]
+    protected Camera m_vMainCamera_ortho = null;
+
+    [SerializeField, Rename("Main cam : pers")]
+    protected Camera m_vMainCamera_pers = null;
 
     [SerializeField, Rename("Field cam")]
     protected Camera m_vFieldCamera = null;
