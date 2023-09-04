@@ -9,13 +9,12 @@ public class motionscript : MonoBehaviour
     private SkeletonAnimation skeletonAnimation;
     // Start is called before the first frame update
     public bool playAura = true; //파티클 제어 bool
-    public ParticleSystem particleObject;
-    public ParticleSystem particleObject2;
-    public ParticleSystem particleObject3;//파티클시스템
+
     public string idle;
+    public string atk1;
     public string atk2;
     public string atk3;
-    public string atk1;
+    
     public string run;
 
 
@@ -27,7 +26,7 @@ public class motionscript : MonoBehaviour
 
         skeletonAnimation = GetComponent<SkeletonAnimation>();
         playAura = true;
-        particleObject.Play();
+    
     }
 
 // Update is called once per frame
@@ -47,18 +46,18 @@ void Update()
         if (Input.GetKeyDown(KeyCode.C))
         {
             skeletonAnimation.state.AddAnimation(1, atk1, true, 0);
-            particleObject.Play();
+            
         }
         if (Input.GetKeyDown(KeyCode.V))
         {
             skeletonAnimation.state.AddAnimation(1, atk2, true, 0);
-            particleObject2.Play();
+          
         }
 
         if (Input.GetKeyDown(KeyCode.B))
         {
             skeletonAnimation.state.AddAnimation(1, atk3, true, 0);
-            particleObject3.Play();
+     
         }
         if (Input.GetKeyDown(KeyCode.G))
         {

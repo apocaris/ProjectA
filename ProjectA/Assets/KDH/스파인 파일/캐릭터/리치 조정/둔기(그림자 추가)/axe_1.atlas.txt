@@ -1,0 +1,31 @@
+axe_1.png
+size:92,92
+filter:Linear,Linear
+pma:true
+hammer
+bounds:0,38,71,24
+offsets:1,1,73,26
+helmet
+bounds:38,62,33,30
+offsets:2,0,36,30
+left foot
+bounds:0,87,5,7
+offsets:1,1,7,9
+rotate:90
+right foot
+bounds:0,87,5,7
+offsets:1,1,7,9
+rotate:90
+left hand
+bounds:7,86,7,6
+offsets:1,1,9,8
+right hand
+bounds:14,86,7,6
+offsets:1,1,9,8
+shadow
+bounds:0,0,68,38
+offsets:1,1,70,40
+torso
+bounds:21,78,14,17
+offsets:1,1,16,19
+rotate:90
