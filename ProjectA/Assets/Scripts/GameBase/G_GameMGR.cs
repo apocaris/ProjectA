@@ -47,13 +47,13 @@ public class G_GameMGR : G_SimpleMGR<G_GameMGR>
         m_bGameInitComplete = true;
     }
 
-    public void StartGameMode(GT_FieldType eFieldType)
+    public void StartGameMode(GT_Field eFieldType)
     {
         G_FieldMGR.a_instance.StartMode(eFieldType);
     }
 
     #region Object Pooling
-    public GameObject CreatePoolObject(GT_PoolType eType, Transform vParent)
+    public GameObject CreatePoolObject(GT_Pool eType, Transform vParent)
     {
         if (vParent == null)
             return null;
@@ -64,21 +64,36 @@ public class G_GameMGR : G_SimpleMGR<G_GameMGR>
         GameObject vObject = null;
         switch (eType)
         {
-            case GT_PoolType.Monster:
+            case GT_Pool.Monster:
                 {
                     vObject = Instantiate(LoadResource<GameObject>(G_Constant.m_strMonsterObject), vParent);
+                }
+                break;
+            case GT_Pool.DamageFont:
+                {
+                    vObject = Instantiate(LoadResource<GameObject>(G_Constant.m_strUIDamageFont), vParent);
                 }
                 break;
         }
 
         if (vObject != null)
-            vObject.SetActive(false);
+        {
+            if (eType == GT_Pool.DamageFont)
+            {
+                // For ngui objects, don't setactive to reduce overhead
+                vObject.transform.position = Vector3.one * 10000.0f;
+            }
+            else
+            {
+                vObject.SetActive(false);
+            }
+        }
 
         m_vObjectPools[eType].Enqueue(vObject);
         return vObject;
     }
 
-    public GameObject GetPoolObject(GT_PoolType eType, Transform vParent)
+    public GameObject GetPoolObject(GT_Pool eType, Transform vParent)
     {
         if (m_vObjectPools[eType].Count > 0)
         {
@@ -88,16 +103,25 @@ public class G_GameMGR : G_SimpleMGR<G_GameMGR>
         return CreatePoolObject(eType, vParent);
     }
 
-    public void ReturnPoolObject(GT_PoolType eType, GameObject vObject)
+    public void ReturnPoolObject(GT_Pool eType, GameObject vObject)
     {
         if (vObject != null)
         {
-            vObject.SetActive(false);
+            if (eType == GT_Pool.DamageFont)
+            {
+                // For ngui objects, don't setactive to reduce overhead
+                vObject.transform.position = Vector3.one * 10000.0f;
+            }
+            else
+            {
+                vObject.SetActive(false);
+            }
+
             m_vObjectPools[eType].Enqueue(vObject);
         }
     }
 
-    public void ResetPool(GT_PoolType eType)
+    public void ResetPool(GT_Pool eType)
     {
         if (m_vObjectPools != null)
         {
@@ -124,8 +148,8 @@ public class G_GameMGR : G_SimpleMGR<G_GameMGR>
     private G_GameScene m_vGameScene = null;
 
     //Pool -------------------------------------------
-    public Dictionary<GT_PoolType, Queue<GameObject>> a_vObjectPools { get { return m_vObjectPools; } }
-    private Dictionary<GT_PoolType, Queue<GameObject>> m_vObjectPools = new Dictionary<GT_PoolType, Queue<GameObject>>();
+    public Dictionary<GT_Pool, Queue<GameObject>> a_vObjectPools { get { return m_vObjectPools; } }
+    private Dictionary<GT_Pool, Queue<GameObject>> m_vObjectPools = new Dictionary<GT_Pool, Queue<GameObject>>();
 
     public Transform a_vIngameArea { get { return m_vIngameArea; } }
 

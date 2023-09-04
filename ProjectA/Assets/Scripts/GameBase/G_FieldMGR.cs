@@ -29,11 +29,11 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         if (m_vMonsterPoolObject == null)
             m_vMonsterPoolObject = GameObject.Find(G_Constant.m_strMonsterPool);
 
-        if (!G_GameMGR.a_instance.a_vObjectPools.ContainsKey(GT_PoolType.Monster))
+        if (!G_GameMGR.a_instance.a_vObjectPools.ContainsKey(GT_Pool.Monster))
         {
             for (int i = 0; i < G_Constant.m_iMonsterPoolSize; ++i)
             {
-                G_GameMGR.a_instance.CreatePoolObject(GT_PoolType.Monster, m_vMonsterPoolObject.transform);
+                G_GameMGR.a_instance.CreatePoolObject(GT_Pool.Monster, m_vMonsterPoolObject.transform);
             }
         }
 
@@ -121,7 +121,7 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                 {
                     case GT_Unit.Monster:
                         {
-                            G_GameMGR.a_instance.ReturnPoolObject(GT_PoolType.Monster, m_vMonsterList[i].gameObject);
+                            G_GameMGR.a_instance.ReturnPoolObject(GT_Pool.Monster, m_vMonsterList[i].gameObject);
                         }
                         break;
                 }
@@ -140,14 +140,14 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
         }
     }
 
-    public void StartMode(GT_FieldType eFieldType)
+    public void StartMode(GT_Field eFieldType)
     {
         ResetMode();
 
         m_eFieldType = eFieldType;
         switch (eFieldType)
         {
-            case GT_FieldType.Stage:
+            case GT_Field.Stage:
                 {
                     if (m_vIngameStageMode != null)
                     {
@@ -165,13 +165,13 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
 
         switch (m_eFieldType)
         {
-            case GT_FieldType.Stage:
+            case GT_Field.Stage:
                 {
                     if (m_vIngameStageMode != null)
                         m_vIngameStageMode.UpdateMode();
                 }
                 break;
-            case GT_FieldType.Dungeon:
+            case GT_Field.Dungeon:
                 {
 
                 }
@@ -385,13 +385,13 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
 
         switch (m_eFieldType)
         {
-            case GT_FieldType.Stage:
+            case GT_Field.Stage:
                 {
                     if (m_vIngameStageMode != null)
                         m_vIngameStageMode.UpdateModeInfo(ref m_vFieldPoint);
                 }
                 break;
-            case GT_FieldType.Dungeon:
+            case GT_Field.Dungeon:
                 {
 
                 }
@@ -413,8 +413,8 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
     }
 
     #region Variable
-    public GT_FieldType a_eFieldType { get { return m_eFieldType; } }
-    private GT_FieldType m_eFieldType = GT_FieldType.Stage;
+    public GT_Field a_eFieldType { get { return m_eFieldType; } }
+    private GT_Field m_eFieldType = GT_Field.Stage;
 
     private bool m_bLoadModeState = false;
     private string m_strLastAddtiveScene = string.Empty;

@@ -1,11 +1,11 @@
-public enum GT_PoolType
+public enum GT_Pool
 {
     Monster,
     DamageFont,
     UIDrop,
 }
 
-public enum GT_FieldType
+public enum GT_Field
 {
     Stage,
     Dungeon,
@@ -65,6 +65,15 @@ public enum GT_EffectSort
     Back,
 }
 
+public enum GT_Damage
+{
+    None = 0,
+    Normal,
+    Critical,
+    SuperCritical,
+    HyperCritical,
+}
+
 public static class G_Constant
 {
     public const string m_strBaseObject = "Prefabs/BaseObject";
@@ -77,6 +86,10 @@ public static class G_Constant
     #region Ingame object names
     public const string m_strCharacterObject = "Prefabs/IngameObject/MainCharacter";
     public const string m_strMonsterObject = "Prefabs/IngameObject/Monster";
+    #endregion
+
+    #region UI object names
+    public const string m_strUIDamageFont = "Prefabs/UI/Component/ui_ingame_damage_font";
     #endregion
 
     #region Character spine class folder
@@ -111,16 +124,17 @@ public static class G_Constant
 
     // 메모리 풀
     public const int m_iMonsterPoolSize = 40;
+    public const int m_iDamageFontPoolSize = 25;
 
     // 해상도
     public const int m_iScreenResoultion = 1080; //540 : qHD , 720 : HD
     public const int m_iFoldScreenResoultion = 1080; //1080 : FHD
+
+    public const string m_strRegexPattern = @"\d+";
 
     // 임시
     //public const float m_fMonsterSpawnDelay = 0.3f;
     public const float m_fMonsterSpawnDelay = 3.0f;
     public const int m_iSpawnMonsterMaxCount = 40;
     public const int m_iSpawnOnceCount = 4;
-
-    public const string m_strRegexPattern = @"\d+";
 }

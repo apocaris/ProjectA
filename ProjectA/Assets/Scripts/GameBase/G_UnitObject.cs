@@ -126,6 +126,14 @@ public class G_UnitObject : G_Object
         }
     }
 
+    public float GetHeight()
+    {
+        if (m_vMeshRenderer == null)
+            return 0.0f;
+
+        return m_vMeshRenderer.bounds.size.y;
+    }
+
     private TrackEntry m_vTrackEntry;
     private IEnumerator m_enumeratorCheckAnimationEnd = null;
 
@@ -476,6 +484,7 @@ public class G_UnitObject : G_Object
     protected G_UnitObject m_vAttackTarget = null;
 
     public GT_Unit a_eUnitType { get { return m_eUnitType; } }
+    public float a_fUnitSize { get { return m_fUnitSize; } }
     #endregion
 
     [Header("Objects")]
@@ -484,6 +493,9 @@ public class G_UnitObject : G_Object
 
     [SerializeField, Rename("Spine Animation")]
     protected SkeletonAnimation m_vSpineObject = null;
+
+    [SerializeField, Rename("Mesh Renderer")]
+    protected MeshRenderer m_vMeshRenderer = null;
 
     [SerializeField, Rename("Dust Anchor")]
     protected GameObject m_vDustAnchor = null;

@@ -54,7 +54,7 @@ public class G_IngameModeBase : G_Object
 
     protected GameObject SpawnMonster(Vector3 vPosition, Action<bool> vOnDie)
     {
-        GameObject vObject = G_GameMGR.a_instance.GetPoolObject(GT_PoolType.Monster, G_FieldMGR.a_instance.a_vMonsterPoolObject.transform);
+        GameObject vObject = G_GameMGR.a_instance.GetPoolObject(GT_Pool.Monster, G_FieldMGR.a_instance.a_vMonsterPoolObject.transform);
         if (vObject != null)
         {
             G_UnitMonster vMonster = vObject.GetComponent<G_UnitMonster>();
@@ -74,7 +74,7 @@ public class G_IngameModeBase : G_Object
                     vOnDie?.Invoke(bForce);
                 }, () =>
                 {
-                    G_GameMGR.a_instance.ReturnPoolObject(GT_PoolType.Monster, vMonster.gameObject);
+                    G_GameMGR.a_instance.ReturnPoolObject(GT_Pool.Monster, vMonster.gameObject);
                 });
 
                 //2021.06.23 스폰시 타겟 설정. 어그로는 패트롤 후 일정 범위 안에 캐릭터 들어오면 인식

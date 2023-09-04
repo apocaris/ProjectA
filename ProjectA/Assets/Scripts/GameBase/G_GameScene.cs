@@ -1,6 +1,9 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+
+using Vector3 = UnityEngine.Vector3;
 
 public class G_GameScene : G_UIBase
 {
@@ -22,7 +25,8 @@ public class G_GameScene : G_UIBase
             G_GameMGR.a_instance.Initalize();
             if (G_GameMGR.a_instance.a_bGameInitComplete)
             {
-                G_GameMGR.a_instance.StartGameMode(GT_FieldType.Stage);
+                InitializeUI();
+                G_GameMGR.a_instance.StartGameMode(GT_Field.Stage);
             }
         }
         else
@@ -30,6 +34,71 @@ public class G_GameScene : G_UIBase
 
         }
     }
+
+    #region UI Initialize
+
+    public void InitializeUI()
+    {
+        // Filling the Initial Damage Font Pool
+        if (!G_GameMGR.a_instance.a_vObjectPools.ContainsKey(GT_Pool.DamageFont))
+        {
+            for (int i = 0; i < G_Constant.m_iDamageFontPoolSize; ++i)
+            {
+                G_GameMGR.a_instance.CreatePoolObject(GT_Pool.DamageFont, m_vUIObjectSpawnPool);
+            }
+        }
+    }
+
+    #endregion
+
+    #region Damage Font
+
+    public void ShowDamage(ref List<GT_Damage> vTypes, ref List<BigInteger> vValues, G_UnitObject vAnchor)
+    {
+        if (m_vUICamera == null)
+            return;
+        if (m_vMainCamera == null)
+            return;
+        if (vAnchor == null)
+            return;
+
+        float fHeight = vAnchor.GetHeight();
+
+        Vector3 vAnchorCenter = new Vector3(vAnchor.transform.position.x, vAnchor.transform.position.y + (fHeight / 2), 0);
+        Vector3 vDamagePos = m_vUICamera.ViewportToWorldPoint(m_vMainCamera.WorldToViewportPoint(vAnchorCenter));
+        vDamagePos.z = 0.0f;
+
+        for (int i = 0; i < vValues.Count; ++i)
+        {
+            if (m_vDamageFonts.Count > G_Constant.m_iDamageFontPoolSize)
+            {
+                GameObject vOld = m_vDamageFonts[0];
+                if (vOld != null)
+                {
+                    G_GameMGR.a_instance.ReturnPoolObject(GT_Pool.DamageFont, vOld);
+                    m_vDamageFonts.Remove(vOld);
+                }
+            }
+
+            GameObject vNew = G_GameMGR.a_instance.GetPoolObject(GT_Pool.DamageFont, m_vUIObjectSpawnPool);
+            if (vNew != null)
+            {
+                vNew.transform.position = vDamagePos;
+                m_vDamageFonts.Add(vNew);
+                G_IngameDamageFont vCtrl = vNew.GetComponent<G_IngameDamageFont>();
+                if (vCtrl != null)
+                {
+                    vCtrl.ResetCtrl(vValues[i], vTypes[i], i, vAnchor.a_fUnitSize, () =>
+                    {
+                        G_GameMGR.a_instance.ReturnPoolObject(GT_Pool.DamageFont, vCtrl.gameObject);
+                        m_vDamageFonts.Remove(vCtrl.gameObject);
+                    });
+                }
+            }
+        }
+    }
+
+    #endregion
 
     #region Cam setting
     public void CameraShake(float fAmount, float fDuration, float fDelay = 0.0f)
@@ -64,6 +133,13 @@ public class G_GameScene : G_UIBase
                 m_vFieldCamera.cullingMask |= 1 << LayerMask.NameToLayer("Field");
         }
     }
+    #endregion
+
+    #region Variables
+
+    // The number of damage labels currently being drawn on the screen.
+    private List<GameObject> m_vDamageFonts = new List<GameObject>();
+
     #endregion
 
     public G_CameraShake a_vIngameCamShake { get { return m_vIngameCamShake; } }

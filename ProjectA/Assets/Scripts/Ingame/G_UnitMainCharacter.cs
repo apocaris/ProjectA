@@ -4,7 +4,12 @@ using Spine.Unity.AttachmentTools;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Numerics;
 using UnityEngine;
+
+using Vector3 = UnityEngine.Vector3;
+using Vector2 = UnityEngine.Vector2;
+using Random = UnityEngine.Random;
 
 public class G_UnitMainCharacter : G_UnitObject
 {
@@ -238,28 +243,6 @@ public class G_UnitMainCharacter : G_UnitObject
     {
         m_vDesDashPos = vTargetPos;
         SetState(GT_UnitState.Dash_Ready);
-    }
-
-    protected override void ApplyDirection(GT_Direction eDirection)
-    {
-        base.ApplyDirection(eDirection);
-
-        //if (m_vVFXAnchor != null)
-        //{
-        //    switch (eDirection)
-        //    {
-        //        case GT_Direction.Left:
-        //            {
-        //                m_vVFXAnchor.transform.localEulerAngles = m_vLeftRot;
-        //            }
-        //            break;
-        //        case GT_Direction.Right:
-        //            {
-        //                m_vVFXAnchor.transform.localEulerAngles = m_vRightRot;
-        //            }
-        //            break;
-        //    }
-        //}
     }
 
 #if ATTACK_BASE_TIMING
@@ -599,6 +582,28 @@ public class G_UnitMainCharacter : G_UnitObject
                     if (!vTargetList[i].a_bAlive)
                         continue;
 
+                    m_vDamageValues.Clear();
+                    m_vDamageTypes.Clear();
+
+                    GT_Damage eType = GT_Damage.Normal;
+                    BigInteger iDamage;
+
+                    // For test
+                    {
+                        iDamage = (BigInteger)Random.Range(1, 1000000);
+                        if (iDamage >= 790000 && iDamage < 794000)
+                            eType = GT_Damage.Critical;
+                        else if (iDamage >= 794001 && iDamage < 900000)
+                            eType = GT_Damage.SuperCritical;
+                        else if (iDamage >= 900001)
+                            eType = GT_Damage.HyperCritical;
+                    }
+
+                    m_vDamageTypes.Add(eType);
+                    m_vDamageValues.Add(iDamage);
+
+                    G_GameMGR.a_instance.a_vGameScene.ShowDamage(ref m_vDamageTypes, ref m_vDamageValues, vTargetList[i]);
+
                     switch (vTargetList[i].a_eUnitType)
                     {
                         case GT_Unit.MainCharacter:
@@ -840,6 +845,9 @@ public class G_UnitMainCharacter : G_UnitObject
 
     public bool a_bRep { get { return m_bRep; } }
     private bool m_bRep = false;
+
+    private List<BigInteger> m_vDamageValues = new List<BigInteger>();
+    private List<GT_Damage> m_vDamageTypes = new List<GT_Damage>();
 
     #endregion
 

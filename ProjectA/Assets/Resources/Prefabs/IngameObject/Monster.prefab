@@ -19727,6 +19727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_vAnchor: {fileID: 6565540861792130890}
   m_vSpineObject: {fileID: 6565540862541495686}
+  m_vMeshRenderer: {fileID: 6565540862541495681}
   m_vDustAnchor: {fileID: 3393838383718380587}
   m_vDustVFX: {fileID: 0}
   m_fAttackRange: 1.5
