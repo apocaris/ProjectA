@@ -1,0 +1,38 @@
+spear_0905.png
+size:78,78
+filter:Linear,Linear
+pma:true
+back hair
+bounds:43,20,22,20
+offsets:1,1,24,22
+head
+bounds:21,14,26,22
+offsets:1,1,28,24
+rotate:90
+left foot
+bounds:40,9,5,5
+offsets:1,1,7,7
+right foot
+bounds:40,9,5,5
+offsets:1,1,7,7
+left hand
+bounds:34,7,7,6
+offsets:1,1,9,8
+rotate:90
+ponytail
+bounds:0,2,21,38
+right hand
+bounds:34,0,7,6
+offsets:1,1,9,8
+rotate:90
+shadow
+bounds:0,40,68,38
+offsets:1,1,70,40
+spear
+bounds:68,3,75,9
+offsets:1,1,77,11
+rotate:90
+torso
+bounds:21,0,14,13
+offsets:1,1,16,15
+rotate:90

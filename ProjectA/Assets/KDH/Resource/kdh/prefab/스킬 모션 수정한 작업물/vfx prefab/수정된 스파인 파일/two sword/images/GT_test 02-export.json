@@ -1,0 +1,52 @@
+{ "skeleton": { "images": "D:/Kim Do hyeun/작업물/샘플 프로젝트_0817/images/" },
+"bones": [
+	{ "name": "root" }
+],
+"slots": [
+	{ "name": "Layer", "bone": "root" },
+	{ "name": "Layer 1", "bone": "root" },
+	{ "name": "back hair", "bone": "root", "attachment": "back hair" },
+	{ "name": "sword", "bone": "root", "attachment": "sword" },
+	{ "name": "right foot", "bone": "root", "attachment": "right foot" },
+	{ "name": "left foot", "bone": "root", "attachment": "left foot" },
+	{ "name": "torso", "bone": "root", "attachment": "torso" },
+	{ "name": "right hand", "bone": "root", "attachment": "right hand" },
+	{ "name": "left hand", "bone": "root", "attachment": "left hand" },
+	{ "name": "head", "bone": "root", "attachment": "head" }
+],
+"skins": {
+	"default": {
+		"Layer": {
+			"Layer": { "x": 114, "y": -47.5, "width": 80, "height": 49 }
+		},
+		"Layer 1": {
+			"Layer 1": { "x": 113, "y": -47.5, "width": 80, "height": 49 }
+		},
+		"back hair": {
+			"back hair": { "x": 131, "y": -48, "width": 30, "height": 28 }
+		},
+		"sword": {
+			"sword": { "x": 91.5, "y": -22.5, "width": 75, "height": 23 }
+		},
+		"right foot": {
+			"right foot": { "x": 130.5, "y": -67.5, "width": 9, "height": 9 }
+		},
+		"left foot": {
+			"left foot": { "x": 137.5, "y": -67.5, "width": 9, "height": 9 }
+		},
+		"torso": {
+			"torso": { "x": 133, "y": -60.5, "width": 16, "height": 17 }
+		},
+		"right hand": {
+			"right hand": { "x": 123.5, "y": -63, "width": 11, "height": 10 }
+		},
+		"left hand": {
+			"left hand": { "x": 142.5, "y": -62, "width": 11, "height": 10 }
+		},
+		"head": {
+			"head": { "x": 132.5, "y": -47, "width": 25, "height": 24 }
+		}
+	}
+},
+"animations": { "animation": {} }
+}
