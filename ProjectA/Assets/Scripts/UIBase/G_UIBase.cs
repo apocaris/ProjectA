@@ -56,14 +56,6 @@ public class G_UIBase : G_Object
 
     public virtual void Initialize() { }
 
-    public virtual void SelfUpdate() { }
-
-    public void FixedUpdate()
-    {
-        if (m_bSelfUpdate && gameObject.activeInHierarchy)
-            SelfUpdate();
-    }
-
     public GameObject CreateUI(string strUIName, GameObject vParent)
     {
         if (IsNull(vParent))
@@ -277,9 +269,4 @@ public class G_UIBase : G_Object
             --iChildCount;
         }
     }
-
-    public bool a_bSelfUpdate { get { return m_bSelfUpdate; } set { a_bSelfUpdate = value; } }
-
-    [SerializeField, Rename("State: Self Update")]
-    protected bool m_bSelfUpdate = false;
 }

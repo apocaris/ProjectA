@@ -1,8 +1,8 @@
-using System.Collections;
+using System;
 using System.Collections.Generic;
 using System.Numerics;
 using UnityEngine;
-
+using UnityEngine.Android;
 using Vector3 = UnityEngine.Vector3;
 
 public class G_GameScene : G_UIBase
@@ -11,10 +11,31 @@ public class G_GameScene : G_UIBase
     {
         base.Awake();
 
+        Screen.sleepTimeout = SleepTimeout.NeverSleep;
+
+        //문화권 시간 고정
+        System.Globalization.CultureInfo.CurrentCulture = System.Globalization.CultureInfo.InvariantCulture;
+
+        Application.targetFrameRate = 60;
+
         if (a_vMainCamera != null)
+        {
             m_vIngameCamShake = a_vMainCamera.GetComponent<G_CameraShake>();
+
+            float fAspect = a_vMainCamera.aspect;
+            int iWidth = (int)(G_Constant.m_iScreenResoultion);
+            int iHeight = (int)(G_Constant.m_iScreenResoultion * fAspect);
+
+            Screen.SetResolution(iWidth, iHeight, true);
+        }
+            
         if (m_vUICamera != null)
             m_vUICamShake = m_vUICamera.GetComponent<G_CameraShake>();
+
+#if UNITY_ANDROID
+        //Android의 경우 지속가능한 성능 옵션 활성화 
+        AndroidDevice.SetSustainedPerformanceMode(true);
+#endif
     }
 
     public void Start()
@@ -35,10 +56,36 @@ public class G_GameScene : G_UIBase
         }
     }
 
+    public void FixedUpdate()
+    {
+        if (G_GameMGR.a_instance.a_bGameInitComplete)
+        {
+            if (m_vAlwaysUpdates != null && m_vAlwaysUpdates.Count > 0)
+            {
+                for (int i = 0; i < m_vAlwaysUpdates.Count; ++i)
+                {
+                    try
+                    {
+                        if (m_vAlwaysUpdates[i] != null)
+                            m_vAlwaysUpdates[i].Execute();
+                    }
+                    catch (Exception e)
+                    {
+                        G_Utils.DebugLog(e.ToString(), 2);
+                    }
+                }
+            }
+        }
+    }
+
     #region UI Initialize
 
     public void InitializeUI()
     {
+        // All UI Initialize
+        if (m_vUIFixedMain != null)
+            m_vUIFixedMain.Initialize();
+
         // Filling the Initial Damage Font Pool
         if (!G_GameMGR.a_instance.a_vObjectPools.ContainsKey(GT_Pool.DamageFont))
         {
@@ -135,10 +182,32 @@ public class G_GameScene : G_UIBase
     }
     #endregion
 
+    #region AlwaysUpdate
+
+    public void AddAlwaysUpdate(ref EventDelegate vEvent)
+    {
+        if (vEvent == null)
+            return;
+        if (m_vAlwaysUpdates == null)
+            return;
+
+        if (m_vAlwaysUpdates.Contains(vEvent))
+            return;
+
+        m_vAlwaysUpdates.Add(vEvent);
+    }
+
+    #endregion
+
     #region Variables
 
     // The number of damage labels currently being drawn on the screen.
     private List<GameObject> m_vDamageFonts = new List<GameObject>();
+
+    // -----------------------------------------------
+    // Features that must always be updated regardless of power saving mode
+
+    private List<EventDelegate> m_vAlwaysUpdates = new List<EventDelegate>();
 
     #endregion
 
@@ -150,11 +219,11 @@ public class G_GameScene : G_UIBase
 
     [Header("Common")]
     [SerializeField, Rename("UI Root")]
-    protected UIRoot m_vUIRoot = null;
+    private UIRoot m_vUIRoot = null;
 
     public Camera a_vUICamera { get { return m_vUICamera; } }
     [SerializeField, Rename("UI cam")]
-    protected Camera m_vUICamera = null;
+    private Camera m_vUICamera = null;
 
     public Camera a_vMainCamera { 
         get
@@ -167,15 +236,22 @@ public class G_GameScene : G_UIBase
         }
     }
     [SerializeField, Rename("Main cam : ortho")]
-    protected Camera m_vMainCamera_ortho = null;
+    private Camera m_vMainCamera_ortho = null;
 
     [SerializeField, Rename("Main cam : pers")]
-    protected Camera m_vMainCamera_pers = null;
+    private Camera m_vMainCamera_pers = null;
 
     [SerializeField, Rename("Field cam")]
-    protected Camera m_vFieldCamera = null;
+    private Camera m_vFieldCamera = null;
 
     [Header("Spawn Pools")]
     [SerializeField, Rename("UI Object Pool")]
-    protected Transform m_vUIObjectSpawnPool = null;
+    private Transform m_vUIObjectSpawnPool = null;
+
+    [Header("Main UI's")]
+    [SerializeField, Rename("Main Panel")]
+    private GameObject m_vMainPanel = null;
+
+    [SerializeField, Rename("Fixed main")]
+    private G_UIFixedMain m_vUIFixedMain = null;
 }

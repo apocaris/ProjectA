@@ -178,11 +178,6 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                         m_vIngameStageMode.UpdateMode();
                 }
                 break;
-            case GT_Field.Dungeon:
-                {
-
-                }
-                break;
         }
     }
 
@@ -396,11 +391,6 @@ public class G_FieldMGR : G_SimpleMGR<G_FieldMGR>
                 {
                     if (m_vIngameStageMode != null)
                         m_vIngameStageMode.UpdateModeInfo(ref m_vFieldPoint);
-                }
-                break;
-            case GT_Field.Dungeon:
-                {
-
                 }
                 break;
         }

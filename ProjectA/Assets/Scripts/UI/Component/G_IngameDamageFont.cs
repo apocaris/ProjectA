@@ -51,7 +51,7 @@ public class G_IngameDamageFont : G_UIBase
 
         if (m_vTweenPosition != null)
         {
-            float fBeginY = fMonsterSizeOffset + (m_fYOffestByOrder * iOrder) + 380.0f;
+            float fBeginY = fMonsterSizeOffset + (m_fYOffestByOrder * iOrder) + 130.0f;
             m_vTweenPosition.from = new Vector3(0.0f, fBeginY, 0.0f);
             m_vTweenPosition.to = new Vector3(0.0f, fBeginY + m_fYTargetOffest, 0.0f);
             m_vTweenPosition.ResetToBeginning();

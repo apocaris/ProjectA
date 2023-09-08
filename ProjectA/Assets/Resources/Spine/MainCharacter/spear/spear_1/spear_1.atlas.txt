@@ -1,36 +1,37 @@
 spear_1.png
-size:128,128
+size:128,64
 filter:Linear,Linear
 pma:true
 back hair
-bounds:21,56,22,20
+bounds:94,27,22,20
 offsets:1,1,24,22
-rotate:90
 head
-bounds:0,78,26,22
+bounds:68,25,26,22
 offsets:1,1,28,24
-rotate:90
 left foot
-bounds:36,87,5,5
+bounds:116,42,5,5
 offsets:1,1,7,7
 right foot
-bounds:36,87,5,5
+bounds:116,42,5,5
 offsets:1,1,7,7
 left hand
-bounds:36,98,7,6
+bounds:68,18,7,6
 offsets:1,1,9,8
-ponytail
-bounds:0,40,21,38
-right hand
-bounds:36,92,7,6
-offsets:1,1,9,8
-shadow
-bounds:75,45,68,38
-offsets:1,1,70,40
 rotate:90
+ponytail
+bounds:75,4,21,38
+rotate:90
+right hand
+bounds:68,11,7,6
+offsets:1,1,9,8
+rotate:90
+shadow
+bounds:0,9,68,38
+offsets:1,1,70,40
 spear
-bounds:0,104,75,9
+bounds:0,0,75,9
 offsets:1,1,77,11
 torso
-bounds:22,91,14,13
+bounds:113,13,14,13
 offsets:1,1,16,15
+rotate:90

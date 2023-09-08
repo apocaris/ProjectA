@@ -1,5 +1,5 @@
-using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -23,11 +23,6 @@ public class G_GameMGR : G_SimpleMGR<G_GameMGR>
     {
         base.Awake();
         m_vGameVersion = Application.version;
-    }
-
-    private void FixedUpdate()
-    {
-        
     }
 
     public override void Initalize()

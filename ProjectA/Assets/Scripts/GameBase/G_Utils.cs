@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Numerics;
 using System.Text.RegularExpressions;
+using UnityEditor;
 using UnityEngine;
 
 public static class G_Utils
@@ -192,6 +193,30 @@ public static class G_Utils
 
             vTargetList.Remove(vTargetList[i]);
         }
+    }
+
+    #endregion
+
+    #region Debug
+
+    public static void DebugLog(string strContent, int iLevel = 1)
+    {
+        string strLog = string.Format("{0} : {1}", PlayerSettings.productName, strContent);
+        switch (iLevel)
+        {
+            case 1:
+                {
+                    Debug.Log(strLog);
+                }
+                break;
+            case 2:
+                {
+                    Debug.LogError(strLog);
+                }
+                break;
+        }
+
+        
     }
 
     #endregion

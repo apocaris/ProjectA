@@ -22,6 +22,9 @@ public class G_UnitMainCharacter : G_UnitObject
     {
         base.ResetObject();
 
+        if (m_vVFXAnchor != null)
+            m_vVFXAnchor.transform.localScale = Vector3.one * m_fUnitSize;
+
         //스킨 관련 정리
         //if (!IsNull(m_vSkinRuntimeMaterial))
         //    Destroy(m_vSkinRuntimeMaterial);
@@ -40,8 +43,8 @@ public class G_UnitMainCharacter : G_UnitObject
                     strClass = G_Constant.m_strClassAxe;
                     strResource = "axe_1";
                     m_fAttackSpeed = 1.1f;
-                    m_fAttackRange = 1.6f;
-                    m_fMoveSpeed = 1.3f;
+                    m_fAttackRange = 1.2f;
+                    m_fMoveSpeed = 1.6f;
                 }
                 break;
             case GT_UnitClass.Spear:
@@ -49,7 +52,7 @@ public class G_UnitMainCharacter : G_UnitObject
                     strClass = G_Constant.m_strClassSpear;
                     strResource = "spear_1";
                     m_fAttackSpeed = 1.3f;
-                    m_fAttackRange = 2.1f;
+                    m_fAttackRange = 1.5f;
                     m_fMoveSpeed = 2f;
                 }
                 break;
@@ -482,13 +485,18 @@ public class G_UnitMainCharacter : G_UnitObject
 
                     ApplyAttackVFX(vEvent.Data.Name);
 
-                    ApplyDamage();
+                    //ApplyDamage();
 
                     if (m_enumeratorCheckAnimationEnd == null)
                     {
                         m_enumeratorCheckAnimationEnd = CheckAttackFinish(FinishAttackNormal);
                         StartCoroutine(m_enumeratorCheckAnimationEnd);
                     }
+                }
+                break;
+            case G_Constant.m_strSpine_Event_Damage:
+                {
+                    ApplyDamage();
                 }
                 break;
         }
@@ -833,7 +841,7 @@ public class G_UnitMainCharacter : G_UnitObject
     private float m_fCheckAttackMotionTimer = 0.0f;
     private bool m_bCheckInitAttackMotion = false;
     private int m_iNextAttackMotion = 0;
-    private int m_iMaxAttackMotion = 2;
+    private int m_iMaxAttackMotion = 1;
     private bool m_bAttackProcess = false;
     protected bool m_bSkillMotionProcess = false;
     private float m_fOrgTimescale = 0.0f;
