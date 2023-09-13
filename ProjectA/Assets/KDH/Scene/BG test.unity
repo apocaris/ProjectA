@@ -17834,6 +17834,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4618448028862859925, guid: 28ad3ff3d7517d440ba62f8353a69e0d, type: 3}
+      propertyPath: LightsModule.enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8830955994960949239, guid: 28ad3ff3d7517d440ba62f8353a69e0d, type: 3}
       propertyPath: m_Name
       value: pos_sword_atk01
