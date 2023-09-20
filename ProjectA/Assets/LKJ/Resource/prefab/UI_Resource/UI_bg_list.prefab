@@ -3638,7 +3638,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1649103343679984132}
   m_Layer: 5
-  m_Name: UI_lbg_ist
+  m_Name: UI_bg_list
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
