@@ -7417,7 +7417,7 @@ MonoBehaviour:
     relative: 1
     absolute: 0
   updateAnchors: 1
-  mColor: {r: 1, g: 1, b: 1, a: 1}
+  mColor: {r: 0.9811321, g: 0.87684155, b: 0.7728729, a: 1}
   mPivot: 4
   mWidth: 140
   mHeight: 150
@@ -7432,7 +7432,7 @@ MonoBehaviour:
   mFillAmount: 1
   mInvert: 0
   mFlip: 0
-  mApplyGradient: 1
+  mApplyGradient: 0
   mGradientTop: {r: 0.6039216, g: 0.45098042, b: 0.3803922, a: 1}
   mGradientBottom: {r: 0.3679245, g: 0.2923066, b: 0.26205945, a: 1}
   centerType: 1

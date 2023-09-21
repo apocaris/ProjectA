@@ -15,8 +15,8 @@ MonoBehaviour:
   material: {fileID: 2100000, guid: 19841845eec3a574c8d749b2bf3c1a4f, type: 2}
   mSprites:
   - name: asset_star
-    x: 586
-    y: 470
+    x: 507
+    y: 738
     width: 48
     height: 49
     borderLeft: 0
@@ -28,8 +28,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 2
   - name: bg_asset
-    x: 456
-    y: 481
+    x: 780
+    y: 19
     width: 124
     height: 38
     borderLeft: 0
@@ -41,8 +41,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: bg_circle
-    x: 621
-    y: 48
+    x: 467
+    y: 673
     width: 36
     height: 36
     borderLeft: 0
@@ -54,8 +54,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_btn
-    x: 680
-    y: 801
+    x: 556
+    y: 673
     width: 26
     height: 60
     borderLeft: 0
@@ -67,8 +67,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_light
-    x: 0
-    y: 41
+    x: 271
+    y: 47
     width: 117
     height: 121
     borderLeft: 0
@@ -80,8 +80,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_line
-    x: 236
-    y: 24
+    x: 118
+    y: 107
     width: 136
     height: 61
     borderLeft: 105
@@ -93,8 +93,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_main_01
-    x: 460
-    y: 565
+    x: 522
+    y: 6
     width: 94
     height: 27
     borderLeft: 0
@@ -106,8 +106,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_main_02
-    x: 594
-    y: 9
+    x: 692
+    y: 883
     width: 23
     height: 23
     borderLeft: 0
@@ -119,8 +119,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_main_03
-    x: 578
-    y: 179
+    x: 722
+    y: 896
     width: 50
     height: 50
     borderLeft: 0
@@ -132,8 +132,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_deco_star
-    x: 654
-    y: 14
+    x: 623
+    y: 664
     width: 33
     height: 33
     borderLeft: 0
@@ -146,7 +146,7 @@ MonoBehaviour:
     paddingBottom: 1
   - name: bg_gage_boss
     x: 0
-    y: 7
+    y: 3
     width: 375
     height: 16
     borderLeft: 0
@@ -158,8 +158,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_gage_boss_now
-    x: 498
-    y: 940
+    x: 413
+    y: 866
     width: 372
     height: 12
     borderLeft: 0
@@ -171,8 +171,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_gage_level_empty
-    x: 491
-    y: 85
+    x: 373
+    y: 673
     width: 93
     height: 93
     borderLeft: 0
@@ -184,8 +184,8 @@ MonoBehaviour:
     paddingTop: 3
     paddingBottom: 4
   - name: bg_gage_level_full
-    x: 373
-    y: 648
+    x: 538
+    y: 288
     width: 89
     height: 89
     borderLeft: 0
@@ -197,8 +197,8 @@ MonoBehaviour:
     paddingTop: 5
     paddingBottom: 6
   - name: bg_gage_stage
-    x: 285
-    y: 453
+    x: 271
+    y: 20
     width: 250
     height: 26
     borderLeft: 0
@@ -210,8 +210,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_gage_stage_now
-    x: 0
-    y: 28
+    x: 376
+    y: 7
     width: 126
     height: 12
     borderLeft: 0
@@ -223,8 +223,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_gradiant
-    x: 666
-    y: 953
+    x: 780
+    y: 8
     width: 133
     height: 10
     borderLeft: 2
@@ -236,8 +236,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_01
-    x: 640
-    y: 784
+    x: 682
+    y: 907
     width: 39
     height: 77
     borderLeft: 0
@@ -249,8 +249,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_02
-    x: 651
-    y: 862
+    x: 413
+    y: 788
     width: 39
     height: 77
     borderLeft: 0
@@ -262,8 +262,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_03
-    x: 571
-    y: 862
+    x: 467
+    y: 710
     width: 39
     height: 77
     borderLeft: 0
@@ -275,8 +275,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_04
-    x: 611
-    y: 862
+    x: 722
+    y: 947
     width: 39
     height: 77
     borderLeft: 0
@@ -288,8 +288,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_05
-    x: 566
-    y: 325
+    x: 493
+    y: 788
     width: 39
     height: 77
     borderLeft: 0
@@ -301,8 +301,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_06
-    x: 546
-    y: 403
+    x: 453
+    y: 788
     width: 39
     height: 77
     borderLeft: 0
@@ -314,8 +314,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_item_07
-    x: 569
-    y: 572
+    x: 762
+    y: 947
     width: 39
     height: 77
     borderLeft: 0
@@ -327,8 +327,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_level
-    x: 202
-    y: 247
+    x: 600
+    y: 626
     width: 60
     height: 19
     borderLeft: 0
@@ -340,8 +340,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_list
-    x: 629
-    y: 179
+    x: 773
+    y: 896
     width: 50
     height: 50
     borderLeft: 11
@@ -353,8 +353,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_main
-    x: 372
-    y: 250
+    x: 490
+    y: 120
     width: 90
     height: 100
     borderLeft: 42
@@ -366,8 +366,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_pass_deco_01
-    x: 546
-    y: 364
+    x: 705
+    y: 986
     width: 16
     height: 38
     borderLeft: 0
@@ -379,8 +379,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_pass_deco_02
-    x: 615
-    y: 711
+    x: 636
+    y: 913
     width: 45
     height: 71
     borderLeft: 0
@@ -392,7 +392,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_pass_level
-    x: 868
+    x: 621
     y: 985
     width: 83
     height: 39
@@ -405,8 +405,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_power
-    x: 456
-    y: 520
+    x: 633
+    y: 4
     width: 146
     height: 42
     borderLeft: 0
@@ -418,8 +418,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_quest_fold
-    x: 540
-    y: 702
+    x: 413
+    y: 950
     width: 74
     height: 74
     borderLeft: 0
@@ -431,8 +431,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_quest_fold_clear
-    x: 271
-    y: 166
+    x: 389
+    y: 120
     width: 100
     height: 100
     borderLeft: 0
@@ -444,8 +444,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_quest_unfold
-    x: 202
-    y: 351
+    x: 118
+    y: 169
     width: 267
     height: 76
     borderLeft: 0
@@ -457,8 +457,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_rectangle
-    x: 601
-    y: 960
+    x: 373
+    y: 511
     width: 64
     height: 64
     borderLeft: 1
@@ -470,7 +470,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_rune
-    x: 737
+    x: 559
     y: 964
     width: 61
     height: 60
@@ -496,7 +496,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_rune_02
-    x: 0
+    x: 118
     y: 246
     width: 201
     height: 181
@@ -522,8 +522,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_select
-    x: 457
-    y: 440
+    x: 583
+    y: 685
     width: 12
     height: 12
     borderLeft: 5
@@ -535,7 +535,7 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_selection
-    x: 666
+    x: 488
     y: 968
     width: 70
     height: 56
@@ -548,8 +548,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_selection_deco
-    x: 566
-    y: 278
+    x: 310
+    y: 720
     width: 60
     height: 46
     borderLeft: 29
@@ -560,9 +560,48 @@ MonoBehaviour:
     paddingRight: 0
     paddingTop: 0
     paddingBottom: 0
+  - name: bg_shop_hot
+    x: 389
+    y: 50
+    width: 140
+    height: 69
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 0
+    paddingBottom: 1
+  - name: bg_shop_ruby
+    x: 0
+    y: 104
+    width: 117
+    height: 323
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 0
+    paddingRight: 0
+    paddingTop: 0
+    paddingBottom: 0
+  - name: bg_shop_sale
+    x: 507
+    y: 689
+    width: 48
+    height: 48
+    borderLeft: 0
+    borderRight: 0
+    borderTop: 0
+    borderBottom: 0
+    paddingLeft: 1
+    paddingRight: 1
+    paddingTop: 1
+    paddingBottom: 1
   - name: bg_skill_crew
-    x: 373
-    y: 480
+    x: 633
+    y: 47
     width: 82
     height: 82
     borderLeft: 0
@@ -574,8 +613,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_skill_leader
-    x: 236
-    y: 86
+    x: 386
+    y: 221
     width: 151
     height: 76
     borderLeft: 0
@@ -587,8 +626,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_stage_auto_off
-    x: 127
-    y: 24
+    x: 545
+    y: 392
     width: 70
     height: 20
     borderLeft: 0
@@ -600,8 +639,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_stage_auto_on
-    x: 386
-    y: 432
+    x: 802
+    y: 953
     width: 70
     height: 20
     borderLeft: 0
@@ -613,8 +652,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_stat
-    x: 460
-    y: 593
+    x: 684
+    y: 135
     width: 108
     height: 54
     borderLeft: 53
@@ -626,8 +665,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: bg_tier_01
-    x: 202
-    y: 267
+    x: 320
+    y: 298
     width: 139
     height: 83
     borderLeft: 0
@@ -640,7 +679,7 @@ MonoBehaviour:
     paddingBottom: 0
   - name: bg_toast
     x: 0
-    y: 163
+    y: 21
     width: 270
     height: 82
     borderLeft: 0
@@ -652,8 +691,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_00
-    x: 372
-    y: 164
+    x: 310
+    y: 853
     width: 102
     height: 85
     borderLeft: 0
@@ -665,8 +704,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_01
-    x: 463
-    y: 265
+    x: 530
+    y: 34
     width: 102
     height: 85
     borderLeft: 0
@@ -678,8 +717,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_02
-    x: 388
-    y: 78
+    x: 310
+    y: 767
     width: 102
     height: 85
     borderLeft: 0
@@ -691,8 +730,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_03
-    x: 475
-    y: 179
+    x: 310
+    y: 939
     width: 102
     height: 85
     borderLeft: 0
@@ -704,8 +743,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_04
-    x: 498
-    y: 953
+    x: 581
+    y: 130
     width: 102
     height: 71
     borderLeft: 0
@@ -717,8 +756,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_05
-    x: 491
-    y: 13
+    x: 628
+    y: 341
     width: 102
     height: 71
     borderLeft: 0
@@ -730,8 +769,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_fold
-    x: 868
-    y: 953
+    x: 629
+    y: 758
     width: 34
     height: 31
     borderLeft: 0
@@ -743,8 +782,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_list_on
-    x: 799
-    y: 974
+    x: 567
+    y: 913
     width: 68
     height: 50
     borderLeft: 0
@@ -756,8 +795,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: btn_list_sub
-    x: 540
-    y: 650
+    x: 483
+    y: 898
     width: 83
     height: 51
     borderLeft: 40
@@ -769,8 +808,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: btn_player
-    x: 118
-    y: 45
+    x: 320
+    y: 382
     width: 117
     height: 117
     borderLeft: 0
@@ -782,8 +821,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 2
   - name: btn_preset
-    x: 594
-    y: 33
+    x: 596
+    y: 646
     width: 26
     height: 51
     borderLeft: 0
@@ -795,8 +834,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: btn_stage_auto
-    x: 198
-    y: 24
+    x: 434
+    y: 767
     width: 20
     height: 20
     borderLeft: 0
@@ -808,8 +847,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_ad
-    x: 578
-    y: 230
+    x: 320
+    y: 250
     width: 56
     height: 47
     borderLeft: 0
@@ -821,8 +860,8 @@ MonoBehaviour:
     paddingTop: 8
     paddingBottom: 9
   - name: icn_asset_coin
-    x: 585
-    y: 128
+    x: 802
+    y: 974
     width: 50
     height: 50
     borderLeft: 0
@@ -834,8 +873,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_asset_crystal
-    x: 603
-    y: 521
+    x: 538
+    y: 237
     width: 42
     height: 50
     borderLeft: 0
@@ -847,8 +886,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_asset_dia
-    x: 730
-    y: 904
+    x: 583
+    y: 698
     width: 41
     height: 35
     borderLeft: 0
@@ -860,8 +899,8 @@ MonoBehaviour:
     paddingTop: 9
     paddingBottom: 6
   - name: icn_auto
-    x: 342
-    y: 269
+    x: 668
+    y: 883
     width: 23
     height: 23
     borderLeft: 0
@@ -873,8 +912,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: icn_auto_on
-    x: 482
-    y: 854
+    x: 581
+    y: 202
     width: 88
     height: 85
     borderLeft: 0
@@ -886,8 +925,8 @@ MonoBehaviour:
     paddingTop: 2
     paddingBottom: 3
   - name: icn_axe
-    x: 624
-    y: 669
+    x: 576
+    y: 824
     width: 41
     height: 41
     borderLeft: 0
@@ -899,8 +938,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: icn_boss
-    x: 636
-    y: 147
+    x: 651
+    y: 834
     width: 27
     height: 31
     borderLeft: 0
@@ -912,8 +951,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_chage
-    x: 645
-    y: 574
+    x: 598
+    y: 790
     width: 35
     height: 33
     borderLeft: 0
@@ -925,8 +964,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 2
   - name: icn_change
-    x: 609
-    y: 574
+    x: 593
+    y: 747
     width: 35
     height: 33
     borderLeft: 0
@@ -938,8 +977,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 2
   - name: icn_clear
-    x: 494
-    y: 747
+    x: 625
+    y: 717
     width: 37
     height: 29
     borderLeft: 0
@@ -951,8 +990,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_close
-    x: 310
-    y: 738
+    x: 464
+    y: 583
     width: 92
     height: 89
     borderLeft: 0
@@ -964,8 +1003,8 @@ MonoBehaviour:
     paddingTop: 5
     paddingBottom: 6
   - name: Icn_crew
-    x: 401
-    y: 940
+    x: 525
+    y: 498
     width: 96
     height: 84
     borderLeft: 0
@@ -977,8 +1016,8 @@ MonoBehaviour:
     paddingTop: 7
     paddingBottom: 9
   - name: icn_crew 1
-    x: 570
-    y: 783
+    x: 413
+    y: 879
     width: 69
     height: 70
     borderLeft: 0
@@ -990,8 +1029,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_deco_clear
-    x: 285
-    y: 428
+    x: 567
+    y: 888
     width: 100
     height: 24
     borderLeft: 0
@@ -1003,8 +1042,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Icn_inven
-    x: 310
-    y: 928
+    x: 373
+    y: 576
     width: 90
     height: 96
     borderLeft: 0
@@ -1016,8 +1055,8 @@ MonoBehaviour:
     paddingTop: 4
     paddingBottom: 0
   - name: Icn_leader
-    x: 310
-    y: 828
+    x: 438
+    y: 476
     width: 86
     height: 99
     borderLeft: 0
@@ -1029,8 +1068,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 0
   - name: icn_lock
-    x: 661
-    y: 737
+    x: 556
+    y: 734
     width: 36
     height: 46
     borderLeft: 0
@@ -1055,8 +1094,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_magician
-    x: 376
-    y: 12
+    x: 684
+    y: 190
     width: 92
     height: 65
     borderLeft: 0
@@ -1068,8 +1107,8 @@ MonoBehaviour:
     paddingTop: 11
     paddingBottom: 24
   - name: icn_menu
-    x: 585
-    y: 85
+    x: 533
+    y: 823
     width: 42
     height: 42
     borderLeft: 0
@@ -1081,8 +1120,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_new
-    x: 475
-    y: 164
+    x: 621
+    y: 970
     width: 14
     height: 14
     borderLeft: 0
@@ -1094,8 +1133,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: icn_power
-    x: 621
-    y: 11
+    x: 618
+    y: 829
     width: 32
     height: 36
     borderLeft: 0
@@ -1107,8 +1146,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_preset
-    x: 342
-    y: 293
+    x: 285
+    y: 442
     width: 29
     height: 57
     borderLeft: 0
@@ -1120,8 +1159,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Icn_regacy
-    x: 403
-    y: 745
+    x: 545
+    y: 413
     width: 90
     height: 84
     borderLeft: 0
@@ -1133,8 +1172,8 @@ MonoBehaviour:
     paddingTop: 9
     paddingBottom: 7
   - name: icn_reward
-    x: 397
-    y: 830
+    x: 460
+    y: 378
     width: 84
     height: 97
     borderLeft: 0
@@ -1146,8 +1185,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: Icn_shop
-    x: 373
-    y: 563
+    x: 670
+    y: 256
     width: 86
     height: 84
     borderLeft: 0
@@ -1159,8 +1198,8 @@ MonoBehaviour:
     paddingTop: 7
     paddingBottom: 9
   - name: icn_skill_01
-    x: 494
-    y: 777
+    x: 792
+    y: 58
     width: 75
     height: 76
     borderLeft: 0
@@ -1172,8 +1211,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_skill_02
-    x: 463
-    y: 668
+    x: 460
+    y: 301
     width: 76
     height: 76
     borderLeft: 0
@@ -1185,8 +1224,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_skill_03
-    x: 470
-    y: 376
+    x: 716
+    y: 58
     width: 75
     height: 76
     borderLeft: 0
@@ -1198,8 +1237,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_spear
-    x: 586
-    y: 428
+    x: 628
+    y: 299
     width: 41
     height: 41
     borderLeft: 0
@@ -1211,8 +1250,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: icn_stage_now
-    x: 691
-    y: 862
+    x: 557
+    y: 595
     width: 42
     height: 36
     borderLeft: 0
@@ -1224,8 +1263,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_star
-    x: 516
-    y: 353
+    x: 663
+    y: 735
     width: 22
     height: 22
     borderLeft: 0
@@ -1237,8 +1276,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_01
-    x: 310
-    y: 720
+    x: 503
+    y: 2
     width: 17
     height: 17
     borderLeft: 0
@@ -1250,8 +1289,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_02
-    x: 821
-    y: 955
+    x: 625
+    y: 698
     width: 22
     height: 18
     borderLeft: 0
@@ -1263,8 +1302,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_03
-    x: 470
-    y: 352
+    x: 533
+    y: 799
     width: 22
     height: 23
     borderLeft: 0
@@ -1276,8 +1315,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_04
-    x: 493
-    y: 352
+    x: 657
+    y: 693
     width: 22
     height: 23
     borderLeft: 0
@@ -1289,8 +1328,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_05
-    x: 844
-    y: 953
+    x: 525
+    y: 477
     width: 18
     height: 20
     borderLeft: 0
@@ -1302,8 +1341,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_06
-    x: 800
-    y: 953
+    x: 413
+    y: 767
     width: 20
     height: 20
     borderLeft: 0
@@ -1315,8 +1354,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_stat_07
-    x: 328
-    y: 720
+    x: 488
+    y: 950
     width: 17
     height: 17
     borderLeft: 0
@@ -1328,8 +1367,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_swords
-    x: 609
-    y: 608
+    x: 556
+    y: 781
     width: 41
     height: 41
     borderLeft: 0
@@ -1341,8 +1380,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: icn_tier
-    x: 691
-    y: 899
+    x: 557
+    y: 632
     width: 38
     height: 40
     borderLeft: 0
@@ -1354,8 +1393,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_time
-    x: 658
-    y: 53
+    x: 600
+    y: 592
     width: 33
     height: 33
     borderLeft: 0
@@ -1367,8 +1406,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 1
   - name: icn_triangle
-    x: 219
-    y: 30
+    x: 538
+    y: 222
     width: 16
     height: 14
     borderLeft: 0
@@ -1380,8 +1419,8 @@ MonoBehaviour:
     paddingTop: 1
     paddingBottom: 1
   - name: icn_unlock
-    x: 628
-    y: 87
+    x: 853
+    y: 984
     width: 32
     height: 40
     borderLeft: 0
@@ -1393,8 +1432,8 @@ MonoBehaviour:
     paddingTop: 0
     paddingBottom: 0
   - name: icn_write
-    x: 688
-    y: 22
+    x: 634
+    y: 798
     width: 35
     height: 30
     borderLeft: 0
